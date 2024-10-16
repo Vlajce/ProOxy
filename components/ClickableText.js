@@ -7,7 +7,7 @@ function ClickableText({ onPress, text }) {
 		<TouchableOpacity
 			style={styles.loginContainer}
 			onPress={onPress}
-			activeOpacity={0.6}>
+			activeOpacity={0.5}>
 			<Text style={styles.loginText}>{text}</Text>
 		</TouchableOpacity>
 	);
