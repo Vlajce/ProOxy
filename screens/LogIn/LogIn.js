@@ -1,10 +1,12 @@
-import { View, Text, StyleSheet, Alert } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { useState } from "react";
+import Checkbox from "expo-checkbox";
 
 import { Colors } from "../../constants/Colors";
 import Input from "../../components/Input";
 import IconButton from "../../components/IconButton";
 import GradientButton from "../../components/GradientButton";
+import ClickableText from "../../components/ClickableText";
 
 function LogIn({ navigation }) {
 	const [inputValue, setInputValues] = useState({
@@ -25,6 +27,9 @@ function LogIn({ navigation }) {
 
 	function CalculatePressedHandler() {
 		navigation.navigate("ChooseCountry");
+	}
+	function ForgotPassword() {
+		navigation.navigate("ForgotPassword");
 	}
 
 	function inputChangeHandler(inputIdentifier, eneterdValue) {
@@ -144,19 +149,30 @@ function LogIn({ navigation }) {
 			{errors.password && (
 				<Text style={styles.errorText}>{errors.password}</Text>
 			)}
-			<View style={styles.rowContainer}></View>
+			<View style={styles.rowContainer}>
+				<View style={styles.cbxContainer}>
+					<Checkbox
+						style={styles.checkbox}
+						value={toggleCheckBox}
+						onValueChange={setToggleCheckBox}
+						color={toggleCheckBox ? Colors.primary100 : undefined}
+					/>
+					<Text style={styles.rememberText}>Remember me</Text>
+				</View>
+
+				<ClickableText
+					onPress={ForgotPassword}
+					text="Forgot Password"></ClickableText>
+			</View>
 			<GradientButton onPress={LoginHandler}>Login</GradientButton>
 			<View style={styles.textCointaner}>
 				<View>
 					<Text style={styles.textAcc}>Don't have an account?</Text>
 				</View>
-				<View style={styles.calcContainer}>
-					<Text
-						style={styles.calcText}
-						onPress={CalculatePressedHandler}>
-						Calculate your CO2
-					</Text>
-				</View>
+				<ClickableText
+					onPress={CalculatePressedHandler}
+					text="Calculate your CO"></ClickableText>
+				<Text style={styles.subscript}>2</Text>
 			</View>
 		</View>
 	);
@@ -176,14 +192,30 @@ const styles = StyleSheet.create({
 	textWelcome: {
 		fontWeight: "bold",
 		fontSize: 28,
-		marginBottom: 10,
+		marginBottom: 7,
 	},
 	textLog: {
 		fontSize: 15,
 		marginBottom: 15,
 	},
 	rowContainer: {
+		marginVertical: 14,
 		flexDirection: "row",
+		justifyContent: "space-between",
+		alignItems: "center",
+	},
+	cbxContainer: {
+		flexDirection: "row",
+		alignItems: "center",
+	},
+	checkbox: {
+		marginRight: 10,
+		padding: 10,
+		borderRadius: 8,
+	},
+	forgotPasswordText: {
+		color: Colors.primary100,
+		fontWeight: "600",
 	},
 	textCointaner: {
 		marginTop: 36,
@@ -198,12 +230,18 @@ const styles = StyleSheet.create({
 	},
 	calcText: {
 		color: Colors.primary100,
-		fontWeight: "bold",
+		fontWeight: "600",
 	},
 	errorText: {
 		color: Colors.error500,
 		fontSize: 12,
 		marginBottom: 8,
 		fontWeight: "bold",
+	},
+	subscript: {
+		color: Colors.primary100,
+		fontWeight: "bold",
+		lineHeight: 28,
+		fontSize: 10,
 	},
 });

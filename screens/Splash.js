@@ -1,6 +1,8 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import GradientButton from "../components/GradientButton";
 import { Colors } from "../constants/Colors";
+
+import GradientButton from "../components/GradientButton";
+import ClickableText from "../components/ClickableText";
 
 function Splash({ navigation }) {
 	function CalculateYourCO2() {
@@ -24,12 +26,10 @@ function Splash({ navigation }) {
 				<View>
 					<Text style={styles.textMem}>Already a member?</Text>
 				</View>
-				<TouchableOpacity
-					style={styles.loginContainer}
+
+				<ClickableText
 					onPress={LogInPressed}
-					activeOpacity={0.6}>
-					<Text style={styles.loginText}>Log in</Text>
-				</TouchableOpacity>
+					text="Log in"></ClickableText>
 			</View>
 		</View>
 	);
@@ -53,16 +53,8 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		marginTop: 36,
 	},
-	loginContainer: {
-		marginLeft: 8,
-	},
 	textMem: {
 		fontWeight: "500",
-	},
-	loginText: {
-		color: Colors.primary100,
-		fontWeight: "bold",
-		textDecorationLine: "none",
 	},
 });
 
