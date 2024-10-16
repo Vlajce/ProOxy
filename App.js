@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LogIn from "./screens/LogIn/LogIn";
 import Splash from "./screens/Splash";
 import ChooseCountry from "./screens/CalculatingCO2/ChooseCountry";
+import ForgotPassword from "./screens/ForgotPassword/ForgotPassword";
 
 const Stack = createNativeStackNavigator();
 
@@ -25,6 +26,10 @@ export default function App() {
 					<Stack.Screen
 						name="ChooseCountry"
 						component={ChooseCountry}
+					/>
+					<Stack.Screen
+						name="ForgotPassword"
+						component={ForgotPassword}
 					/>
 				</Stack.Navigator>
 			</NavigationContainer>

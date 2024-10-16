@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import GradientButton from "../components/GradientButton";
 import { Colors } from "../constants/Colors";
 
@@ -15,21 +15,21 @@ function Splash({ navigation }) {
 			<View style={styles.logo}>
 				<Text>Proxy</Text>
 			</View>
-
-			<GradientButton onPress={CalculateYourCO2}>
-				Calculate Your CO2
-			</GradientButton>
+			<View style={styles.buttonContainer}>
+				<GradientButton onPress={CalculateYourCO2}>
+					Calculate Your CO2
+				</GradientButton>
+			</View>
 			<View style={styles.textCointaner}>
 				<View>
 					<Text style={styles.textMem}>Already a member?</Text>
 				</View>
-				<View style={styles.loginContainer}>
-					<Text
-						style={styles.loginText}
-						onPress={LogInPressed}>
-						Log in
-					</Text>
-				</View>
+				<TouchableOpacity
+					style={styles.loginContainer}
+					onPress={LogInPressed}
+					activeOpacity={0.6}>
+					<Text style={styles.loginText}>Log in</Text>
+				</TouchableOpacity>
 			</View>
 		</View>
 	);
@@ -46,6 +46,9 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		alignItems: "center",
 	},
+	buttonContainer: {
+		width: "80%",
+	},
 	textCointaner: {
 		flexDirection: "row",
 		marginTop: 36,
@@ -59,6 +62,7 @@ const styles = StyleSheet.create({
 	loginText: {
 		color: Colors.primary100,
 		fontWeight: "bold",
+		textDecorationLine: "none",
 	},
 });
 
