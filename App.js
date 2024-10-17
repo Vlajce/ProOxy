@@ -1,11 +1,13 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
 import LogIn from "./screens/LogIn/LogIn";
 import Splash from "./screens/Splash";
 import ChooseCountry from "./screens/CalculatingCO2/ChooseCountry";
 import ForgotPassword from "./screens/ForgotPassword/ForgotPassword";
+import CountrySelection from "./screens/CalculatingCO2/CountrySelection";
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +28,10 @@ export default function App() {
 					<Stack.Screen
 						name="ChooseCountry"
 						component={ChooseCountry}
+					/>
+					<Stack.Screen
+						name="CountrySelection"
+						component={CountrySelection}
 					/>
 					<Stack.Screen
 						name="ForgotPassword"

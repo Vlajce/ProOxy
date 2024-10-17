@@ -15,7 +15,7 @@ function Splash({ navigation }) {
 	return (
 		<View style={styles.container}>
 			<View style={styles.logo}>
-				<Text>Proxy</Text>
+				<Text style={styles.title}>Proxy</Text>
 			</View>
 			<View style={styles.buttonContainer}>
 				<GradientButton onPress={CalculateYourCO2}>
@@ -40,6 +40,11 @@ const styles = StyleSheet.create({
 		flex: 1,
 		paddingTop: 164,
 		alignItems: "center",
+	},
+	title: {
+		fontSize: 30,
+		fontWeight: "bold",
+		color: Colors.primary100,
 	},
 	logo: {
 		marginBottom: 300,

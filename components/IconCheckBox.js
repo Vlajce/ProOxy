@@ -1,10 +1,13 @@
 import { Pressable, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useState } from "react";
 
-function IconButton({ icon, size, color, onPress }) {
+import { Colors } from "../constants/Colors";
+
+function IconCheckBox({ icon, size, color, onPress }) {
 	return (
 		<Pressable
-			style={({ pressed }) => [styles.button, pressed && styles.pressed]}
+			style={styles.button}
 			onPress={onPress}>
 			<Ionicons
 				name={icon}
@@ -15,15 +18,12 @@ function IconButton({ icon, size, color, onPress }) {
 	);
 }
 
-export default IconButton;
+export default IconCheckBox;
 
 const styles = StyleSheet.create({
 	button: {
+		borderRadius: 70,
 		justifyContent: "center",
 		alignItems: "flex-start",
-		paddingBottom: 36,
-	},
-	pressed: {
-		opacity: 0.7,
 	},
 });

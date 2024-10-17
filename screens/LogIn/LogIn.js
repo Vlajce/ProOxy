@@ -1,25 +1,23 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 import { useState } from "react";
-import Checkbox from "expo-checkbox";
 
 import { Colors } from "../../constants/Colors";
 import Input from "../../components/Input";
 import IconButton from "../../components/IconButton";
 import GradientButton from "../../components/GradientButton";
 import ClickableText from "../../components/ClickableText";
+import IconCheckBox from "../../components/IconCheckBox";
 
 function LogIn({ navigation }) {
 	const [inputValue, setInputValues] = useState({
 		email: "",
 		password: "",
 	});
-
 	const [errors, setErrors] = useState({
 		email: "",
 		password: "",
 	});
-
-	const [toggleCheckBox, setToggleCheckBox] = useState(false);
+	const [toggleCheckBox, setToggleCheckBox] = useState(true);
 
 	function IconPressedHandler() {
 		navigation.goBack();
@@ -30,6 +28,10 @@ function LogIn({ navigation }) {
 	}
 	function ForgotPassword() {
 		navigation.navigate("ForgotPassword");
+	}
+
+	function SetCheckBoxValue() {
+		setToggleCheckBox(!toggleCheckBox);
 	}
 
 	function inputChangeHandler(inputIdentifier, eneterdValue) {
@@ -44,8 +46,6 @@ function LogIn({ navigation }) {
 			password: "",
 		});
 	}
-
-	function rememberMeHandler() {}
 
 	function LoginHandler() {
 		const user = {
@@ -114,13 +114,18 @@ function LogIn({ navigation }) {
 			<IconButton
 				icon="close-circle"
 				size={36}
-				color={Colors.gray200}
+				color={Colors.gray100}
 				onPress={IconPressedHandler}></IconButton>
 			<View style={styles.welcomeContainer}>
 				<View>
 					<Text style={styles.textWelcome}>Welcome</Text>
 				</View>
-				<View>{/*MORA IKONICA DA SE DODA*/}</View>
+				<View>
+					<Image
+						style={styles.wavingHand}
+						source={require("../../assets/images/waving-hand.png")}
+					/>
+				</View>
 			</View>
 			<Text style={styles.textLog}>Login to continue</Text>
 			<Input
@@ -151,15 +156,13 @@ function LogIn({ navigation }) {
 			)}
 			<View style={styles.rowContainer}>
 				<View style={styles.cbxContainer}>
-					<Checkbox
-						style={styles.checkbox}
-						value={toggleCheckBox}
-						onValueChange={setToggleCheckBox}
-						color={toggleCheckBox ? Colors.primary100 : undefined}
-					/>
+					<IconCheckBox
+						icon="checkbox"
+						size={30}
+						color={toggleCheckBox ? Colors.primary50 : Colors.gray50}
+						onPress={SetCheckBoxValue}></IconCheckBox>
 					<Text style={styles.rememberText}>Remember me</Text>
 				</View>
-
 				<ClickableText
 					onPress={ForgotPassword}
 					text="Forgot Password"></ClickableText>
@@ -183,16 +186,25 @@ export default LogIn;
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		paddingTop: 80,
-		paddingHorizontal: 40,
+		marginVertical: 80,
+		marginHorizontal: 40,
+		//paddingTop: 80,
+		//paddingHorizontal: 40,
 	},
 	welcomeContainer: {
 		flexDirection: "row",
+		alignItems: "center",
 	},
 	textWelcome: {
 		fontWeight: "bold",
 		fontSize: 28,
 		marginBottom: 7,
+	},
+	wavingHand: {
+		width: 30,
+		height: 30,
+		marginLeft: 6,
+		justifyContent: "center",
 	},
 	textLog: {
 		fontSize: 15,
@@ -208,10 +220,8 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		alignItems: "center",
 	},
-	checkbox: {
-		marginRight: 10,
-		padding: 10,
-		borderRadius: 8,
+	rememberText: {
+		marginLeft: 8,
 	},
 	forgotPasswordText: {
 		color: Colors.primary100,

@@ -1,6 +1,6 @@
-import { Pressable, Text, View, StyleSheet } from "react-native";
+import { Pressable, Text, StyleSheet } from "react-native";
 
-import Colors from "../constants/Colors";
+import { Colors } from "../constants/Colors";
 import { LinearGradient } from "expo-linear-gradient";
 
 function GradientButton({ children, onPress }) {
@@ -9,7 +9,7 @@ function GradientButton({ children, onPress }) {
 			onPress={onPress}
 			style={({ pressed }) => pressed && styles.pressed}>
 			<LinearGradient
-				colors={["#5da118", "#528123", "#466f1e"]}
+				colors={[Colors.primary50, Colors.primary100, Colors.primary200]}
 				start={{ x: 0, y: 0 }}
 				end={{ x: 1, y: 0 }}
 				style={styles.button}>
