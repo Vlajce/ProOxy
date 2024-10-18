@@ -1,7 +1,7 @@
 export const Colors = {
-	primary50: "#8cc326",
-	primary100: "#82a438",
-	primary200: "#577006",
+	primary50: "#89BB31",
+	primary100: "#83B32F",
+	primary200: "#76A12A",
 	gray50: "#dedede",
 	gray100: "#87888d",
 	gray200: "#747577",

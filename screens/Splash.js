@@ -1,10 +1,12 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, useWindowDimensions } from "react-native";
 import { Colors } from "../constants/Colors";
 
 import GradientButton from "../components/GradientButton";
 import ClickableText from "../components/ClickableText";
 
 function Splash({ navigation }) {
+	const { width, height } = useWindowDimensions();
+
 	function CalculateYourCO2() {
 		navigation.navigate("ChooseCountry");
 	}
@@ -12,10 +14,14 @@ function Splash({ navigation }) {
 		navigation.navigate("LogIn");
 	}
 
+	const marginTopDistance = height < 640 ? 80 : 200;
+	const marginBottomDistance = height < 640 ? 60 : 200;
+	const titleFontSize = width < 360 ? 24 : 30;
+
 	return (
-		<View style={styles.container}>
-			<View style={styles.logo}>
-				<Text style={styles.title}>Proxy</Text>
+		<View style={[styles.container, { marginTop: marginTopDistance }]}>
+			<View style={[styles.logo, { marginBottom: marginBottomDistance }]}>
+				<Text style={[styles.title, { fontSize: titleFontSize }]}>Proxy</Text>
 			</View>
 			<View style={styles.buttonContainer}>
 				<GradientButton onPress={CalculateYourCO2}>
@@ -38,21 +44,22 @@ function Splash({ navigation }) {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		paddingTop: 164,
+		//paddingTop: 164,
 		alignItems: "center",
 	},
 	title: {
 		fontSize: 30,
 		fontWeight: "bold",
-		color: Colors.primary100,
+		color: Colors.primary200,
 	},
 	logo: {
-		marginBottom: 300,
+		//marginBottom: 300,
 		justifyContent: "center",
 		alignItems: "center",
 	},
 	buttonContainer: {
 		width: "80%",
+		marginVertical: 5,
 	},
 	textCointaner: {
 		flexDirection: "row",

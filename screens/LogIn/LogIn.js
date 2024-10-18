@@ -1,5 +1,12 @@
-import { View, Text, StyleSheet, Image } from "react-native";
+import {
+	View,
+	Text,
+	StyleSheet,
+	Image,
+	useWindowDimensions,
+} from "react-native";
 import { useState } from "react";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import { Colors } from "../../constants/Colors";
 import Input from "../../components/Input";
@@ -18,6 +25,7 @@ function LogIn({ navigation }) {
 		password: "",
 	});
 	const [toggleCheckBox, setToggleCheckBox] = useState(true);
+	const { width, height } = useWindowDimensions();
 
 	function IconPressedHandler() {
 		navigation.goBack();
@@ -109,8 +117,20 @@ function LogIn({ navigation }) {
 		return isValid;
 	}
 
+	const marginVerticalDistance = height < 640 ? 30 : 100;
+	const marginHorizontalDistance = width < 400 ? 40 : 70;
+
 	return (
-		<View style={styles.container}>
+		<KeyboardAwareScrollView
+			style={[
+				styles.container,
+				{
+					marginVertical: marginVerticalDistance,
+					marginHorizontal: marginHorizontalDistance,
+				},
+			]}
+			keyboardShouldPersistTaps="handled"
+			extraScrollHeight={40}>
 			<IconButton
 				icon="close-circle"
 				size={36}
@@ -135,14 +155,15 @@ function LogIn({ navigation }) {
 					placeholder: "Your Email Address",
 					autoCorrect: false,
 					autoCapitalize: "none",
-					onChangeText: inputChangeHandler.bind(this, "email"), //preconfiguring parameters
+					onChangeText: inputChangeHandler.bind(this, "email"),
 					value: inputValue.email,
-				}}></Input>
+				}}
+			/>
 			{errors.email && <Text style={styles.errorText}>{errors.email}</Text>}
 			<Input
 				label="Password"
 				textInputConfig={{
-					keyboardType: "email-address",
+					keyboardType: "default",
 					placeholder: "Enter Your Password",
 					minLength: 7,
 					autoCorrect: false,
@@ -150,7 +171,8 @@ function LogIn({ navigation }) {
 					secureTextEntry: true,
 					onChangeText: inputChangeHandler.bind(this, "password"),
 					value: inputValue.password,
-				}}></Input>
+				}}
+			/>
 			{errors.password && (
 				<Text style={styles.errorText}>{errors.password}</Text>
 			)}
@@ -159,13 +181,15 @@ function LogIn({ navigation }) {
 					<IconCheckBox
 						icon="checkbox"
 						size={30}
-						color={toggleCheckBox ? Colors.primary50 : Colors.gray50}
-						onPress={SetCheckBoxValue}></IconCheckBox>
+						color={toggleCheckBox ? Colors.primary200 : Colors.gray50}
+						onPress={SetCheckBoxValue}
+					/>
 					<Text style={styles.rememberText}>Remember me</Text>
 				</View>
 				<ClickableText
 					onPress={ForgotPassword}
-					text="Forgot Password"></ClickableText>
+					text="Forgot Password"
+				/>
 			</View>
 			<GradientButton onPress={LoginHandler}>Login</GradientButton>
 			<View style={styles.textCointaner}>
@@ -174,10 +198,11 @@ function LogIn({ navigation }) {
 				</View>
 				<ClickableText
 					onPress={CalculatePressedHandler}
-					text="Calculate your CO"></ClickableText>
+					text="Calculate your CO"
+				/>
 				<Text style={styles.subscript}>2</Text>
 			</View>
-		</View>
+		</KeyboardAwareScrollView>
 	);
 }
 
@@ -186,10 +211,8 @@ export default LogIn;
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		marginVertical: 80,
-		marginHorizontal: 40,
-		//paddingTop: 80,
-		//paddingHorizontal: 40,
+		//marginVertical: 80,
+		//marginHorizontal: 40,
 	},
 	welcomeContainer: {
 		flexDirection: "row",
@@ -224,7 +247,7 @@ const styles = StyleSheet.create({
 		marginLeft: 8,
 	},
 	forgotPasswordText: {
-		color: Colors.primary100,
+		color: Colors.primary200,
 		fontWeight: "600",
 	},
 	textCointaner: {
@@ -239,7 +262,7 @@ const styles = StyleSheet.create({
 		marginLeft: 6,
 	},
 	calcText: {
-		color: Colors.primary100,
+		color: Colors.primary200,
 		fontWeight: "600",
 	},
 	errorText: {
@@ -249,7 +272,7 @@ const styles = StyleSheet.create({
 		fontWeight: "bold",
 	},
 	subscript: {
-		color: Colors.primary100,
+		color: Colors.primary200,
 		fontWeight: "bold",
 		lineHeight: 28,
 		fontSize: 10,

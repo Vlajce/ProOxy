@@ -22,8 +22,8 @@ function ChooseCountry({ navigation }) {
 				<View style={styles.upperContent}>
 					<IconButton
 						icon="close-circle"
-						size={36}
-						color={Colors.gray100}
+						size={40}
+						color="white"
 						onPress={IconPressedHandler}></IconButton>
 				</View>
 			</View>
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
 	},
 	upperContainer: {
 		flex: 0.4,
-		backgroundColor: "blue",
+		backgroundColor: "#2a8dca",
 	},
 	upperContent: {
 		paddingVertical: 80,
