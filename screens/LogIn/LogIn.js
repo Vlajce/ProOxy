@@ -9,11 +9,12 @@ import { useState } from "react";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import { Colors } from "../../constants/Colors";
-import Input from "../../components/Input";
-import IconButton from "../../components/IconButton";
-import GradientButton from "../../components/GradientButton";
-import ClickableText from "../../components/ClickableText";
-import IconCheckBox from "../../components/IconCheckBox";
+
+import Input from "../../components/UI/Input";
+import IconButton from "../../components/UI/IconButton";
+import GradientButton from "../../components/UI/GradientButton";
+import ClickableText from "../../components/UI/ClickableText";
+import IconCheckBox from "../../components/UI/IconCheckBox";
 
 function LogIn({ navigation }) {
 	const [inputValue, setInputValues] = useState({
@@ -42,7 +43,7 @@ function LogIn({ navigation }) {
 		setToggleCheckBox(!toggleCheckBox);
 	}
 
-	function inputChangeHandler(inputIdentifier, eneterdValue) {
+	function InputChangeHandler(inputIdentifier, eneterdValue) {
 		setInputValues((currentInputValues) => {
 			return {
 				...currentInputValues,
@@ -61,7 +62,7 @@ function LogIn({ navigation }) {
 			password: inputValue.password,
 		};
 
-		if (!inputValidation(user)) {
+		if (!InputValidation(user)) {
 			setInputValues((currentValues) => {
 				return {
 					email: currentValues.email,
@@ -77,7 +78,7 @@ function LogIn({ navigation }) {
 		//context za usere!
 	}
 
-	function inputValidation(user) {
+	function InputValidation(user) {
 		let emailError = "";
 		let passwordError = "";
 		let isValid = true;
@@ -117,23 +118,23 @@ function LogIn({ navigation }) {
 		return isValid;
 	}
 
-	const marginVerticalDistance = height < 640 ? 30 : 100;
-	const marginHorizontalDistance = width < 400 ? 40 : 70;
+	const paddingVerticalDistance = height < 640 ? 30 : 100;
+	const paddingHorizontalDistance = width < 400 ? 40 : 70;
 
 	return (
 		<KeyboardAwareScrollView
 			style={[
 				styles.container,
 				{
-					marginVertical: marginVerticalDistance,
-					marginHorizontal: marginHorizontalDistance,
+					paddingVertical: paddingVerticalDistance,
+					paddingHorizontal: paddingHorizontalDistance,
 				},
 			]}
 			keyboardShouldPersistTaps="handled"
 			extraScrollHeight={40}>
 			<IconButton
 				icon="close-circle"
-				size={36}
+				size={40}
 				color={Colors.gray100}
 				onPress={IconPressedHandler}></IconButton>
 			<View style={styles.welcomeContainer}>
@@ -150,18 +151,20 @@ function LogIn({ navigation }) {
 			<Text style={styles.textLog}>Login to continue</Text>
 			<Input
 				label="Email"
+				labelStyle={styles.inputLabel}
 				textInputConfig={{
 					keyboardType: "email-address",
 					placeholder: "Your Email Address",
 					autoCorrect: false,
 					autoCapitalize: "none",
-					onChangeText: inputChangeHandler.bind(this, "email"),
+					onChangeText: InputChangeHandler.bind(this, "email"),
 					value: inputValue.email,
 				}}
 			/>
 			{errors.email && <Text style={styles.errorText}>{errors.email}</Text>}
 			<Input
 				label="Password"
+				labelStyle={styles.inputLabel}
 				textInputConfig={{
 					keyboardType: "default",
 					placeholder: "Enter Your Password",
@@ -169,7 +172,7 @@ function LogIn({ navigation }) {
 					autoCorrect: false,
 					autoCapitalize: "none",
 					secureTextEntry: true,
-					onChangeText: inputChangeHandler.bind(this, "password"),
+					onChangeText: InputChangeHandler.bind(this, "password"),
 					value: inputValue.password,
 				}}
 			/>
@@ -211,12 +214,11 @@ export default LogIn;
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		//marginVertical: 80,
-		//marginHorizontal: 40,
 	},
 	welcomeContainer: {
 		flexDirection: "row",
 		alignItems: "center",
+		marginTop: 36,
 	},
 	textWelcome: {
 		fontWeight: "bold",
@@ -232,6 +234,13 @@ const styles = StyleSheet.create({
 	textLog: {
 		fontSize: 15,
 		marginBottom: 15,
+	},
+	inputLabel: {
+		fontSize: 15,
+		fontWeight: "bold",
+		marginTop: 20,
+		marginBottom: 10,
+		color: Colors.gray100,
 	},
 	rowContainer: {
 		marginVertical: 14,

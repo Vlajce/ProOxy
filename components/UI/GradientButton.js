@@ -1,6 +1,6 @@
 import { Pressable, Text, StyleSheet } from "react-native";
 
-import { Colors } from "../constants/Colors";
+import { Colors } from "../../constants/Colors";
 import { LinearGradient } from "expo-linear-gradient";
 
 function GradientButton({ children, onPress }) {

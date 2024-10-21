@@ -1,8 +1,8 @@
 import { View, Text, StyleSheet, useWindowDimensions } from "react-native";
 import { Colors } from "../constants/Colors";
 
-import GradientButton from "../components/GradientButton";
-import ClickableText from "../components/ClickableText";
+import GradientButton from "../components/UI/GradientButton";
+import ClickableText from "../components/UI/ClickableText";
 
 function Splash({ navigation }) {
 	const { width, height } = useWindowDimensions();

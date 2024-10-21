@@ -1,6 +1,6 @@
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
 
-import { Colors } from "../constants/Colors";
+import { Colors } from "../../constants/Colors";
 
 function ClickableText({ onPress, text }) {
 	return (

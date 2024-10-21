@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, Image, Pressable } from "react-native";
 import Ionicons from "@expo/vector-icons/AntDesign";
 
-import { Colors } from "../constants/Colors";
+import { Colors } from "../../constants/Colors";
 
 const dummyCountry = {
 	name: "Switzerland",
@@ -19,7 +19,7 @@ function Card({ label, countryIcon, text, icon, onPress }) {
 			<View style={styles.cardCont}>
 				<View style={styles.countryCont}>
 					<Image
-						source={require("../assets/images/switzerland.png")}
+						source={require("../../assets/images/switzerland.png")}
 						style={styles.flag}
 					/>
 					<Text style={styles.countryName}>{dummyCountry.name}</Text>

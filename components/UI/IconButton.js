@@ -21,7 +21,6 @@ const styles = StyleSheet.create({
 	button: {
 		justifyContent: "center",
 		alignItems: "flex-start",
-		paddingBottom: 36,
 	},
 	pressed: {
 		opacity: 0.7,
