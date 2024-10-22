@@ -8,7 +8,7 @@ import CountryItem from "../CalculatingCO2/CountryItem";
 import IconButton from "../UI/IconButton";
 import Input from "../UI/Input";
 
-function CountrySelectionModal({ modalVisible, onClose }) {
+function CountrySelectionModal({ modalVisible, onClose, onSelectCountry }) {
 	const [searchValue, setSearchValue] = useState("");
 	const [countries, setCountries] = useState([]);
 
@@ -20,7 +20,11 @@ function CountrySelectionModal({ modalVisible, onClose }) {
 		const fetchCountries = async () => {
 			try {
 				const response = await axios.get("https://restcountries.com/v3.1/all");
-				setCountries(response.data);
+
+				const sortedCountries = response.data.sort((a, b) =>
+					a.name.common.localeCompare(b.name.common)
+				);
+				setCountries(sortedCountries);
 			} catch (error) {
 				console.error(error);
 			}
@@ -30,7 +34,15 @@ function CountrySelectionModal({ modalVisible, onClose }) {
 	}, []);
 
 	const renderCountryItem = ({ item }) => {
-		return <CountryItem>{item.name.common}</CountryItem>;
+		return (
+			<CountryItem
+				name={item.name.common}
+				flag={item.flags.png}
+				onPress={() => {
+					onSelectCountry(item);
+					onClose();
+				}}></CountryItem>
+		);
 	};
 
 	return (
@@ -49,22 +61,24 @@ function CountrySelectionModal({ modalVisible, onClose }) {
 				<Text style={{ fontWeight: "semi-bold" }}>
 					Which country do you lie in?
 				</Text>
-				<Input
-					label=""
-					textInputConfig={{
-						keyboardType: "default",
-						placeholder: "Search",
-						placeholderTextColor: "#b4acac", //Colors.gray100,
-						autoCorrect: false,
-						autoCapitalize: "none",
-						onChangeText: InputChangeHandler,
-						value: searchValue,
-					}}
-					icon="search"></Input>
+				<View style={styles.inputCont}>
+					<Input
+						label=""
+						textInputConfig={{
+							keyboardType: "default",
+							placeholder: "Search",
+							placeholderTextColor: "#b4acac", //Colors.gray100,
+							autoCorrect: false,
+							autoCapitalize: "none",
+							onChangeText: InputChangeHandler,
+							value: searchValue,
+						}}
+						icon="search"></Input>
+				</View>
 				<View style={styles.countriesContainer}>
 					<FlatList
 						data={countries}
-						//renderItem={renderCountryItem}
+						renderItem={renderCountryItem}
 						keyExtractor={(item) => item.cca2}
 					/>
 				</View>
@@ -84,11 +98,15 @@ const styles = StyleSheet.create({
 	title: {
 		marginVertical: 40,
 		fontWeight: "bold",
-		fontFamily: "Trebuchet MS",
+		//fontFamily: "Trebuchet MS",
 		fontSize: 30,
 		textAlign: "center",
 	},
+	inputCont: {
+		height: 50,
+		marginBottom: 46,
+	},
 	countriesContainer: {
-		marginTop: 70,
+		//flex: 1,
 	},
 });

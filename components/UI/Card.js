@@ -3,14 +3,7 @@ import Ionicons from "@expo/vector-icons/AntDesign";
 
 import { Colors } from "../../constants/Colors";
 
-const dummyCountry = {
-	name: "Switzerland",
-	coConcentration: 580,
-	imageUrl:
-		"https://upload.wikimedia.org/wikipedia/commons/0/08/Flag_of_Switzerland_%28Pantone%29.svg",
-};
-
-function Card({ label, countryIcon, text, icon, onPress }) {
+function Card({ label, flag, name, icon, onPress }) {
 	return (
 		<Pressable
 			style={styles.container}
@@ -19,10 +12,10 @@ function Card({ label, countryIcon, text, icon, onPress }) {
 			<View style={styles.cardCont}>
 				<View style={styles.countryCont}>
 					<Image
-						source={require("../../assets/images/switzerland.png")}
+						source={{ uri: flag }}
 						style={styles.flag}
 					/>
-					<Text style={styles.countryName}>{dummyCountry.name}</Text>
+					<Text style={styles.countryName}>{name}</Text>
 				</View>
 				<View>
 					<Ionicons
@@ -61,10 +54,11 @@ const styles = StyleSheet.create({
 	flag: {
 		width: 40,
 		height: 40,
-		borderRadius: 5,
+		borderRadius: 20,
 		overflow: "hidden",
 		justifyContent: "flex-start",
 		marginRight: 10,
+		backgroundColor: "transparent",
 	},
 	countryName: {
 		fontSize: 15,

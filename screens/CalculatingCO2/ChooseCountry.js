@@ -6,7 +6,7 @@ import {
 	useWindowDimensions,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import IconButton from "../../components/UI/IconButton";
 import { Colors } from "../../constants/Colors";
@@ -16,9 +16,24 @@ import CountrySelectionModal from "../../components/CalculatingCO2/CountrySelect
 
 function ChooseCountry({ navigation }) {
 	const [modalIsVisible, setModalIsVisible] = useState(false);
+	// const [country, setCountry] = useState({
+	// 	name: "Switzerland",
+	// 	coConcentration: 580,
+	// 	imageUrl:
+	// 		"https://upload.wikimedia.org/wikipedia/commons/0/08/Flag_of_Switzerland_%28Pantone%29.svg",
+	// });
+	const [country, setCountry] = useState(null);
 
 	const { width, height } = useWindowDimensions();
 	const isLandscape = width > height;
+
+	useEffect(() => {
+		setCountry({
+			name: "Switzerland",
+			coConcentration: 580,
+			imageUrl: "https://flagcdn.com/w320/ch.png",
+		});
+	}, []);
 
 	function IconPressedHandler() {
 		navigation.navigate("Splash");
@@ -34,17 +49,28 @@ function ChooseCountry({ navigation }) {
 		return (
 			<CountrySelectionModal
 				visible={modalIsVisible}
-				onPress={ChosenCountryHandler}></CountrySelectionModal>
+				onClose={ChosenCountryHandler}></CountrySelectionModal>
 		);
 	}
 
-	function ContinueHandler() {}
+	function ContinueHandler() {
+		navigation.navigate("Flying");
+	}
+
+	function handleSelectCountry(selectedCountry) {
+		setCountry({
+			name: selectedCountry.name.common,
+			coConcentration: selectedCountry.coConcentration || 580,
+			imageUrl: selectedCountry.flags.png,
+		});
+	}
 
 	return (
 		<ScrollView
 			contentContainerStyle={styles.scrollViewContainer}
 			bounces="false">
 			<StatusBar style="light" />
+
 			<View
 				style={[
 					styles.mainContainer,
@@ -92,9 +118,13 @@ function ChooseCountry({ navigation }) {
 					<View style={styles.cardCont}>
 						<Card
 							label="Select Country"
-							countryIcon="none"
-							text="country"
-							icon="none"
+							flag={
+								country
+									? country.imageUrl
+									: "https://upload.wikimedia.org/wikipedia/commons/0/08/Flag_of_Switzerland_%28Pantone%29.svg"
+							}
+							name={country ? country.name : "Switzerland"}
+							icon="caretdown"
 							onPress={SelectCountryHandler}
 						/>
 					</View>
@@ -105,6 +135,7 @@ function ChooseCountry({ navigation }) {
 				<CountrySelectionModal
 					modalVisible={modalIsVisible}
 					onClose={ChosenCountryHandler}
+					onSelectCountry={handleSelectCountry}
 				/>
 			)}
 		</ScrollView>

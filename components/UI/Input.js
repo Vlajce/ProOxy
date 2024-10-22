@@ -31,18 +31,21 @@ const styles = StyleSheet.create({
 		flex: 1,
 	},
 	inputWrapper: {
-		position: "relative", // Postavljanje pozicije za ikonu unutar wrapper-a
-	},
-	icon: {
-		position: "absolute",
-		right: 10, // Razmak od desne ivice
-		top: "50%", // Vertikalno centriranje ikone
-		transform: [{ translateY: -12 }], // Da se centriraju tačno u sredinu
-	},
-	input: {
+		height: 60,
+		position: "relative",
 		backgroundColor: Colors.gray50,
 		borderRadius: 12,
-		padding: 24,
+		flexDirection: "row",
+		alignItems: "center",
+		justifyContent: "center",
+		paddingHorizontal: 16,
+		paddingVertical: 14,
+	},
+	icon: {
+		marginLeft: "auto",
+	},
+	input: {
+		flex: 1,
 		color: Colors.gray200,
 		fontSize: 16,
 	},

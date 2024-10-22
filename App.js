@@ -7,14 +7,15 @@ import LogIn from "./screens/LogIn/LogIn";
 import Splash from "./screens/Splash";
 import ChooseCountry from "./screens/CalculatingCO2/ChooseCountry";
 import ForgotPassword from "./screens/ForgotPassword/ForgotPassword";
+import Flying from "./screens/CalculatingCO2/Flying";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
 	return (
 		<>
-			<StatusBar style="auto" />
 			<NavigationContainer>
+				<StatusBar style="auto" />
 				<Stack.Navigator
 					screenOptions={{
 						headerShown: false,
@@ -34,13 +35,13 @@ export default function App() {
 						name="ChooseCountry"
 						component={ChooseCountry}
 					/>
-					{/* <Stack.Screen
-						name="CountrySelection"
-						component={CountrySelection}
-					/> */}
 					<Stack.Screen
 						name="ForgotPassword"
 						component={ForgotPassword}
+					/>
+					<Stack.Screen
+						name="Flying"
+						component={Flying}
 					/>
 				</Stack.Navigator>
 			</NavigationContainer>
