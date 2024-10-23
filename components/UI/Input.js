@@ -2,13 +2,13 @@ import { View, Text, TextInput, StyleSheet } from "react-native";
 import Feather from "@expo/vector-icons/Feather";
 import { Colors } from "../../constants/Colors";
 
-function Input({ label, labelStyle, textInputConfig, icon }) {
+function Input({ label, labelStyle, textInputConfig, icon, inputStyle }) {
 	return (
-		<View style={styles.inputContainer}>
+		<View style={inputStyle}>
 			<Text style={labelStyle}>{label}</Text>
 			<View style={styles.inputWrapper}>
 				<TextInput
-					style={styles.input}
+					style={[styles.input]}
 					{...textInputConfig}
 				/>
 				{icon && (
@@ -27,9 +27,6 @@ function Input({ label, labelStyle, textInputConfig, icon }) {
 export default Input;
 
 const styles = StyleSheet.create({
-	inputContainer: {
-		flex: 1,
-	},
 	inputWrapper: {
 		height: 60,
 		position: "relative",

@@ -118,8 +118,9 @@ function LogIn({ navigation }) {
 		return isValid;
 	}
 
-	const paddingVerticalDistance = height < 640 ? 30 : 100;
-	const paddingHorizontalDistance = width < 400 ? 40 : 70;
+	const isLandscape = width > height;
+	const paddingVerticalDistance = isLandscape ? height * 0.05 : height * 0.1;
+	const paddingHorizontalDistance = isLandscape ? width * 0.1 : width * 0.1;
 
 	return (
 		<KeyboardAwareScrollView
@@ -131,7 +132,8 @@ function LogIn({ navigation }) {
 				},
 			]}
 			keyboardShouldPersistTaps="handled"
-			extraScrollHeight={40}>
+			extraScrollHeight={50}
+			scrollEnabled={true}>
 			<IconButton
 				icon="close-circle"
 				size={40}
@@ -263,6 +265,7 @@ const styles = StyleSheet.create({
 		marginTop: 36,
 		flexDirection: "row",
 		justifyContent: "center",
+		paddingBottom: 36,
 	},
 	textAcc: {
 		fontWeight: "500",
