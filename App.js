@@ -9,6 +9,8 @@ import ChooseCountry from "./screens/CalculatingCO2/ChooseCountry";
 import ForgotPassword from "./screens/ForgotPassword/ForgotPassword";
 import Flying from "./screens/CalculatingCO2/Flying";
 import CheckYourEmail from "./screens/ForgotPassword/CheckYourEmail";
+import EnterNewPassword from "./screens/ForgotPassword/EnterNewPassword";
+import PasswordUpdated from "./screens/ForgotPassword/PasswordUpdated";
 
 const Stack = createNativeStackNavigator();
 
@@ -43,6 +45,14 @@ export default function App() {
 					<Stack.Screen
 						name="CheckYourEmail"
 						component={CheckYourEmail}
+					/>
+					<Stack.Screen
+						name="EnterNewPassword"
+						component={EnterNewPassword}
+					/>
+					<Stack.Screen
+						name="PasswordUpdated"
+						component={PasswordUpdated}
 					/>
 					<Stack.Screen
 						name="Flying"

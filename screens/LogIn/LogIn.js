@@ -43,11 +43,11 @@ function LogIn({ navigation }) {
 		setToggleCheckBox(!toggleCheckBox);
 	}
 
-	function InputChangeHandler(inputIdentifier, eneterdValue) {
+	function InputChangeHandler(inputIdentifier, enteredValue) {
 		setInputValues((currentInputValues) => {
 			return {
 				...currentInputValues,
-				[inputIdentifier]: eneterdValue, //dinamicki pristup propertiju
+				[inputIdentifier]: enteredValue, //dinamicki pristup propertiju
 			};
 		});
 		setErrors({
@@ -202,8 +202,8 @@ function LogIn({ navigation }) {
 					<Text style={styles.textAcc}>Don't have an account?</Text>
 				</View>
 				<ClickableText
-					onPress={CalculatePressedHandler}
 					text="Calculate your CO"
+					onPress={CalculatePressedHandler}
 				/>
 				<Text style={styles.subscript}>2</Text>
 			</View>

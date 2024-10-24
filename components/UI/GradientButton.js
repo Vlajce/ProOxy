@@ -32,8 +32,8 @@ const styles = StyleSheet.create({
 			width: 0,
 			height: 6,
 		},
-		shadowOpacity: 0.7,
-		shadowRadius: 18,
+		shadowOpacity: 0.5,
+		shadowRadius: 12,
 		borderRadius: 60,
 	},
 	pressed: {
@@ -49,5 +49,6 @@ const styles = StyleSheet.create({
 	text: {
 		color: "white",
 		fontSize: 18,
+		fontWeight: "500",
 	},
 });
