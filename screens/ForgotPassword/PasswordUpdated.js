@@ -1,4 +1,10 @@
-import { View, Text, StyleSheet, useWindowDimensions } from "react-native";
+import {
+	View,
+	Text,
+	Image,
+	StyleSheet,
+	useWindowDimensions,
+} from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import Feather from "@expo/vector-icons/Feather";
 
@@ -42,6 +48,12 @@ function PasswordUpdated({ navigation }) {
 
 			<View style={styles.titleCont}>
 				<Text style={styles.title}>Password Updated</Text>
+				<View>
+					<Image
+						style={styles.wavingHand}
+						source={require("../../assets/images/hand-horns.png")}
+					/>
+				</View>
 			</View>
 
 			<View style={[styles.iconCont, { marginVertical: 20 }]}>
@@ -87,6 +99,11 @@ const styles = StyleSheet.create({
 	title: {
 		fontSize: 30,
 		fontWeight: "700",
+	},
+	wavingHand: {
+		marginLeft: 8,
+		width: 35,
+		height: 35,
 	},
 	iconCont: {
 		width: 120,
