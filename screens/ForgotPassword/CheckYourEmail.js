@@ -56,7 +56,7 @@ function CheckYourEmail({ navigation }) {
 				IconComponent={FontAwesome}
 				iconProps={{
 					name: "envelope-open-o",
-					size: 32,
+					size: 35,
 					color: Colors.primary100,
 				}}
 				textStyle={{ paddingHorizontal: 20 }}>

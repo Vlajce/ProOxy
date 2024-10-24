@@ -2,8 +2,6 @@ import { View, Text, StyleSheet, useWindowDimensions } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import Feather from "@expo/vector-icons/Feather";
 
-import HeaderFP from "../../components/ForgotPassword/HeaderFP";
-import InfoSection from "../../components/ForgotPassword/InfoSection";
 import GradientButton from "../../components/UI/GradientButton";
 import { Colors } from "../../constants/Colors";
 import StaticProgressBar from "../../components/UI/StaticProgressBar";

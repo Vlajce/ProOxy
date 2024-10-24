@@ -56,7 +56,7 @@ function ForgotPassword({ navigation }) {
 			<InfoSection
 				title="Forgot Password?"
 				IconComponent={FontAwesome}
-				iconProps={{ name: "key", size: 32, color: Colors.primary100 }}>
+				iconProps={{ name: "key", size: 35, color: Colors.primary100 }}>
 				Don't worry! It happens. Please enter the email address associated with
 				your account.
 			</InfoSection>

@@ -61,7 +61,7 @@ function EnterNewPassword({ navigation }) {
 			<InfoSection
 				title="Enter New Password"
 				IconComponent={SimpleLineIcons}
-				iconProps={{ name: "lock", size: 32, color: Colors.primary100 }}
+				iconProps={{ name: "lock", size: 35, color: Colors.primary100 }}
 				textStyle={{ paddingHorizontal: 20 }}>
 				Set a strong password to keep secure your account
 			</InfoSection>
