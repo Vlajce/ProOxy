@@ -9,12 +9,12 @@ import { useState } from "react";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import { Colors } from "../../constants/Colors";
-
 import Input from "../../components/UI/Input";
 import IconButton from "../../components/UI/IconButton";
 import GradientButton from "../../components/UI/GradientButton";
 import ClickableText from "../../components/UI/ClickableText";
 import IconCheckBox from "../../components/UI/IconCheckBox";
+import Content from "../../components/Content";
 
 function LogIn({ navigation }) {
 	const [inputValue, setInputValues] = useState({

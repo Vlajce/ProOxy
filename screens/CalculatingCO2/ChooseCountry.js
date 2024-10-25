@@ -14,14 +14,8 @@ import GradientButton from "../../components/UI/GradientButton";
 import Card from "../../components/UI/Card";
 import CountrySelectionModal from "../../components/CalculatingCO2/CountrySelectionModal";
 
-function ChooseCountry({ navigation }) {
+function ChooseCountry({ navigation, countries }) {
 	const [modalIsVisible, setModalIsVisible] = useState(false);
-	// const [country, setCountry] = useState({
-	// 	name: "Switzerland",
-	// 	coConcentration: 580,
-	// 	imageUrl:
-	// 		"https://upload.wikimedia.org/wikipedia/commons/0/08/Flag_of_Switzerland_%28Pantone%29.svg",
-	// });
 	const [country, setCountry] = useState(null);
 
 	const { width, height } = useWindowDimensions();
@@ -136,6 +130,7 @@ function ChooseCountry({ navigation }) {
 					modalVisible={modalIsVisible}
 					onClose={ChosenCountryHandler}
 					onSelectCountry={handleSelectCountry}
+					countries={countries}
 				/>
 			)}
 		</ScrollView>

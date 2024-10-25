@@ -8,30 +8,34 @@ import CountryItem from "../CalculatingCO2/CountryItem";
 import IconButton from "../UI/IconButton";
 import Input from "../UI/Input";
 
-function CountrySelectionModal({ modalVisible, onClose, onSelectCountry }) {
+function CountrySelectionModal({
+	modalVisible,
+	onClose,
+	onSelectCountry,
+	countries,
+}) {
 	const [searchValue, setSearchValue] = useState("");
-	const [countries, setCountries] = useState([]);
 
 	function InputChangeHandler(enteredText) {
-		setSearchValue((currentSearchValue) => enteredText);
+		setSearchValue(enteredText);
 	}
 
-	useEffect(() => {
-		const fetchCountries = async () => {
-			try {
-				const response = await axios.get("https://restcountries.com/v3.1/all");
+	// useEffect(() => {
+	// 	const fetchCountries = async () => {
+	// 		try {
+	// 			const response = await axios.get("https://restcountries.com/v3.1/all");
 
-				const sortedCountries = response.data.sort((a, b) =>
-					a.name.common.localeCompare(b.name.common)
-				);
-				setCountries(sortedCountries);
-			} catch (error) {
-				console.error(error);
-			}
-		};
+	// 			const sortedCountries = response.data.sort((a, b) =>
+	// 				a.name.common.localeCompare(b.name.common)
+	// 			);
+	// 			setCountries(sortedCountries);
+	// 		} catch (error) {
+	// 			console.error(error);
+	// 		}
+	// 	};
 
-		fetchCountries();
-	}, []);
+	// 	fetchCountries();
+	// }, []);
 
 	const renderCountryItem = ({ item }) => {
 		return (

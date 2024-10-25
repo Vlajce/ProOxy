@@ -14,13 +14,14 @@ function Splash({ navigation }) {
 		navigation.navigate("LogIn");
 	}
 
-	const marginTopDistance = height < 640 ? 80 : 200;
-	const marginBottomDistance = height < 640 ? 60 : 200;
-	const titleFontSize = width < 360 ? 24 : 30;
+	const isLandscape = width > height;
+	const paddingTopDistance = isLandscape ? height * 0.2 : height * 0.25;
+	const paddingBottomDistance = isLandscape ? height * 0.2 : height * 0.3;
+	const titleFontSize = isLandscape ? 40 : 32;
 
 	return (
-		<View style={[styles.container, { marginTop: marginTopDistance }]}>
-			<View style={[styles.logo, { marginBottom: marginBottomDistance }]}>
+		<View style={[styles.container, { paddingTop: paddingTopDistance }]}>
+			<View style={[styles.logo, { paddingBottom: paddingBottomDistance }]}>
 				<Text style={[styles.title, { fontSize: titleFontSize }]}>Proxy</Text>
 			</View>
 			<View style={styles.buttonContainer}>
@@ -44,7 +45,6 @@ function Splash({ navigation }) {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		//paddingTop: 164,
 		alignItems: "center",
 	},
 	title: {
@@ -53,7 +53,6 @@ const styles = StyleSheet.create({
 		color: Colors.primary200,
 	},
 	logo: {
-		//marginBottom: 300,
 		justifyContent: "center",
 		alignItems: "center",
 	},
