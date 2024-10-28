@@ -2,13 +2,13 @@ import { TouchableOpacity, Text, StyleSheet } from "react-native";
 
 import { Colors } from "../../constants/Colors";
 
-function ClickableText({ onPress, text }) {
+function ClickableText({ onPress, text, style }) {
 	return (
 		<TouchableOpacity
 			style={styles.loginContainer}
 			onPress={onPress}
 			activeOpacity={0.5}>
-			<Text style={styles.loginText}>{text}</Text>
+			<Text style={[styles.loginText, style]}>{text}</Text>
 		</TouchableOpacity>
 	);
 }
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
 	},
 	loginText: {
 		color: Colors.primary100,
-		fontWeight: "bold",
+		fontWeight: "500",
 		textDecorationLine: "none",
 	},
 });
