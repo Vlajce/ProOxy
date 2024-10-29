@@ -24,17 +24,22 @@ function Footer({ progress, style, onButtonClick, onTextClick }) {
 				textColor={"white"}
 				showProgressValue={false}
 				title={
-					<View
+					<Text
 						style={{
 							flexDirection: "row",
 							alignItems: "center",
 							justifyContent: "center",
 						}}>
-						<Text style={{ color: "white", fontSize: 15, fontWeight: "bold" }}>
+						<Text
+							style={{
+								color: "white",
+								fontSize: 15,
+								fontWeight: "bold",
+							}}>
 							{progress}
 						</Text>
 						<Text style={{ color: "white", fontSize: 15 }}>/5</Text>
-					</View>
+					</Text>
 				}
 			/>
 			<GradientButton
