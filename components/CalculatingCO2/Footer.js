@@ -1,40 +1,49 @@
 import { View, Text, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-//import ProgressCircle from "react-native-progress-circle";
+//import * as Progress from "react-native-progress";
+import CircularProgress from "react-native-circular-progress-indicator";
 
 import { Colors } from "../../constants/Colors";
 import GradientButton from "../UI/GradientButton";
 import ClickableText from "../UI/ClickableText";
 
 function Footer({ progress, style, onButtonClick, onTextClick }) {
-	const navigation = useNavigation();
-
-	function NextHandler() {
-		navigation.navigate("Mobility");
-	}
-
-	function SkipHandler() {
-		//sta radi?
-	}
-
 	return (
 		<View style={[styles.container, style]}>
-			{/* <ProgressCircle
-				percent={20}
-				radius={50}
-				borderWidth={8}
-				color="#3399FF"
-				shadowColor="#999"
-				bgColor="#fff">
-				<Text style={{ fontSize: 18 }}>{"30%"}</Text>
-			</ProgressCircle> */}
+			<CircularProgress
+				value={progress}
+				maxValue={5}
+				radius={30}
+				progressValueColor={"white"}
+				activeStrokeColor="white"
+				inActiveStrokeColor={Colors.gray50}
+				inActiveStrokeOpacity={0.2}
+				inActiveStrokeWidth={5}
+				activeStrokeWidth={5}
+				duration={1000}
+				textColor={"white"}
+				showProgressValue={false}
+				title={
+					<View
+						style={{
+							flexDirection: "row",
+							alignItems: "center",
+							justifyContent: "center",
+						}}>
+						<Text style={{ color: "white", fontSize: 15, fontWeight: "bold" }}>
+							{progress}
+						</Text>
+						<Text style={{ color: "white", fontSize: 15 }}>/5</Text>
+					</View>
+				}
+			/>
 			<GradientButton
 				style={styles.button}
-				onPress={NextHandler}>
+				onPress={onButtonClick}>
 				Next
 			</GradientButton>
 			<ClickableText
-				onPress={SkipHandler}
+				onPress={onTextClick}
 				text="Skip"
 				style={styles.clickableText}
 			/>
@@ -49,7 +58,8 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		justifyContent: "space-between",
 		alignItems: "center",
-		paddingHorizontal: 10,
+		//paddingHorizontal: 10,
+		//marginHorizontal: -10,
 	},
 	button: {
 		width: "35%",

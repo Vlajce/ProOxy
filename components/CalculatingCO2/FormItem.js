@@ -24,13 +24,15 @@ function FormItem({
 				},
 			]}
 			onPress={() => onSelect(value)}>
-			<RadioButton
-				selected={isSelected}
-				style={styles.radioButton}></RadioButton>
-
 			<View style={styles.option}>
-				{IconComponent && <IconComponent {...iconProps} />}
-				<Text style={styles.text}>{children}</Text>
+				<RadioButton
+					selected={isSelected}
+					style={styles.radioButton}></RadioButton>
+				<View style={styles.textContainer}>
+					<Text style={styles.text}>
+						{IconComponent && <IconComponent {...iconProps} />} {children}
+					</Text>
+				</View>
 			</View>
 		</Pressable>
 	);
@@ -40,23 +42,23 @@ export default FormItem;
 
 const styles = StyleSheet.create({
 	mainContainer: {
-		paddingTop: 30,
-		paddingBottom: 15,
-		paddingRight: 30,
-		paddingLeft: 20,
+		padding: 24,
 		flexDirection: "row",
+		alignItems: "center",
 	},
 	option: {
-		paddingRight: 50,
 		flexDirection: "row",
 	},
 	radioButton: {
 		marginRight: 16,
+		alignItems: "flex-start",
+	},
+	textContainer: {
+		flex: 1,
 	},
 	text: {
 		fontWeight: "500",
-		fontSize: 16,
-		marginRight: 12,
+		fontSize: 15,
 		textAlign: "left",
 	},
 });

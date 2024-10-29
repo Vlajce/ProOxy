@@ -1,11 +1,18 @@
-import { View, Text, StyleSheet, Image, Pressable } from "react-native";
+import {
+	View,
+	Text,
+	StyleSheet,
+	Image,
+	Pressable,
+	TouchableOpacity,
+} from "react-native";
 import Ionicons from "@expo/vector-icons/AntDesign";
 
 import { Colors } from "../../constants/Colors";
 
 function Card({ label, flag, name, icon, onPress }) {
 	return (
-		<Pressable
+		<TouchableOpacity
 			style={styles.container}
 			onPress={onPress}>
 			<Text style={styles.label}>{label}</Text>
@@ -25,7 +32,7 @@ function Card({ label, flag, name, icon, onPress }) {
 					/>
 				</View>
 			</View>
-		</Pressable>
+		</TouchableOpacity>
 	);
 }
 

@@ -4,7 +4,7 @@ import SimpleLineIcons from "@expo/vector-icons/SimpleLineIcons";
 import { useState } from "react";
 
 import { Colors } from "../../constants/Colors";
-import HeaderFP from "../../components/ForgotPassword/HeaderFP";
+import HeaderForgotPassword from "../../components/ForgotPassword/HeaderForgotPassword";
 import InfoSection from "../../components/ForgotPassword/InfoSection";
 import GradientButton from "../../components/UI/GradientButton";
 import Input from "../../components/UI/Input";
@@ -51,13 +51,13 @@ function EnterNewPassword({ navigation }) {
 			keyboardShouldPersistTaps="handled"
 			extraScrollHeight={50}
 			scrollEnabled={true}>
-			<HeaderFP
+			<HeaderForgotPassword
 				icon="chevron-back-circle"
 				size={40}
 				color={Colors.gray100}
 				onIconPress={IconPressHandler}
 				isLandscape={isLandscape}
-				progress={5 / 7}></HeaderFP>
+				progress={5 / 7}></HeaderForgotPassword>
 			<InfoSection
 				title="Enter New Password"
 				IconComponent={SimpleLineIcons}
