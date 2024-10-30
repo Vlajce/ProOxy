@@ -4,7 +4,7 @@ import { Colors } from "../constants/Colors";
 import GradientButton from "../components/UI/GradientButton";
 import ClickableText from "../components/UI/ClickableText";
 
-function Splash({ navigation }) {
+function Welcome({ navigation }) {
 	const { width, height } = useWindowDimensions();
 
 	function CalculateYourCO2() {
@@ -42,6 +42,8 @@ function Splash({ navigation }) {
 	);
 }
 
+export default Welcome;
+
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
@@ -68,5 +70,3 @@ const styles = StyleSheet.create({
 		fontWeight: "500",
 	},
 });
-
-export default Splash;

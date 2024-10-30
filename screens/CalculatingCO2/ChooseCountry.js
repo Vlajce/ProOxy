@@ -30,7 +30,7 @@ function ChooseCountry({ navigation, countries }) {
 	}, []);
 
 	function IconPressedHandler() {
-		navigation.navigate("Splash");
+		navigation.navigate("Welcome");
 	}
 
 	function ChosenCountryHandler() {

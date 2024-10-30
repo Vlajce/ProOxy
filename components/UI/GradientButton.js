@@ -3,7 +3,7 @@ import { View, Pressable, Text, StyleSheet, Platform } from "react-native";
 import { Colors } from "../../constants/Colors";
 import { LinearGradient } from "expo-linear-gradient";
 
-function GradientButton({ children, onPress, style }) {
+function GradientButton({ onPress, style, children }) {
 	return (
 		<View style={[styles.container, style]}>
 			<Pressable

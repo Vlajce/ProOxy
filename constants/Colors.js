@@ -6,6 +6,6 @@ export const Colors = {
 	gray50: "#dedede", //#EEF1F7
 	gray100: "#87888d",
 	gray200: "#747577",
-	error50: "#ce4750",
-	error500: "#ba0f0f",
+	error50: "#d52323",
+	error500: "#a31616",
 };

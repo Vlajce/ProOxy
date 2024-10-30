@@ -1,15 +1,22 @@
 import { View, Text, TextInput, StyleSheet } from "react-native";
 import Feather from "@expo/vector-icons/Feather";
+import { useField } from "formik";
+
 import { Colors } from "../../constants/Colors";
 
-function Input({ label, labelStyle, textInputConfig, icon, inputStyle }) {
+function Input({ name, label, textInputConfig, icon, inputStyle }) {
+	const [field, meta, helpers] = useField(name);
+
 	return (
 		<View style={inputStyle}>
-			<Text style={labelStyle}>{label}</Text>
+			{label && <Text style={styles.labelStyle}>{label}</Text>}
 			<View style={styles.inputWrapper}>
 				<TextInput
 					style={[styles.input]}
 					{...textInputConfig}
+					value={field.value}
+					onChangeText={helpers.setValue}
+					onBlur={() => helpers.setTouched(true)}
 				/>
 				{icon && (
 					<Feather
@@ -40,6 +47,13 @@ const styles = StyleSheet.create({
 	},
 	icon: {
 		marginLeft: "auto",
+	},
+	labelStyle: {
+		fontSize: 15,
+		fontWeight: "bold",
+		marginTop: 20,
+		marginBottom: 10,
+		color: Colors.gray100,
 	},
 	input: {
 		flex: 1,

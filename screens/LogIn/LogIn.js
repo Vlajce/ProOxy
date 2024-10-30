@@ -1,12 +1,17 @@
+import React from "react";
 import {
 	View,
 	Text,
 	StyleSheet,
 	Image,
 	useWindowDimensions,
+	TextInput,
+	Button,
 } from "react-native";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import * as yup from "yup";
+import { Formik } from "formik";
 
 import { Colors } from "../../constants/Colors";
 import Input from "../../components/UI/Input";
@@ -14,19 +19,24 @@ import IconButton from "../../components/UI/IconButton";
 import GradientButton from "../../components/UI/GradientButton";
 import ClickableText from "../../components/UI/ClickableText";
 import IconCheckBox from "../../components/UI/IconCheckBox";
-import Content from "../../components/Content";
+
+const loginValidationSchema = yup.object().shape({
+	email: yup
+		.string()
+		.email("Please enter valid email")
+		.required("Email Address is Required"),
+	password: yup
+		.string()
+		.min(7, ({ min }) => `Password must be at least ${min} characters`)
+		.required("Password is required"),
+});
 
 function LogIn({ navigation }) {
-	const [inputValue, setInputValues] = useState({
-		email: "",
-		password: "",
-	});
-	const [errors, setErrors] = useState({
-		email: "",
-		password: "",
-	});
-	const [toggleCheckBox, setToggleCheckBox] = useState(true);
 	const { width, height } = useWindowDimensions();
+
+	const form = useRef(null);
+
+	const [toggleCheckBox, setToggleCheckBox] = useState(true);
 
 	function IconPressedHandler() {
 		navigation.goBack();
@@ -35,87 +45,17 @@ function LogIn({ navigation }) {
 	function CalculatePressedHandler() {
 		navigation.navigate("ChooseCountry");
 	}
-	function ForgotPassword() {
-		navigation.navigate("ForgotPassword");
-	}
 
 	function SetCheckBoxValue() {
 		setToggleCheckBox(!toggleCheckBox);
 	}
 
-	function InputChangeHandler(inputIdentifier, enteredValue) {
-		setInputValues((currentInputValues) => {
-			return {
-				...currentInputValues,
-				[inputIdentifier]: enteredValue, //dinamicki pristup propertiju
-			};
-		});
-		setErrors({
-			email: "",
-			password: "",
-		});
-	}
+	function submitHandler(values) {
+		console.log(values);
 
-	function LoginHandler() {
-		const user = {
-			email: inputValue.email,
-			password: inputValue.password,
-		};
+		//Provera na backend-u
 
-		if (!InputValidation(user)) {
-			setInputValues((currentValues) => {
-				return {
-					email: currentValues.email,
-					password: currentValues.password,
-				};
-			});
-			return;
-		}
-
-		console.log(user);
-
-		//fetch...
-		//context za usere!
-	}
-
-	function InputValidation(user) {
-		let emailError = "";
-		let passwordError = "";
-		let isValid = true;
-
-		if (user.email.trim() === "") {
-			emailError = "Email field cannot be empty";
-			isValid = false;
-		} else {
-			const emailRegex = /^[A-Za-z0-9]+@[A-Za-z0-9]+\.[A-Za-z]+$/;
-			if (!emailRegex.test(user.email)) {
-				emailError = "Please enter a valid email address";
-				isValid = false;
-			}
-		}
-		if (user.password.trim() === "") {
-			passwordError = "Password field cannot be empty";
-			isValid = false;
-		} else if (user.password.length < 8) {
-			passwordError = "Password should be at least 8 characters long";
-			isValid = false;
-		} else if (!/\d/.test(user.password)) {
-			passwordError = "Password must contain at least one number";
-			isValid = false;
-		} else if (!/[A-Z]/.test(user.password) || !/[a-z]/.test(user.password)) {
-			passwordError = "Password must contain both upper and lower case letters";
-			isValid = false;
-		} else if (!/[^A-Za-z0-9]/.test(user.password)) {
-			passwordError = "Password must contain at least one special character";
-			isValid = false;
-		}
-
-		setErrors({
-			email: emailError,
-			password: passwordError,
-		});
-
-		return isValid;
+		navigation.navigate("Offset");
 	}
 
 	const isLandscape = width > height;
@@ -132,8 +72,9 @@ function LogIn({ navigation }) {
 				},
 			]}
 			keyboardShouldPersistTaps="handled"
-			extraScrollHeight={50}
-			scrollEnabled={true}>
+			extraScrollHeight={30}
+			scrollEnabled={true}
+			bounces={false}>
 			<IconButton
 				icon="close-circle"
 				size={40}
@@ -151,36 +92,47 @@ function LogIn({ navigation }) {
 				</View>
 			</View>
 			<Text style={styles.textLog}>Login to continue</Text>
-			<Input
-				label="Email"
-				labelStyle={styles.inputLabel}
-				textInputConfig={{
-					keyboardType: "email-address",
-					placeholder: "Your Email Address",
-					autoCorrect: false,
-					autoCapitalize: "none",
-					onChangeText: InputChangeHandler.bind(this, "email"),
-					value: inputValue.email,
-				}}
-			/>
-			{errors.email && <Text style={styles.errorText}>{errors.email}</Text>}
-			<Input
-				label="Password"
-				labelStyle={styles.inputLabel}
-				textInputConfig={{
-					keyboardType: "default",
-					placeholder: "Enter Your Password",
-					minLength: 7,
-					autoCorrect: false,
-					autoCapitalize: "none",
-					secureTextEntry: true,
-					onChangeText: InputChangeHandler.bind(this, "password"),
-					value: inputValue.password,
-				}}
-			/>
-			{errors.password && (
-				<Text style={styles.errorText}>{errors.password}</Text>
-			)}
+			<Formik
+				innerRef={form}
+				initialValues={{ email: "", password: "" }}
+				onSubmit={submitHandler}
+				validationSchema={loginValidationSchema}>
+				{({ handleSubmit, values, errors, touched }) => (
+					<>
+						<Input
+							name="email"
+							label="Email"
+							textInputConfig={{
+								keyboardType: "email-address",
+								placeholder: "Your Email Address",
+								autoCorrect: false,
+								autoCapitalize: "none",
+							}}
+						/>
+						{touched.email && errors.email && (
+							<Text style={{ fontSize: 15, color: Colors.error50 }}>
+								{errors.email}
+							</Text>
+						)}
+						<Input
+							name="password"
+							label="Password"
+							textInputConfig={{
+								keyboardType: "default",
+								placeholder: "Enter Your Password",
+								autoCorrect: false,
+								autoCapitalize: "none",
+								secureTextEntry: true,
+							}}
+						/>
+						{touched.password && errors.password && (
+							<Text style={{ fontSize: 15, color: Colors.error50 }}>
+								{errors.password}
+							</Text>
+						)}
+					</>
+				)}
+			</Formik>
 			<View style={styles.rowContainer}>
 				<View style={styles.cbxContainer}>
 					<IconCheckBox
@@ -192,11 +144,13 @@ function LogIn({ navigation }) {
 					<Text style={styles.rememberText}>Remember me</Text>
 				</View>
 				<ClickableText
-					onPress={ForgotPassword}
+					onPress={() => navigation.navigate("ForgotPassword")}
 					text="Forgot Password"
 				/>
 			</View>
-			<GradientButton onPress={LoginHandler}>Login</GradientButton>
+			<GradientButton onPress={() => form.current.submitForm()}>
+				Login
+			</GradientButton>
 			<View style={styles.textCointaner}>
 				<View>
 					<Text style={styles.textAcc}>Don't have an account?</Text>
@@ -236,13 +190,6 @@ const styles = StyleSheet.create({
 	textLog: {
 		fontSize: 15,
 		marginBottom: 15,
-	},
-	inputLabel: {
-		fontSize: 15,
-		fontWeight: "bold",
-		marginTop: 20,
-		marginBottom: 10,
-		color: Colors.gray100,
 	},
 	rowContainer: {
 		marginVertical: 14,
@@ -288,5 +235,14 @@ const styles = StyleSheet.create({
 		fontWeight: "bold",
 		lineHeight: 28,
 		fontSize: 10,
+	},
+	textInput: {
+		height: 40,
+		width: "100%",
+		margin: 10,
+		backgroundColor: "white",
+		borderColor: "gray",
+		borderWidth: StyleSheet.hairlineWidth,
+		borderRadius: 10,
 	},
 });

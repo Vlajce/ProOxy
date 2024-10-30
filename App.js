@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 import LogIn from "./screens/LogIn/LogIn";
-import Splash from "./screens/Splash";
+import Welcome from "./screens/Welcome";
 import ChooseCountry from "./screens/CalculatingCO2/ChooseCountry";
 import ForgotPassword from "./screens/ForgotPassword/ForgotPassword";
 import Flying from "./screens/CalculatingCO2/Flying";
@@ -58,8 +58,8 @@ export default function App() {
 						},
 					}}>
 					<Stack.Screen
-						name="Splash"
-						component={Splash}
+						name="Welcome"
+						component={Welcome}
 					/>
 					<Stack.Screen
 						name="LogIn"
