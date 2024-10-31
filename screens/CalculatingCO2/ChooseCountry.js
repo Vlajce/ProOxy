@@ -15,19 +15,10 @@ import Card from "../../components/UI/Card";
 import CountrySelectionModal from "../../components/CalculatingCO2/CountrySelectionModal";
 
 function ChooseCountry({ navigation, countries }) {
+	const { width, height } = useWindowDimensions();
+
 	const [modalIsVisible, setModalIsVisible] = useState(false);
 	const [country, setCountry] = useState(null);
-
-	const { width, height } = useWindowDimensions();
-	const isLandscape = width > height;
-
-	useEffect(() => {
-		setCountry({
-			name: "Switzerland",
-			coConcentration: 580,
-			imageUrl: "https://flagcdn.com/w320/ch.png",
-		});
-	}, []);
 
 	function IconPressedHandler() {
 		navigation.navigate("Welcome");
@@ -58,6 +49,8 @@ function ChooseCountry({ navigation, countries }) {
 			imageUrl: selectedCountry.flags.png,
 		});
 	}
+
+	const isLandscape = width > height;
 
 	return (
 		<ScrollView
@@ -113,9 +106,7 @@ function ChooseCountry({ navigation, countries }) {
 						<Card
 							label="Select Country"
 							flag={
-								country
-									? country.imageUrl
-									: "https://upload.wikimedia.org/wikipedia/commons/0/08/Flag_of_Switzerland_%28Pantone%29.svg"
+								country ? country.imageUrl : "https://flagcdn.com/w320/ch.png"
 							}
 							name={country ? country.name : "Switzerland"}
 							icon="caretdown"

@@ -33,7 +33,8 @@ function Flying({ navigation }) {
 	}
 
 	function NextHandler() {
-		navigation.navigate("Mobility");
+		navigation.navigate("CreateAccount");
+		//navigation.navigate("Mobility");
 	}
 
 	function SkipHandler() {

@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, useWindowDimensions } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 
-import HeaderForgotPassword from "../../components/ForgotPassword/HeaderForgotPassword";
+import HeaderWithProgress from "../../components/UI/HeaderWithProgress";
 import InfoSection from "../../components/ForgotPassword/InfoSection";
 import GradientButton from "../../components/UI/GradientButton";
 import ClickableText from "../../components/UI/ClickableText";
@@ -19,7 +19,9 @@ function CheckYourEmail({ navigation }) {
 		navigation.navigate("EnterNewPassword");
 	}
 
-	function ResendEmail() {}
+	function ResendEmail() {
+		// poziv back-a
+	}
 
 	const isLandscape = width > height;
 	const paddingVerticalDistance = isLandscape ? height * 0.15 : height * 0.1;
@@ -44,13 +46,13 @@ function CheckYourEmail({ navigation }) {
 			keyboardShouldPersistTaps="handled"
 			extraScrollHeight={50}
 			scrollEnabled={true}>
-			<HeaderForgotPassword
+			<HeaderWithProgress
 				icon="chevron-back-circle"
 				size={40}
 				color={Colors.gray100}
 				onIconPress={IconPressHandler}
 				isLandscape={isLandscape}
-				progress={1 / 3}></HeaderForgotPassword>
+				progress={1 / 3}></HeaderWithProgress>
 			<InfoSection
 				title="Check Your Email"
 				IconComponent={FontAwesome}
@@ -79,6 +81,7 @@ function CheckYourEmail({ navigation }) {
 				<ClickableText
 					text="Resend an email"
 					onPress={ResendEmail}
+					style={{ fontSize: 14 }}
 				/>
 			</View>
 		</KeyboardAwareScrollView>

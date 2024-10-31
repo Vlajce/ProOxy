@@ -5,20 +5,16 @@ import { Colors } from "../../constants/Colors";
 function ClickableText({ onPress, text, style }) {
 	return (
 		<TouchableOpacity
-			style={styles.loginContainer}
 			onPress={onPress}
 			activeOpacity={0.5}>
-			<Text style={[styles.loginText, style]}>{text}</Text>
+			<Text style={[styles.text, style]}>{text}</Text>
 		</TouchableOpacity>
 	);
 }
 export default ClickableText;
 
 const styles = StyleSheet.create({
-	loginContainer: {
-		marginLeft: 8,
-	},
-	loginText: {
+	text: {
 		color: Colors.primary100,
 		fontWeight: "500",
 		textDecorationLine: "none",

@@ -1,7 +1,6 @@
 import { View, Text, StyleSheet, FlatList, Modal } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState } from "react";
 
 import { Colors } from "../../constants/Colors";
 import CountryItem from "../CalculatingCO2/CountryItem";
@@ -19,23 +18,6 @@ function CountrySelectionModal({
 	function InputChangeHandler(enteredText) {
 		setSearchValue(enteredText);
 	}
-
-	// useEffect(() => {
-	// 	const fetchCountries = async () => {
-	// 		try {
-	// 			const response = await axios.get("https://restcountries.com/v3.1/all");
-
-	// 			const sortedCountries = response.data.sort((a, b) =>
-	// 				a.name.common.localeCompare(b.name.common)
-	// 			);
-	// 			setCountries(sortedCountries);
-	// 		} catch (error) {
-	// 			console.error(error);
-	// 		}
-	// 	};
-
-	// 	fetchCountries();
-	// }, []);
 
 	const renderCountryItem = ({ item }) => {
 		return (

@@ -11,11 +11,14 @@ function InfoSection({
 	return (
 		<View style={styles.upperTextCont}>
 			<Text style={styles.title}>{title}</Text>
-
-			<View style={[styles.icon, iconStyle]}>
-				{IconComponent && <IconComponent {...iconProps} />}
-			</View>
-			<Text style={[styles.helperText, textStyle]}>{children}</Text>
+			{IconComponent && (
+				<View style={[styles.icon, iconStyle]}>
+					<IconComponent {...iconProps} />
+				</View>
+			)}
+			{children && (
+				<Text style={[styles.helperText, textStyle]}>{children}</Text>
+			)}
 		</View>
 	);
 }

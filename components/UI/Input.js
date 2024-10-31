@@ -4,7 +4,7 @@ import { useField } from "formik";
 
 import { Colors } from "../../constants/Colors";
 
-function Input({ name, label, textInputConfig, icon, inputStyle }) {
+function Input({ name, label, textInputConfig, icon, inputStyle, textStyle }) {
 	const [field, meta, helpers] = useField(name);
 
 	return (
@@ -12,7 +12,7 @@ function Input({ name, label, textInputConfig, icon, inputStyle }) {
 			{label && <Text style={styles.labelStyle}>{label}</Text>}
 			<View style={styles.inputWrapper}>
 				<TextInput
-					style={[styles.input]}
+					style={[styles.input, textStyle]}
 					{...textInputConfig}
 					value={field.value}
 					onChangeText={helpers.setValue}

@@ -1,9 +1,9 @@
 import { View, StyleSheet } from "react-native";
 
-import IconButton from "../UI/IconButton";
-import StaticProgressBar from "../UI/StaticProgressBar";
+import IconButton from "./IconButton";
+import StaticProgressBar from "./StaticProgressBar";
 
-function HeaderFP({
+function HeaderWithProgress({
 	style,
 	icon,
 	size,
@@ -37,7 +37,7 @@ function HeaderFP({
 	);
 }
 
-export default HeaderFP;
+export default HeaderWithProgress;
 
 const styles = StyleSheet.create({
 	headerCont: {

@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
 			height: 6,
 		},
 		shadowOpacity: 0.5,
-		shadowRadius: 12,
+		shadowRadius: 8,
 		borderRadius: 60,
 	},
 	pressed: {

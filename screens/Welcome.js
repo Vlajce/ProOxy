@@ -36,7 +36,8 @@ function Welcome({ navigation }) {
 
 				<ClickableText
 					onPress={LogInPressed}
-					text="Log in"></ClickableText>
+					text="Log in"
+					style={{ fontSize: 14, marginLeft: 8 }}></ClickableText>
 			</View>
 		</View>
 	);
