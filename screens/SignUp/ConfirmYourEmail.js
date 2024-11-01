@@ -8,13 +8,14 @@ import HeaderWithProgress from "../../components/UI/HeaderWithProgress";
 import InfoSection from "../../components/ForgotPassword/InfoSection";
 import GradientButton from "../../components/UI/GradientButton";
 import ClickableText from "../../components/UI/ClickableText";
+import DigitInput from "../../components/UI/DigitInput";
 
 function ConfirmYourMail({ navigation }) {
 	const { width, height } = useWindowDimensions();
 
 	const isLandscape = width > height;
 	const paddingVerticalDistance = isLandscape ? height * 0.05 : height * 0.08;
-	const paddingHorizontalDistance = isLandscape ? width * 0.1 : width * 0.1;
+	const paddingHorizontalDistance = isLandscape ? width * 0.1 : width * 0.08;
 
 	return (
 		<KeyboardAwareScrollView
@@ -28,6 +29,8 @@ function ConfirmYourMail({ navigation }) {
 			contentContainerStyle={{
 				paddingBottom: 80,
 			}}
+			extraHeight={80}
+			enableOnAndroid={true}
 			bounces="false"
 			keyboardShouldPersistTaps="handled"
 			extraScrollHeight={50}
@@ -52,7 +55,12 @@ function ConfirmYourMail({ navigation }) {
 				your email.
 			</InfoSection>
 
-			<View style={styles.codeContainer}></View>
+			<View style={styles.codeContainer}>
+				<DigitInput focus={true} />
+				<DigitInput focus={false} />
+				<DigitInput focus={false} />
+				<DigitInput focus={false} />
+			</View>
 			<GradientButton
 				style={{ marginBottom: 40 }}
 				onPress={() => navigation.navigate("CompleteProfile")}>
@@ -76,10 +84,10 @@ const styles = StyleSheet.create({
 		flex: 1,
 	},
 	codeContainer: {
+		flexDirection: "row",
 		marginVertical: 40,
-		width: 310,
-		height: 100,
-		backgroundColor: Colors.gray10,
+		// alignItems: "center",
+		// justifyContent: "center",
 	},
 	text: {
 		textAlign: "center",

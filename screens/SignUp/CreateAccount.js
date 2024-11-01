@@ -79,7 +79,7 @@ function CreateAccount({ navigation }) {
 					onIconPress={() => navigation.goBack()}
 					isLandscape={isLandscape}
 					progress={1 / 3}
-					style={{ marginBottom: 16 }}
+					style={{ marginBottom: 24 }}
 				/>
 				<InfoSection title="Create Account" />
 				<Formik

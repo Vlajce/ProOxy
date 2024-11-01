@@ -22,7 +22,7 @@ function CompleteProfile({ navigation }) {
 	}
 
 	const isLandscape = width > height;
-	const paddingVerticalDistance = isLandscape ? height * 0.15 : height * 0.1;
+	const paddingVerticalDistance = isLandscape ? height * 0.05 : height * 0.08;
 	const paddingHorizontalDistance = isLandscape ? width * 0.1 : width * 0.1;
 
 	return (
@@ -162,6 +162,7 @@ function CompleteProfile({ navigation }) {
 								textInputConfig={{
 									keyboardType: "email-address",
 									placeholder: "+381",
+									placeholderTextColor: "black",
 									autoCorrect: false,
 									autoCapitalize: "none",
 								}}
