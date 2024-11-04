@@ -1,31 +1,16 @@
 import { View, Text, TextInput, StyleSheet } from "react-native";
 import Feather from "@expo/vector-icons/Feather";
-import { useField } from "formik";
 
 import { Colors } from "../../constants/Colors";
 
-function Input({
-	name,
-	label,
-	prefix,
-	textInputConfig,
-	icon,
-	inputStyle,
-	textStyle,
-}) {
-	const [field, meta, helpers] = useField(name);
-
+function SearchBar({ label, textInputConfig, icon, inputStyle, textStyle }) {
 	return (
 		<View style={inputStyle}>
 			{label && <Text style={styles.labelStyle}>{label}</Text>}
 			<View style={styles.inputWrapper}>
-				{prefix && <Text style={styles.countryCode}>{prefix}</Text>}
 				<TextInput
 					style={[styles.input, textStyle]}
 					{...textInputConfig}
-					value={field.value}
-					onChangeText={helpers.setValue}
-					onBlur={() => helpers.setTouched(true)}
 				/>
 				{icon && (
 					<Feather
@@ -40,7 +25,7 @@ function Input({
 	);
 }
 
-export default Input;
+export default SearchBar;
 
 const styles = StyleSheet.create({
 	inputWrapper: {
@@ -65,9 +50,5 @@ const styles = StyleSheet.create({
 		flex: 1,
 		color: Colors.gray200,
 		fontSize: 16,
-	},
-	countryCode: {
-		fontSize: 16,
-		marginRight: 8,
 	},
 });

@@ -18,23 +18,14 @@ function ConfirmYourMail({ navigation }) {
 	const paddingHorizontalDistance = isLandscape ? width * 0.1 : width * 0.08;
 
 	return (
-		<KeyboardAwareScrollView
+		<View
 			style={[
 				styles.container,
 				{
 					paddingVertical: paddingVerticalDistance,
 					paddingHorizontal: paddingHorizontalDistance,
 				},
-			]}
-			contentContainerStyle={{
-				paddingBottom: 80,
-			}}
-			extraHeight={80}
-			enableOnAndroid={true}
-			bounces="false"
-			keyboardShouldPersistTaps="handled"
-			extraScrollHeight={50}
-			scrollEnabled={true}>
+			]}>
 			<HeaderWithProgress
 				icon="chevron-back-circle"
 				size={40}
@@ -42,38 +33,54 @@ function ConfirmYourMail({ navigation }) {
 				onIconPress={() => navigation.goBack()}
 				isLandscape={isLandscape}
 				progress={2 / 3}
+				style={{ marginBottom: 20 }}
 			/>
-			<InfoSection
-				title="Confirm Your Email"
-				IconComponent={MaterialCommunityIcons}
-				iconProps={{
-					name: "shield-check-outline",
-					size: 35,
-					color: Colors.primary100,
-				}}>
-				Please confirm your account by entering the authorization code sent to
-				your email.
-			</InfoSection>
+			<KeyboardAwareScrollView
+				style={styles.container}
+				// contentContainerStyle={{
+				// 	paddingBottom: 80,
+				// }}
+				extraHeight={100}
+				enableOnAndroid={true}
+				bounces="false"
+				keyboardShouldPersistTaps="handled"
+				extraScrollHeight={100}
+				scrollEnabled={true}>
+				<InfoSection
+					title="Confirm Your Email"
+					IconComponent={MaterialCommunityIcons}
+					iconProps={{
+						name: "shield-check-outline",
+						size: 35,
+						color: Colors.primary100,
+					}}
+					iconStyle={{ marginBottom: 10, marginTop: 10 }}>
+					Please confirm your account by entering the authorization code sent to
+					your email.
+				</InfoSection>
 
-			<View style={styles.codeContainer}>
-				<DigitInput focus={true} />
-				<DigitInput focus={false} />
-				<DigitInput focus={false} />
-				<DigitInput focus={false} />
-			</View>
-			<GradientButton
-				style={{ marginBottom: 40 }}
-				onPress={() => navigation.navigate("CompleteProfile")}>
-				Confirm Email Address
-			</GradientButton>
-			<Text style={styles.text}>It may take a minute to receive you core.</Text>
-			<Text style={styles.text}>Hasn't recieved it?</Text>
-			<ClickableText
-				onPress={() => console.log("Resend a new code")}
-				text="Resend a new code"
-				style={{ textAlign: "center", fontSize: 15, marginTop: 40 }}
-			/>
-		</KeyboardAwareScrollView>
+				<View style={styles.codeContainer}>
+					<DigitInput focus={true} />
+					<DigitInput focus={false} />
+					<DigitInput focus={false} />
+					<DigitInput focus={false} />
+				</View>
+				<GradientButton
+					style={{ marginBottom: 20 }}
+					onPress={() => navigation.navigate("CompleteProfile")}>
+					Confirm Email Address
+				</GradientButton>
+				<Text style={styles.text}>
+					It may take a minute to receive you core.
+				</Text>
+				<Text style={styles.text}>Hasn't recieved it?</Text>
+				<ClickableText
+					onPress={() => console.log("Resend a new code")}
+					text="Resend a new code"
+					style={{ textAlign: "center", fontSize: 15, marginTop: 6 }}
+				/>
+			</KeyboardAwareScrollView>
+		</View>
 	);
 }
 
@@ -85,9 +92,7 @@ const styles = StyleSheet.create({
 	},
 	codeContainer: {
 		flexDirection: "row",
-		marginVertical: 40,
-		// alignItems: "center",
-		// justifyContent: "center",
+		marginVertical: 24,
 	},
 	text: {
 		textAlign: "center",

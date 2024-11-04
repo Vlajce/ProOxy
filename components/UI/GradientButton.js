@@ -26,14 +26,14 @@ export default GradientButton;
 const styles = StyleSheet.create({
 	container: {
 		justifyContent: "center",
-		elevation: 12,
+		elevation: 8,
 		shadowColor: "#607337",
 		shadowOffset: {
 			width: 0,
 			height: 6,
 		},
 		shadowOpacity: 0.5,
-		shadowRadius: 8,
+		shadowRadius: 6,
 		borderRadius: 60,
 	},
 	pressed: {

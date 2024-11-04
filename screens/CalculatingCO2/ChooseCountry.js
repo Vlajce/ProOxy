@@ -47,6 +47,7 @@ function ChooseCountry({ navigation, countries }) {
 			name: selectedCountry.name.common,
 			coConcentration: selectedCountry.coConcentration || 580,
 			imageUrl: selectedCountry.flags.png,
+			callingNumber: selectedCountry.idd.root,
 		});
 	}
 

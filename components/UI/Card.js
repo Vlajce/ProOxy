@@ -7,13 +7,14 @@ import {
 	TouchableOpacity,
 } from "react-native";
 import Ionicons from "@expo/vector-icons/AntDesign";
+import { useField } from "formik";
 
 import { Colors } from "../../constants/Colors";
 
-function Card({ label, flag, name, icon, onPress }) {
+function Card({ label, flag, name, onPress, style }) {
 	return (
 		<TouchableOpacity
-			style={styles.container}
+			style={[styles.container, style]}
 			onPress={onPress}>
 			<Text style={styles.label}>{label}</Text>
 			<View style={styles.cardCont}>
@@ -47,6 +48,7 @@ const styles = StyleSheet.create({
 		marginBottom: 14,
 	},
 	cardCont: {
+		height: 65,
 		flexDirection: "row",
 		borderRadius: 10,
 		backgroundColor: Colors.gray50,
@@ -59,8 +61,8 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 	},
 	flag: {
-		width: 40,
-		height: 40,
+		width: 35,
+		height: 35,
 		borderRadius: 20,
 		overflow: "hidden",
 		justifyContent: "flex-start",

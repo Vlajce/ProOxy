@@ -6,6 +6,7 @@ import { Colors } from "../../constants/Colors";
 import CountryItem from "../CalculatingCO2/CountryItem";
 import IconButton from "../UI/IconButton";
 import Input from "../UI/Input";
+import SearchBar from "../UI/SearchBar";
 
 function CountrySelectionModal({
 	modalVisible,
@@ -48,7 +49,7 @@ function CountrySelectionModal({
 					Which country do you lie in?
 				</Text>
 				<View style={styles.inputCont}>
-					<Input
+					<SearchBar
 						label=""
 						textInputConfig={{
 							keyboardType: "default",
@@ -59,7 +60,8 @@ function CountrySelectionModal({
 							onChangeText: InputChangeHandler,
 							value: searchValue,
 						}}
-						icon="search"></Input>
+						icon="search"
+					/>
 				</View>
 				<View style={styles.countriesContainer}>
 					<FlatList

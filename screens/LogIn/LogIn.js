@@ -71,7 +71,7 @@ function LogIn({ navigation }) {
 				icon="close-circle"
 				size={40}
 				color={Colors.gray100}
-				onPress={() => navigation.goBack()}></IconButton>
+				onPress={() => navigation.navigate("Welcome")}></IconButton>
 			<View style={styles.welcomeContainer}>
 				<View>
 					<Text style={styles.textWelcome}>Welcome</Text>

@@ -104,10 +104,14 @@ export default function App() {
 						name="ConfirmYourMail"
 						component={ConfirmYourMail}
 					/>
-					<Stack.Screen
-						name="CompleteProfile"
-						component={CompleteProfile}
-					/>
+					<Stack.Screen name="CompleteProfile">
+						{(props) => (
+							<CompleteProfile
+								{...props}
+								countries={countries}
+							/>
+						)}
+					</Stack.Screen>
 				</Stack.Navigator>
 			</NavigationContainer>
 		</>

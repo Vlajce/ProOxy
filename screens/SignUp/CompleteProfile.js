@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { View, Text, StyleSheet, useWindowDimensions } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import * as yup from "yup";
@@ -9,16 +9,33 @@ import HeaderWithProgress from "../../components/UI/HeaderWithProgress";
 import Input from "../../components/UI/Input";
 import InfoSection from "../../components/ForgotPassword/InfoSection";
 import GradientButton from "../../components/UI/GradientButton";
+import Card from "../../components/UI/Card";
+import CountrySelectionModal from "../../components/CalculatingCO2/CountrySelectionModal";
 
-function CompleteProfile({ navigation }) {
+function CompleteProfile({ navigation, countries }) {
 	const { width, height } = useWindowDimensions();
 
+	const [modalIsVisible, setModalIsVisible] = useState(false);
+	const [country, setCountry] = useState({
+		name: "Serbia",
+		imageUrl: "https://flagcdn.com/w320/rs.png",
+		callingNumber: "+381",
+	});
 	const form = useRef(null);
 
 	function submitHandler(values) {
 		console.log(values);
 
 		navigation.navigate("LogIn");
+	}
+	function SelectCountryHandler() {
+		setModalIsVisible(true);
+
+		return (
+			<CountrySelectionModal
+				visible={modalIsVisible}
+				onClose={() => setModalIsVisible(false)}></CountrySelectionModal>
+		);
 	}
 
 	const isLandscape = width > height;
@@ -68,7 +85,7 @@ function CompleteProfile({ navigation }) {
 						<>
 							<Input
 								name="address"
-								label="Address"
+								label="Street Address"
 								textInputConfig={{
 									keyboardType: "default",
 									placeholder: "Enter Your Address",
@@ -141,15 +158,15 @@ function CompleteProfile({ navigation }) {
 									{errors.zipCode}
 								</Text>
 							)}
-							<Input
-								name="country"
+							<Card
 								label="Country"
-								textInputConfig={{
-									keyboardType: "email-address",
-									placeholder: "TREBA DA SE ZAMENI ZA KARTICU",
-									autoCorrect: false,
-									autoCapitalize: "none",
-								}}
+								flag={
+									country ? country.imageUrl : "https://flagcdn.com/w320/rs.png"
+								}
+								name={country ? country.name : "Serbia"}
+								icon="caretdown"
+								onPress={SelectCountryHandler}
+								style={{ marginTop: 20 }}
 							/>
 							{errors.country && touched.country && (
 								<Text style={{ fontSize: 15, color: Colors.error50 }}>
@@ -159,10 +176,9 @@ function CompleteProfile({ navigation }) {
 							<Input
 								name="phone"
 								label="Phone Number"
+								prefix={country.callingNumber}
 								textInputConfig={{
 									keyboardType: "email-address",
-									placeholder: "+381",
-									placeholderTextColor: "black",
 									autoCorrect: false,
 									autoCapitalize: "none",
 								}}
@@ -187,6 +203,21 @@ function CompleteProfile({ navigation }) {
 					}}>
 					Save Account
 				</GradientButton>
+				{modalIsVisible && (
+					<CountrySelectionModal
+						modalVisible={modalIsVisible}
+						onClose={() => setModalIsVisible(false)}
+						onSelectCountry={(selectedCountry) => {
+							setCountry({
+								name: selectedCountry.name.common,
+								coConcentration: selectedCountry.coConcentration || 580,
+								imageUrl: selectedCountry.flags.png,
+								callingNumber: selectedCountry.idd.root,
+							});
+						}}
+						countries={countries}
+					/>
+				)}
 			</KeyboardAwareScrollView>
 		</View>
 	);
