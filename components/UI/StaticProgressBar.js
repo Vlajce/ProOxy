@@ -1,10 +1,12 @@
 import { View, StyleSheet } from "react-native";
 import { Colors } from "../../constants/Colors";
 
-const StaticProgressBar = ({ style, progress }) => {
+const StaticProgressBar = ({ contStyle, filledColor, progress }) => {
 	return (
-		<View style={[styles.container, style]}>
-			<View style={[styles.filled, { width: `${progress * 100}%` }]} />
+		<View style={[styles.container, contStyle]}>
+			<View
+				style={[styles.filled, filledColor, { width: `${progress * 100}%` }]}
+			/>
 		</View>
 	);
 };
@@ -13,7 +15,7 @@ const styles = StyleSheet.create({
 	container: {
 		height: 8,
 		width: "40%",
-		backgroundColor: Colors.gray50,
+		backgroundColor: Colors.gray10,
 		borderRadius: 5,
 		overflow: "hidden",
 	},

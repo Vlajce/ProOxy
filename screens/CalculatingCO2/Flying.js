@@ -15,8 +15,10 @@ import { Colors } from "../../constants/Colors";
 import FormItem from "../../components/CalculatingCO2/FormItem";
 import Footer from "../../components/CalculatingCO2/Footer";
 
-function Flying({ navigation }) {
+function Flying({ navigation, route }) {
 	const { width, height } = useWindowDimensions();
+
+	const { country } = route.params;
 
 	const bottomSheetModalRef = useRef(null);
 
@@ -33,7 +35,11 @@ function Flying({ navigation }) {
 	}
 
 	function NextHandler() {
-		navigation.navigate("CreateAccount");
+		navigation.navigate("CurrentCO2", {
+			country: country,
+			worldAvg: 427,
+		});
+		//navigation.navigate("CreateAccount");
 		//navigation.navigate("Mobility");
 	}
 

@@ -18,7 +18,11 @@ function ChooseCountry({ navigation, countries }) {
 	const { width, height } = useWindowDimensions();
 
 	const [modalIsVisible, setModalIsVisible] = useState(false);
-	const [country, setCountry] = useState(null);
+	const [country, setCountry] = useState({
+		name: "Switzerland",
+		coConcentration: 580,
+		imageUrl: "https://flagcdn.com/w320/ch.png",
+	});
 
 	function IconPressedHandler() {
 		navigation.navigate("Welcome");
@@ -39,7 +43,9 @@ function ChooseCountry({ navigation, countries }) {
 	}
 
 	function ContinueHandler() {
-		navigation.navigate("Flying");
+		navigation.navigate("Flying", {
+			country: country,
+		});
 	}
 
 	function handleSelectCountry(selectedCountry) {
@@ -55,7 +61,7 @@ function ChooseCountry({ navigation, countries }) {
 
 	return (
 		<ScrollView
-			contentContainerStyle={styles.scrollViewContainer}
+			contentContainerStyle={{ flex: 1 }}
 			bounces="false">
 			<StatusBar style="light" />
 
@@ -80,7 +86,7 @@ function ChooseCountry({ navigation, countries }) {
 								onPress={IconPressedHandler}
 							/>
 						</View>
-						<View style={styles.textContainerRight}>
+						<View style={{ alignItems: "flex-end" }}>
 							<Text style={styles.co2Text}>
 								<Text style={styles.co2Number}>580</Text>
 								<Text style={styles.co2Unit}> kg</Text>
@@ -103,7 +109,7 @@ function ChooseCountry({ navigation, countries }) {
 							Personalize it from your home page.
 						</Text>
 					</View>
-					<View style={styles.cardCont}>
+					<View style={{ marginVertical: 20 }}>
 						<Card
 							label="Select Country"
 							flag={
@@ -132,9 +138,6 @@ function ChooseCountry({ navigation, countries }) {
 export default ChooseCountry;
 
 const styles = StyleSheet.create({
-	scrollViewContainer: {
-		flexGrow: 1,
-	},
 	mainContainer: {
 		flex: 1,
 	},
@@ -156,9 +159,6 @@ const styles = StyleSheet.create({
 		alignItems: "flex-start",
 		paddingVertical: 80,
 		paddingHorizontal: 40,
-	},
-	textContainerRight: {
-		alignItems: "flex-end",
 	},
 	co2Text: {
 		flexDirection: "row",
@@ -184,9 +184,6 @@ const styles = StyleSheet.create({
 	landscapeLowerContainer: {
 		paddingVertical: 30,
 		paddingHorizontal: 50,
-	},
-	cardCont: {
-		marginVertical: 20,
 	},
 	textContainer: {
 		justifyContent: "center",

@@ -17,6 +17,7 @@ import PasswordUpdated from "./screens/ForgotPassword/PasswordUpdated";
 import CreateAccount from "./screens/SignUp/CreateAccount";
 import ConfirmYourMail from "./screens/SignUp/ConfirmYourEmail";
 import CompleteProfile from "./screens/SignUp/CompleteProfile";
+import CurrentCO2 from "./screens/Main/CurrentCO2";
 
 const Stack = createNativeStackNavigator();
 
@@ -112,6 +113,10 @@ export default function App() {
 							/>
 						)}
 					</Stack.Screen>
+					<Stack.Screen
+						name="CurrentCO2"
+						component={CurrentCO2}
+					/>
 				</Stack.Navigator>
 			</NavigationContainer>
 		</>
