@@ -2,9 +2,16 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import * as SplashScreen from "expo-splash-screen";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import "react-native-gesture-handler";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import AntDesign from "@expo/vector-icons/AntDesign";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 
 import LogIn from "./screens/LogIn/LogIn";
 import Welcome from "./screens/Welcome";
@@ -18,6 +25,87 @@ import CreateAccount from "./screens/SignUp/CreateAccount";
 import ConfirmYourMail from "./screens/SignUp/ConfirmYourEmail";
 import CompleteProfile from "./screens/SignUp/CompleteProfile";
 import CurrentCO2 from "./screens/Main/CurrentCO2";
+import MyImpact from "./screens/Main/MyImpact";
+import Projects from "./screens/Main/Projects";
+import Calculator from "./screens/Main/Calculator";
+import Profile from "./screens/Main/Profile";
+import { Colors } from "./constants/Colors";
+
+const Tab = createBottomTabNavigator();
+
+function Home() {
+	return (
+		<Tab.Navigator
+			screenOptions={{
+				headerShown: false,
+				tabBarActiveTintColor: Colors.primary100,
+				tabBarInactiveTintColor: Colors.gray70,
+				tabBarStyle: {
+					paddingBottom: 24,
+					paddingTop: 12,
+					height: "10%",
+				},
+				tabBarLabelStyle: {
+					fontSize: 12,
+					fontWeight: "600",
+				},
+			}}>
+			<Tab.Screen
+				name="MyImpact"
+				component={MyImpact}
+				options={{
+					tabBarLabel: "My impact",
+					tabBarIcon: ({ color }) => (
+						<FontAwesome
+							name="leaf"
+							color={color}
+							size={22}
+						/>
+					),
+				}}
+			/>
+			<Tab.Screen
+				name="Projects"
+				component={Projects}
+				options={{
+					tabBarIcon: ({ color }) => (
+						<AntDesign
+							name="appstore1"
+							color={color}
+							size={22}
+						/>
+					),
+				}}
+			/>
+			<Tab.Screen
+				name="Calculator"
+				component={Calculator}
+				options={{
+					tabBarIcon: ({ color }) => (
+						<MaterialCommunityIcons
+							name="calculator"
+							color={color}
+							size={22}
+						/>
+					),
+				}}
+			/>
+			<Tab.Screen
+				name="Profile"
+				component={Profile}
+				options={{
+					tabBarIcon: ({ color }) => (
+						<FontAwesome5
+							name="user-alt"
+							color={color}
+							size={22}
+						/>
+					),
+				}}
+			/>
+		</Tab.Navigator>
+	);
+}
 
 const Stack = createNativeStackNavigator();
 
@@ -51,7 +139,7 @@ export default function App() {
 	}
 
 	return (
-		<>
+		<GestureHandlerRootView style={{ flex: 1 }}>
 			<NavigationContainer>
 				<StatusBar style="auto" />
 				<Stack.Navigator
@@ -117,17 +205,12 @@ export default function App() {
 						name="CurrentCO2"
 						component={CurrentCO2}
 					/>
+					<Stack.Screen
+						name="Home"
+						component={Home}
+					/>
 				</Stack.Navigator>
 			</NavigationContainer>
-		</>
+		</GestureHandlerRootView>
 	);
 }
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: "#fff",
-		alignItems: "center",
-		justifyContent: "center",
-	},
-});

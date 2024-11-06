@@ -4,7 +4,7 @@ import { LinearGradient } from "expo-linear-gradient";
 
 import { Colors } from "../../constants/Colors";
 
-function FootprintCard({ percentage, children }) {
+function FootprintCard({ percentage, title }) {
 	return (
 		<View style={styles.container}>
 			<LinearGradient
@@ -20,7 +20,7 @@ function FootprintCard({ percentage, children }) {
 						]}
 					/>
 				</View>
-				<Text style={{ fontWeight: "600" }}>{children}</Text>
+				<Text style={{ fontWeight: "600" }}>{title}</Text>
 				<Text style={styles.calcValue}>{percentage}%</Text>
 			</LinearGradient>
 		</View>

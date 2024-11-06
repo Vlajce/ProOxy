@@ -44,7 +44,7 @@ function LogIn({ navigation }) {
 
 		//Provera na backend-u
 
-		navigation.navigate("Offset");
+		navigation.navigate("Home");
 	}
 
 	const isLandscape = width > height;
@@ -87,8 +87,9 @@ function LogIn({ navigation }) {
 			<Formik
 				innerRef={form}
 				initialValues={{ email: "", password: "" }}
-				onSubmit={submitHandler}
-				validationSchema={loginValidationSchema}>
+				onSubmit={submitHandler}>
+				{/* Zakomentarisano samo u svrhe testiranja da bi bilo lakse */}
+				{/* //validationSchema={loginValidationSchema} */}
 				{({ handleSubmit, values, errors, touched }) => (
 					<>
 						<Input

@@ -5,7 +5,6 @@ import { useState } from "react";
 import { Colors } from "../../constants/Colors";
 import CountryItem from "../CalculatingCO2/CountryItem";
 import IconButton from "../UI/IconButton";
-import Input from "../UI/Input";
 import SearchBar from "../UI/SearchBar";
 
 function CountrySelectionModal({
@@ -63,7 +62,7 @@ function CountrySelectionModal({
 						icon="search"
 					/>
 				</View>
-				<View style={styles.countriesContainer}>
+				<View>
 					<FlatList
 						data={countries}
 						renderItem={renderCountryItem}
@@ -86,15 +85,11 @@ const styles = StyleSheet.create({
 	title: {
 		marginVertical: 40,
 		fontWeight: "bold",
-		//fontFamily: "Trebuchet MS",
 		fontSize: 30,
 		textAlign: "center",
 	},
 	inputCont: {
 		height: 50,
 		marginBottom: 46,
-	},
-	countriesContainer: {
-		//flex: 1,
 	},
 });

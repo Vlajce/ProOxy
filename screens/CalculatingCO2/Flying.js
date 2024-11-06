@@ -39,7 +39,6 @@ function Flying({ navigation, route }) {
 			country: country,
 			worldAvg: 427,
 		});
-		//navigation.navigate("CreateAccount");
 		//navigation.navigate("Mobility");
 	}
 
