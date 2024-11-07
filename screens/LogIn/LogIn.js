@@ -48,16 +48,14 @@ function LogIn({ navigation }) {
 	}
 
 	const isLandscape = width > height;
-	const paddingVerticalDistance = isLandscape ? height * 0.05 : height * 0.1;
-	const paddingHorizontalDistance = isLandscape ? width * 0.1 : width * 0.1;
 
 	return (
 		<KeyboardAwareScrollView
 			style={[
 				styles.container,
 				{
-					paddingVertical: paddingVerticalDistance,
-					paddingHorizontal: paddingHorizontalDistance,
+					paddingVertical: isLandscape ? height * 0.05 : height * 0.1,
+					paddingHorizontal: isLandscape ? width * 0.1 : width * 0.1,
 				},
 			]}
 			contentContainerStyle={{

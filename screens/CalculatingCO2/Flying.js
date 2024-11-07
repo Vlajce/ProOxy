@@ -1,11 +1,12 @@
 import { View, Text, StyleSheet, useWindowDimensions } from "react-native";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { MaterialIcons } from "@expo/vector-icons";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import "react-native-gesture-handler";
 
+import { useStatusBar } from "../../hooks/useStatusBar";
 import IconButton from "../../components/UI/IconButton";
 import { Colors } from "../../constants/Colors";
 import FormItem from "../../components/CalculatingCO2/FormItem";
@@ -13,10 +14,13 @@ import Footer from "../../components/CalculatingCO2/Footer";
 
 function Flying({ navigation, route }) {
 	const { width, height } = useWindowDimensions();
-
+	const { updateStatusBarColor, statusBarColor } = useStatusBar();
 	const { country } = route.params;
-
 	const [selectedOption, setSelectedOption] = useState("");
+
+	useEffect(() => {
+		updateStatusBarColor("light-content");
+	}, []);
 
 	function handleSelect(value) {
 		setSelectedOption((prevOption) => (prevOption === value ? "" : value));

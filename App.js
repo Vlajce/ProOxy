@@ -1,5 +1,3 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -29,7 +27,9 @@ import MyImpact from "./screens/Main/MyImpact";
 import Projects from "./screens/Main/Projects";
 import Calculator from "./screens/Main/Calculator";
 import Profile from "./screens/Main/Profile";
+import StatusBar from "./components/StatusBar";
 import { Colors } from "./constants/Colors";
+import { StatusBarProvider } from "./hooks/useStatusBar";
 
 const Tab = createBottomTabNavigator();
 
@@ -54,6 +54,7 @@ function Home() {
 				name="MyImpact"
 				component={MyImpact}
 				options={{
+					headerTintColor: "white",
 					tabBarLabel: "My impact",
 					tabBarIcon: ({ color }) => (
 						<FontAwesome
@@ -139,78 +140,80 @@ export default function App() {
 	}
 
 	return (
-		<GestureHandlerRootView style={{ flex: 1 }}>
-			<NavigationContainer>
-				<StatusBar style="auto" />
-				<Stack.Navigator
-					screenOptions={{
-						headerShown: false,
-						contentStyle: {
-							backgroundColor: "#FFFFFF",
-						},
-					}}>
-					<Stack.Screen
-						name="Welcome"
-						component={Welcome}
-					/>
-					<Stack.Screen
-						name="LogIn"
-						component={LogIn}
-					/>
-					<Stack.Screen name="ChooseCountry">
-						{(props) => (
-							<ChooseCountry
-								{...props}
-								countries={countries}
-							/>
-						)}
-					</Stack.Screen>
-					<Stack.Screen
-						name="ForgotPassword"
-						component={ForgotPassword}
-					/>
-					<Stack.Screen
-						name="CheckYourEmail"
-						component={CheckYourEmail}
-					/>
-					<Stack.Screen
-						name="EnterNewPassword"
-						component={EnterNewPassword}
-					/>
-					<Stack.Screen
-						name="PasswordUpdated"
-						component={PasswordUpdated}
-					/>
-					<Stack.Screen
-						name="Flying"
-						component={Flying}
-					/>
-					<Stack.Screen
-						name="CreateAccount"
-						component={CreateAccount}
-					/>
-					<Stack.Screen
-						name="ConfirmYourMail"
-						component={ConfirmYourMail}
-					/>
-					<Stack.Screen name="CompleteProfile">
-						{(props) => (
-							<CompleteProfile
-								{...props}
-								countries={countries}
-							/>
-						)}
-					</Stack.Screen>
-					<Stack.Screen
-						name="CurrentCO2"
-						component={CurrentCO2}
-					/>
-					<Stack.Screen
-						name="Home"
-						component={Home}
-					/>
-				</Stack.Navigator>
-			</NavigationContainer>
-		</GestureHandlerRootView>
+		<StatusBarProvider>
+			<GestureHandlerRootView style={{ flex: 1 }}>
+				<NavigationContainer>
+					<StatusBar />
+					<Stack.Navigator
+						screenOptions={{
+							headerShown: false,
+							contentStyle: {
+								backgroundColor: "#FFFFFF",
+							},
+						}}>
+						<Stack.Screen
+							name="Welcome"
+							component={Welcome}
+						/>
+						<Stack.Screen
+							name="LogIn"
+							component={LogIn}
+						/>
+						<Stack.Screen name="ChooseCountry">
+							{(props) => (
+								<ChooseCountry
+									{...props}
+									countries={countries}
+								/>
+							)}
+						</Stack.Screen>
+						<Stack.Screen
+							name="ForgotPassword"
+							component={ForgotPassword}
+						/>
+						<Stack.Screen
+							name="CheckYourEmail"
+							component={CheckYourEmail}
+						/>
+						<Stack.Screen
+							name="EnterNewPassword"
+							component={EnterNewPassword}
+						/>
+						<Stack.Screen
+							name="PasswordUpdated"
+							component={PasswordUpdated}
+						/>
+						<Stack.Screen
+							name="Flying"
+							component={Flying}
+						/>
+						<Stack.Screen
+							name="CreateAccount"
+							component={CreateAccount}
+						/>
+						<Stack.Screen
+							name="ConfirmYourMail"
+							component={ConfirmYourMail}
+						/>
+						<Stack.Screen name="CompleteProfile">
+							{(props) => (
+								<CompleteProfile
+									{...props}
+									countries={countries}
+								/>
+							)}
+						</Stack.Screen>
+						<Stack.Screen
+							name="CurrentCO2"
+							component={CurrentCO2}
+						/>
+						<Stack.Screen
+							name="Home"
+							component={Home}
+						/>
+					</Stack.Navigator>
+				</NavigationContainer>
+			</GestureHandlerRootView>
+		</StatusBarProvider>
 	);
 }

@@ -55,155 +55,152 @@ function CreateAccount({ navigation }) {
 	const paddingHorizontalDistance = isLandscape ? width * 0.1 : width * 0.1;
 
 	return (
-		<>
-			<StatusBar />
-			<KeyboardAwareScrollView
-				style={[
-					styles.container,
-					{
-						paddingVertical: paddingVerticalDistance,
-						paddingHorizontal: paddingHorizontalDistance,
-					},
-				]}
-				contentContainerStyle={{
-					paddingBottom: 80,
-				}}
-				keyboardShouldPersistTaps="handled"
-				extraScrollHeight={30}
-				scrollEnabled={true}
-				bounces={false}>
-				<HeaderWithProgress
-					icon="chevron-back-circle"
-					size={40}
-					color={Colors.gray100}
-					onIconPress={() => navigation.goBack()}
-					isLandscape={isLandscape}
-					progress={1 / 3}
-					style={{ marginBottom: 24 }}
-				/>
-				<InfoSection title="Create Account" />
-				<Formik
-					innerRef={form}
-					initialValues={{ name: "", surname: "", email: "" }}
-					onSubmit={submitHandler}
-					//validationSchema={registrationValidationSchema}
-				>
-					{({ handleSubmit, errors, touched }) => (
-						<>
-							<Input
-								name="name"
-								label="Name"
-								textInputConfig={{
-									keyboardType: "default",
-									placeholder: "Enter Your Name",
-									autoCorrect: false,
-									autoCapitalize: "none",
-								}}
-							/>
-							{errors.name && touched.name && (
-								<Text style={{ fontSize: 15, color: Colors.error50 }}>
-									{errors.name}
-								</Text>
-							)}
-							<Input
-								name="surname"
-								label="Surname"
-								textInputConfig={{
-									keyboardType: "default",
-									placeholder: "Enter Your Surname",
-									autoCorrect: false,
-									autoCapitalize: "none",
-								}}
-							/>
-							{errors.surname && touched.surname && (
-								<Text style={{ fontSize: 15, color: Colors.error50 }}>
-									{errors.surname}
-								</Text>
-							)}
-							<Input
-								name="email"
-								label="Email"
-								textInputConfig={{
-									keyboardType: "email-address",
-									placeholder: "Enter Your Email Address",
-									autoCorrect: false,
-									autoCapitalize: "none",
-								}}
-							/>
-							{errors.email && touched.email && (
-								<Text style={{ fontSize: 15, color: Colors.error50 }}>
-									{errors.email}
-								</Text>
-							)}
-						</>
-					)}
-				</Formik>
-				<View style={styles.rowContainer}>
-					<View style={{ justifyContent: "flex-start" }}>
-						<IconCheckBox
-							icon="checkbox"
-							size={30}
-							color={toggleCheckBox ? Colors.primary200 : Colors.gray50}
+		<KeyboardAwareScrollView
+			style={[
+				styles.container,
+				{
+					paddingVertical: paddingVerticalDistance,
+					paddingHorizontal: paddingHorizontalDistance,
+				},
+			]}
+			contentContainerStyle={{
+				paddingBottom: 80,
+			}}
+			keyboardShouldPersistTaps="handled"
+			extraScrollHeight={30}
+			scrollEnabled={true}
+			bounces={false}>
+			<HeaderWithProgress
+				icon="chevron-back-circle"
+				size={40}
+				color={Colors.gray100}
+				onIconPress={() => navigation.goBack()}
+				isLandscape={isLandscape}
+				progress={1 / 3}
+				style={{ marginBottom: 24 }}
+			/>
+			<InfoSection title="Create Account" />
+			<Formik
+				innerRef={form}
+				initialValues={{ name: "", surname: "", email: "" }}
+				onSubmit={submitHandler}
+				//validationSchema={registrationValidationSchema}
+			>
+				{({ handleSubmit, errors, touched }) => (
+					<>
+						<Input
+							name="name"
+							label="Name"
+							textInputConfig={{
+								keyboardType: "default",
+								placeholder: "Enter Your Name",
+								autoCorrect: false,
+								autoCapitalize: "none",
+							}}
+						/>
+						{errors.name && touched.name && (
+							<Text style={{ fontSize: 15, color: Colors.error50 }}>
+								{errors.name}
+							</Text>
+						)}
+						<Input
+							name="surname"
+							label="Surname"
+							textInputConfig={{
+								keyboardType: "default",
+								placeholder: "Enter Your Surname",
+								autoCorrect: false,
+								autoCapitalize: "none",
+							}}
+						/>
+						{errors.surname && touched.surname && (
+							<Text style={{ fontSize: 15, color: Colors.error50 }}>
+								{errors.surname}
+							</Text>
+						)}
+						<Input
+							name="email"
+							label="Email"
+							textInputConfig={{
+								keyboardType: "email-address",
+								placeholder: "Enter Your Email Address",
+								autoCorrect: false,
+								autoCapitalize: "none",
+							}}
+						/>
+						{errors.email && touched.email && (
+							<Text style={{ fontSize: 15, color: Colors.error50 }}>
+								{errors.email}
+							</Text>
+						)}
+					</>
+				)}
+			</Formik>
+			<View style={styles.rowContainer}>
+				<View style={{ justifyContent: "flex-start" }}>
+					<IconCheckBox
+						icon="checkbox"
+						size={30}
+						color={toggleCheckBox ? Colors.primary200 : Colors.gray50}
+						onPress={() => setToggleCheckBox(!toggleCheckBox)}
+					/>
+				</View>
+				<View style={styles.textCont}>
+					<Text style={{ fontSize: 15, fontWeight: "500" }}>
+						By creating an account, you agree to our
+						<ClickableText
 							onPress={() => setToggleCheckBox(!toggleCheckBox)}
+							text="Term & Conditions"
+							style={{ fontSize: 15, marginTop: 8 }}
 						/>
-					</View>
-					<View style={styles.textCont}>
-						<Text style={{ fontSize: 15, fontWeight: "500" }}>
-							By creating an account, you agree to our
-							<ClickableText
-								onPress={() => setToggleCheckBox(!toggleCheckBox)}
-								text="Term & Conditions"
-								style={{ fontSize: 15, marginTop: 8 }}
-							/>
-						</Text>
-					</View>
+					</Text>
 				</View>
-				<GradientButton
+			</View>
+			<GradientButton
+				onPress={() => {
+					if (form.current) {
+						form.current.handleSubmit();
+					} else {
+						console.error("Form reference is null");
+					}
+				}}>
+				Create Account
+			</GradientButton>
+			<View style={styles.divider}>
+				<View style={styles.hairline} />
+				<Text style={styles.dividerText}>Or Sign up with</Text>
+				<View style={styles.hairline} />
+			</View>
+			<View style={styles.iconsContainer}>
+				<TouchableOpacity
 					onPress={() => {
-						if (form.current) {
-							form.current.handleSubmit();
-						} else {
-							console.error("Form reference is null");
-						}
+						console.log("Kliknuto na Apple ikonicu");
 					}}>
-					Create Account
-				</GradientButton>
-				<View style={styles.divider}>
-					<View style={styles.hairline} />
-					<Text style={styles.dividerText}>Or Sign up with</Text>
-					<View style={styles.hairline} />
-				</View>
-				<View style={styles.iconsContainer}>
-					<TouchableOpacity
-						onPress={() => {
-							console.log("Kliknuto na Apple ikonicu");
-						}}>
-						<Image
-							source={require("../../assets/icons/apple.png")}
-							style={styles.image}
-						/>
-					</TouchableOpacity>
-					<TouchableOpacity
-						onPress={() => {
-							console.log("Kliknuto na Google ikonicu");
-						}}>
-						<Image
-							source={require("../../assets/icons/google.png")}
-							style={styles.image}
-						/>
-					</TouchableOpacity>
-					<TouchableOpacity
-						onPress={() => {
-							console.log("Kliknuto na Facebook ikonicu");
-						}}>
-						<Image
-							source={require("../../assets/icons/facebook.png")}
-							style={styles.image}
-						/>
-					</TouchableOpacity>
-				</View>
-			</KeyboardAwareScrollView>
-		</>
+					<Image
+						source={require("../../assets/icons/apple.png")}
+						style={styles.image}
+					/>
+				</TouchableOpacity>
+				<TouchableOpacity
+					onPress={() => {
+						console.log("Kliknuto na Google ikonicu");
+					}}>
+					<Image
+						source={require("../../assets/icons/google.png")}
+						style={styles.image}
+					/>
+				</TouchableOpacity>
+				<TouchableOpacity
+					onPress={() => {
+						console.log("Kliknuto na Facebook ikonicu");
+					}}>
+					<Image
+						source={require("../../assets/icons/facebook.png")}
+						style={styles.image}
+					/>
+				</TouchableOpacity>
+			</View>
+		</KeyboardAwareScrollView>
 	);
 }
 

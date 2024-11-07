@@ -59,7 +59,6 @@ function CompleteProfile({ navigation, countries }) {
 				isLandscape={isLandscape}
 				progress={3 / 3}
 			/>
-
 			<KeyboardAwareScrollView
 				style={styles.scrollableCont}
 				bounces="false"

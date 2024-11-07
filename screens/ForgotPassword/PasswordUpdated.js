@@ -43,9 +43,8 @@ function PasswordUpdated({ navigation }) {
 			scrollEnabled={true}>
 			<StaticProgressBar
 				progress={1}
-				style={styles.progressBar}
+				contStyle={styles.progressBar}
 			/>
-
 			<View style={styles.titleCont}>
 				<Text style={styles.title}>Password Updated</Text>
 				<View>

@@ -68,7 +68,8 @@ function EnterNewPassword({ navigation }) {
 				color={Colors.gray100}
 				onIconPress={IconPressHandler}
 				isLandscape={isLandscape}
-				progress={5 / 7}></HeaderWithProgress>
+				progress={5 / 7}
+			/>
 			<InfoSection
 				title="Enter New Password"
 				IconComponent={SimpleLineIcons}
@@ -79,8 +80,9 @@ function EnterNewPassword({ navigation }) {
 			<Formik
 				innerRef={form}
 				initialValues={{ newPassword: "", confirmPassword: "" }}
-				onSubmit={submitHandler}
-				validationSchema={newPasswordValidationSchema}>
+				onSubmit={submitHandler}>
+				{/*zakomentarisano u svrhe testiranja*/}
+				{/* validationSchema={newPasswordValidationSchema}> */}
 				{({ handleSubmit, values, errors, touched }) => (
 					<>
 						<Input

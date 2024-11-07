@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-function MyImpact() {
+import { useStatusBar } from "../../hooks/useStatusBar";
+
+function MyImpact({ navigation }) {
+	const { updateStatusBarColor } = useStatusBar();
+
+	useEffect(() => {
+		updateStatusBarColor("dark-content");
+	}, []);
+
 	return (
 		<View style={styles.container}>
 			<Text>MyImpact</Text>

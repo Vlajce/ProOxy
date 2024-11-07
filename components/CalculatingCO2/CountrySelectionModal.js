@@ -15,10 +15,6 @@ function CountrySelectionModal({
 }) {
 	const [searchValue, setSearchValue] = useState("");
 
-	function InputChangeHandler(enteredText) {
-		setSearchValue(enteredText);
-	}
-
 	const renderCountryItem = ({ item }) => {
 		return (
 			<CountryItem
@@ -56,7 +52,7 @@ function CountrySelectionModal({
 							placeholderTextColor: "#b4acac", //Colors.gray100,
 							autoCorrect: false,
 							autoCapitalize: "none",
-							onChangeText: InputChangeHandler,
+							onChangeText: setSearchValue,
 							value: searchValue,
 						}}
 						icon="search"

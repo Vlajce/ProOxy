@@ -11,32 +11,15 @@ import { Colors } from "../../constants/Colors";
 function CheckYourEmail({ navigation }) {
 	const { width, height } = useWindowDimensions();
 
-	function IconPressHandler() {
-		navigation.goBack();
-	}
-
-	function onSubmitHandler() {
-		navigation.navigate("EnterNewPassword");
-	}
-
-	function ResendEmail() {
-		// poziv back-a
-	}
-
 	const isLandscape = width > height;
-	const paddingVerticalDistance = isLandscape ? height * 0.15 : height * 0.1;
-	const paddingHorizontalDistance = isLandscape ? width * 0.1 : width * 0.1;
-
-	const marginBottomDistance = isLandscape ? height * 0.05 : height * 0.06; //50 za portrait
-	const marginTopDistance = isLandscape ? height * 0.08 : height * 0.15; //150 za portrait
 
 	return (
 		<KeyboardAwareScrollView
 			style={[
 				styles.container,
 				{
-					paddingVertical: paddingVerticalDistance,
-					paddingHorizontal: paddingHorizontalDistance,
+					paddingVertical: isLandscape ? height * 0.15 : height * 0.1,
+					paddingHorizontal: isLandscape ? width * 0.1 : width * 0.1,
 				},
 			]}
 			contentContainerStyle={{
@@ -50,9 +33,10 @@ function CheckYourEmail({ navigation }) {
 				icon="chevron-back-circle"
 				size={40}
 				color={Colors.gray100}
-				onIconPress={IconPressHandler}
+				onIconPress={() => navigation.goBack()}
 				isLandscape={isLandscape}
-				progress={1 / 3}></HeaderWithProgress>
+				progress={1 / 3}
+			/>
 			<InfoSection
 				title="Check Your Email"
 				IconComponent={FontAwesome}
@@ -65,22 +49,29 @@ function CheckYourEmail({ navigation }) {
 				We have sent a password recover instuctions to your email
 			</InfoSection>
 			<GradientButton
-				onPress={onSubmitHandler}
+				onPress={() => navigation.navigate("EnterNewPassword")}
 				style={{ marginTop: 30 }}>
 				Open Email App
 			</GradientButton>
 
-			<View style={[styles.textCont, { marginTop: marginTopDistance }]}>
+			<View
+				style={[
+					styles.textCont,
+					{ marginTop: isLandscape ? height * 0.08 : height * 0.15 },
+				]}>
 				<Text style={styles.lowerText}>
 					It may take a minute to recieve the email.
 				</Text>
 				<Text
-					style={[styles.lowerText, { marginBottom: marginBottomDistance }]}>
+					style={[
+						styles.lowerText,
+						{ marginBottom: isLandscape ? height * 0.05 : height * 0.06 },
+					]}>
 					Check your spam folder.
 				</Text>
 				<ClickableText
 					text="Resend an email"
-					onPress={ResendEmail}
+					onPress={() => console.log("Resend an Email")}
 					style={{ fontSize: 14 }}
 				/>
 			</View>

@@ -23,26 +23,20 @@ function ForgotPassword({ navigation }) {
 
 	const form = useRef(null);
 
-	function IconPressHandler() {
-		navigation.goBack();
-	}
-
 	function submitHandler(values) {
 		console.log(values);
 		navigation.navigate("CheckYourEmail");
 	}
 
 	const isLandscape = width > height;
-	const paddingVerticalDistance = isLandscape ? height * 0.15 : height * 0.1;
-	const paddingHorizontalDistance = isLandscape ? width * 0.1 : width * 0.1;
 
 	return (
 		<KeyboardAwareScrollView
 			style={[
 				styles.container,
 				{
-					paddingVertical: paddingVerticalDistance,
-					paddingHorizontal: paddingHorizontalDistance,
+					paddingVertical: isLandscape ? height * 0.15 : height * 0.1,
+					paddingHorizontal: isLandscape ? width * 0.1 : width * 0.1,
 				},
 			]}
 			contentContainerStyle={{
@@ -56,7 +50,7 @@ function ForgotPassword({ navigation }) {
 				icon="chevron-back-circle"
 				size={40}
 				color={Colors.gray100}
-				onIconPress={IconPressHandler}
+				onIconPress={() => navigation.goBack()}
 				isLandscape={isLandscape}
 				progress={1 / 3}
 			/>
@@ -70,8 +64,9 @@ function ForgotPassword({ navigation }) {
 			<Formik
 				innerRef={form}
 				initialValues={{ email: "" }}
-				onSubmit={submitHandler}
-				validationSchema={forgotPasswordValidationSchema}>
+				onSubmit={submitHandler}>
+				{/*zakomentarisano u svrhe testiranja*/}
+				{/* validationSchema={newPasswordValidationSchema}> */}
 				{({ handleSubmit, values, errors, touched }) => (
 					<>
 						<Input

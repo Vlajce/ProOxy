@@ -58,7 +58,6 @@ function ConfirmYourMail({ navigation }) {
 					Please confirm your account by entering the authorization code sent to
 					your email.
 				</InfoSection>
-
 				<View style={styles.codeContainer}>
 					<DigitInput focus={true} />
 					<DigitInput focus={false} />

@@ -12,10 +12,6 @@ function HeaderWithProgress({
 	isLandscape,
 	progress,
 }) {
-	const progressBarWidth = isLandscape ? 500 : 300;
-	const translateX = isLandscape ? -100 : -60;
-	const translateY = -4;
-
 	return (
 		<View style={[styles.headerCont, style]}>
 			<IconButton
@@ -27,8 +23,11 @@ function HeaderWithProgress({
 				style={[
 					styles.progressBarContainer,
 					{
-						width: progressBarWidth,
-						transform: [{ translateX }, { translateY }],
+						width: isLandscape ? 500 : 300,
+						transform: [
+							{ translateX: isLandscape ? -100 : -60 },
+							{ translateY: -4 },
+						],
 					},
 				]}>
 				<StaticProgressBar progress={progress} />

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import {
 	View,
 	Text,
@@ -6,8 +6,8 @@ import {
 	StyleSheet,
 	useWindowDimensions,
 } from "react-native";
-import { StatusBar } from "expo-status-bar";
 
+import { useStatusBar } from "../../hooks/useStatusBar";
 import { Colors } from "../../constants/Colors";
 import BottomSheetPopup from "../../components/UI/BottomSheetPopup";
 import SettingsCard from "../../components/MainScreen/Profile/SettingsCard";
@@ -17,14 +17,28 @@ import { otherData } from "../../dummy_data/Profile/OtherData";
 
 function Profile({ navigation }) {
 	const { width, height } = useWindowDimensions();
-
 	const bottomSheetRef = useRef(null);
+	const { updateStatusBarColor } = useStatusBar();
+
+	useEffect(() => {
+		const subscribeFocus = navigation.addListener("focus", () => {
+			updateStatusBarColor("light-content");
+		});
+
+		const subscribeBlur = navigation.addListener("blur", () => {
+			updateStatusBarColor("dark-content");
+		});
+
+		return () => {
+			subscribeFocus();
+			subscribeBlur();
+		};
+	}, [navigation]);
 
 	const isLandscape = width > height;
 
 	return (
 		<>
-			<StatusBar style="light" />
 			<View
 				style={{
 					flex: 1,
@@ -32,6 +46,7 @@ function Profile({ navigation }) {
 					paddingTop: isLandscape ? height * 0.1 : height * 0.1,
 					paddingHorizontal: isLandscape ? width * 0.1 : width * 0.1,
 				}}>
+				{/* <StatusBar style="light" /> */}
 				<View style={{ flexDirection: "row" }}>
 					<Text style={styles.welcomeText}>Hello Philipp</Text>
 					<Image

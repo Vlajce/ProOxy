@@ -1,5 +1,4 @@
-import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useEffect } from "react";
 import {
 	View,
 	Text,
@@ -14,9 +13,15 @@ import FootprintCard from "../../components/MainScreen/FootprintCard";
 import EntryCard from "../../components/MainScreen/EntryCard";
 import { footprintData } from "../../dummy_data/MainScreen/FootPrintData";
 import { entryData } from "../../dummy_data/MainScreen/EntryData";
+import { useStatusBar } from "../../hooks/useStatusBar";
 
-function MyImpact() {
+function Calculator({ navigation }) {
 	const { width, height } = useWindowDimensions();
+	const { updateStatusBarColor } = useStatusBar();
+
+	useEffect(() => {
+		updateStatusBarColor("dark-content");
+	}, []);
 
 	const isLandscape = width > height;
 
@@ -67,7 +72,7 @@ function MyImpact() {
 	);
 }
 
-export default MyImpact;
+export default Calculator;
 
 const styles = StyleSheet.create({
 	upperContainer: {

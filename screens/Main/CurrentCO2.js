@@ -1,8 +1,9 @@
-import React, { useMemo, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { View, Text, StyleSheet, useWindowDimensions } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import Entypo from "@expo/vector-icons/Entypo";
 
+import { useStatusBar } from "../../hooks/useStatusBar";
 import IconButton from "../../components/UI/IconButton";
 import { Colors } from "../../constants/Colors";
 import CO2Card from "../../components/MainScreen/C02Card";
@@ -17,10 +18,14 @@ import BottomSheetPopup from "../../components/UI/BottomSheetPopup";
 
 function CurrentCO2({ navigation, route }) {
 	const { width, height } = useWindowDimensions();
-
 	const bottomSheetRef = useRef(null);
-
 	const { country, worldAvg } = route.params;
+	const { updateStatusBarColor } = useStatusBar();
+
+	useEffect(() => {
+		updateStatusBarColor("dark-content");
+		return () => updateStatusBarColor("light-content");
+	}, []);
 
 	const isLandscape = width > height;
 

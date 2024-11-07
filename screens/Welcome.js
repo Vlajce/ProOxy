@@ -1,41 +1,47 @@
+import React, { useEffect } from "react";
 import { View, Text, StyleSheet, useWindowDimensions } from "react-native";
-import { Colors } from "../constants/Colors";
 
+import { useStatusBar } from "../hooks/useStatusBar";
+import { Colors } from "../constants/Colors";
 import GradientButton from "../components/UI/GradientButton";
 import ClickableText from "../components/UI/ClickableText";
 
 function Welcome({ navigation }) {
 	const { width, height } = useWindowDimensions();
+	const { updateStatusBarColor } = useStatusBar();
 
-	function CalculateYourCO2() {
-		navigation.navigate("ChooseCountry");
-	}
-	function LogInPressed() {
-		navigation.navigate("LogIn");
-	}
+	useEffect(() => {
+		updateStatusBarColor("dark-content");
+	}, []);
 
 	const isLandscape = width > height;
-	const paddingTopDistance = isLandscape ? height * 0.2 : height * 0.25;
-	const paddingBottomDistance = isLandscape ? height * 0.2 : height * 0.3;
-	const titleFontSize = isLandscape ? 40 : 32;
 
 	return (
-		<View style={[styles.container, { paddingTop: paddingTopDistance }]}>
-			<View style={[styles.logo, { paddingBottom: paddingBottomDistance }]}>
-				<Text style={[styles.title, { fontSize: titleFontSize }]}>Proxy</Text>
+		<View
+			style={[
+				styles.container,
+				{ paddingTop: isLandscape ? height * 0.2 : height * 0.25 },
+			]}>
+			<View
+				style={[
+					styles.logo,
+					{ paddingBottom: isLandscape ? height * 0.2 : height * 0.3 },
+				]}>
+				<Text style={[styles.title, { fontSize: isLandscape ? 40 : 32 }]}>
+					Proxy
+				</Text>
 			</View>
 			<View style={styles.buttonContainer}>
-				<GradientButton onPress={CalculateYourCO2}>
+				<GradientButton onPress={() => navigation.navigate("ChooseCountry")}>
 					Calculate Your CO2
 				</GradientButton>
 			</View>
 			<View style={styles.textCointaner}>
 				<View>
-					<Text style={styles.textMem}>Already a member?</Text>
+					<Text style={{ fontWeight: "500" }}>Already a member?</Text>
 				</View>
-
 				<ClickableText
-					onPress={LogInPressed}
+					onPress={() => navigation.navigate("LogIn")}
 					text="Log in"
 					style={{ fontSize: 14, marginLeft: 8 }}></ClickableText>
 			</View>
@@ -66,8 +72,5 @@ const styles = StyleSheet.create({
 	textCointaner: {
 		flexDirection: "row",
 		marginTop: 36,
-	},
-	textMem: {
-		fontWeight: "500",
 	},
 });

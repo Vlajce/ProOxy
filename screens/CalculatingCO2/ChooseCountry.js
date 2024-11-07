@@ -5,9 +5,9 @@ import {
 	ScrollView,
 	useWindowDimensions,
 } from "react-native";
-import { StatusBar } from "expo-status-bar";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
+import { useStatusBar } from "../../hooks/useStatusBar";
 import IconButton from "../../components/UI/IconButton";
 import { Colors } from "../../constants/Colors";
 import GradientButton from "../../components/UI/GradientButton";
@@ -16,6 +16,7 @@ import CountrySelectionModal from "../../components/CalculatingCO2/CountrySelect
 
 function ChooseCountry({ navigation, countries }) {
 	const { width, height } = useWindowDimensions();
+	const { updateStatusBarColor, statusBarColor } = useStatusBar();
 
 	const [modalIsVisible, setModalIsVisible] = useState(false);
 	const [country, setCountry] = useState({
@@ -24,13 +25,13 @@ function ChooseCountry({ navigation, countries }) {
 		imageUrl: "https://flagcdn.com/w320/ch.png",
 	});
 
-	function IconPressedHandler() {
-		navigation.navigate("Welcome");
-	}
+	useEffect(() => {
+		modalIsVisible
+			? updateStatusBarColor("dark-content")
+			: updateStatusBarColor("light-content");
 
-	function ChosenCountryHandler() {
-		setModalIsVisible(false);
-	}
+		return () => updateStatusBarColor("dark-content");
+	}, [modalIsVisible]);
 
 	function SelectCountryHandler() {
 		setModalIsVisible(true);
@@ -38,23 +39,8 @@ function ChooseCountry({ navigation, countries }) {
 		return (
 			<CountrySelectionModal
 				visible={modalIsVisible}
-				onClose={ChosenCountryHandler}></CountrySelectionModal>
+				onClose={() => setModalIsVisible(false)}></CountrySelectionModal>
 		);
-	}
-
-	function ContinueHandler() {
-		navigation.navigate("Flying", {
-			country: country,
-		});
-	}
-
-	function handleSelectCountry(selectedCountry) {
-		setCountry({
-			name: selectedCountry.name.common,
-			coConcentration: selectedCountry.coConcentration || 580,
-			imageUrl: selectedCountry.flags.png,
-			callingNumber: selectedCountry.idd.root,
-		});
 	}
 
 	const isLandscape = width > height;
@@ -63,8 +49,6 @@ function ChooseCountry({ navigation, countries }) {
 		<ScrollView
 			contentContainerStyle={{ flex: 1 }}
 			bounces="false">
-			<StatusBar style="light" />
-
 			<View
 				style={[
 					styles.mainContainer,
@@ -83,7 +67,7 @@ function ChooseCountry({ navigation, countries }) {
 								icon="close-circle"
 								size={40}
 								color="white"
-								onPress={IconPressedHandler}
+								onPress={() => navigation.navigate("Welcome")}
 							/>
 						</View>
 						<View style={{ alignItems: "flex-end" }}>
@@ -120,14 +104,28 @@ function ChooseCountry({ navigation, countries }) {
 							onPress={SelectCountryHandler}
 						/>
 					</View>
-					<GradientButton onPress={ContinueHandler}>Continue</GradientButton>
+					<GradientButton
+						onPress={() =>
+							navigation.navigate("Flying", {
+								country: country,
+							})
+						}>
+						Continue
+					</GradientButton>
 				</View>
 			</View>
 			{modalIsVisible && (
 				<CountrySelectionModal
 					modalVisible={modalIsVisible}
-					onClose={ChosenCountryHandler}
-					onSelectCountry={handleSelectCountry}
+					onClose={() => setModalIsVisible(false)}
+					onSelectCountry={(selectedCountry) =>
+						setCountry({
+							name: selectedCountry.name.common,
+							coConcentration: selectedCountry.coConcentration || 580,
+							imageUrl: selectedCountry.flags.png,
+							callingNumber: selectedCountry.idd.root,
+						})
+					}
 					countries={countries}
 				/>
 			)}
