@@ -15,7 +15,7 @@ import OtherCard from "../../components/MainScreen/Profile/OtherCard";
 import { settingData } from "../../dummy_data/Profile/SettingsData";
 import { otherData } from "../../dummy_data/Profile/OtherData";
 
-function Profile() {
+function Profile({ navigation }) {
 	const { width, height } = useWindowDimensions();
 
 	const bottomSheetRef = useRef(null);
@@ -66,11 +66,14 @@ function Profile() {
 									text={item.text}
 									IconComponent={item.icon}
 									iconStyle={{ marginRight: 20 }}
-									onClick={() => console.log("Kliknuto na other karticu")}
+									onClick={
+										item.rightIcon
+											? () => console.log("Kliknuto na karticu")
+											: () => navigation.navigate("LogIn")
+									}
 									rightIcon={item.rightIcon}
 								/>
 							))}
-							{/* </View> */}
 						</>
 					)}
 				/>

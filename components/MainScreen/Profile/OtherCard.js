@@ -8,8 +8,8 @@ function OtherCard({ text, IconComponent, iconStyle, rightIcon, onClick }) {
 			style={[
 				styles.container,
 				!rightIcon && { backgroundColor: Colors.red50 },
-				(onClick = { onClick }),
-			]}>
+			]}
+			onPress={onClick}>
 			<View style={{ flexDirection: "row", justifyContent: "space-between" }}>
 				<View
 					style={{

@@ -5,10 +5,6 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { MaterialIcons } from "@expo/vector-icons";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import "react-native-gesture-handler";
-import {
-	BottomSheetModal,
-	BottomSheetModalProvider,
-} from "@gorhom/bottom-sheet";
 
 import IconButton from "../../components/UI/IconButton";
 import { Colors } from "../../constants/Colors";
@@ -20,42 +16,13 @@ function Flying({ navigation, route }) {
 
 	const { country } = route.params;
 
-	const bottomSheetModalRef = useRef(null);
-
-	const snapPoint = ["50"];
-
 	const [selectedOption, setSelectedOption] = useState("");
-
-	function IconPressedHandler() {
-		navigation.goBack();
-	}
 
 	function handleSelect(value) {
 		setSelectedOption((prevOption) => (prevOption === value ? "" : value));
 	}
 
-	function NextHandler() {
-		navigation.navigate("CurrentCO2", {
-			country: country,
-			worldAvg: 427,
-		});
-		//navigation.navigate("Mobility");
-	}
-
-	function SkipHandler() {
-		//sta radi?
-	}
-
-	function handlePresentModal() {
-		bottomSheetModalRef.current?.present();
-	}
-
 	const isLandscape = width > height;
-	const paddingVerticalDistance = isLandscape ? height * 0.15 : height * 0.1;
-	const paddingHorizontalDistance = isLandscape ? width * 0.1 : width * 0.1;
-
-	const translateX = isLandscape ? height * -0.8 : width * -0.3;
-	const translateY = 2;
 
 	return (
 		<>
@@ -63,8 +30,8 @@ function Flying({ navigation, route }) {
 				style={[
 					styles.container,
 					{
-						paddingVertical: paddingVerticalDistance,
-						paddingHorizontal: paddingHorizontalDistance,
+						paddingVertical: isLandscape ? height * 0.15 : height * 0.1,
+						paddingHorizontal: isLandscape ? width * 0.1 : width * 0.1,
 					},
 				]}>
 				<View style={styles.header}>
@@ -72,13 +39,16 @@ function Flying({ navigation, route }) {
 						icon="chevron-back-circle"
 						size={40}
 						color="white"
-						onPress={IconPressedHandler}
+						onPress={() => navigation.goBack()}
 					/>
 					<View
 						style={[
 							styles.headerCenter,
 							{
-								transform: [{ translateX }, { translateY }],
+								transform: [
+									{ translateX: isLandscape ? height * -0.8 : width * -0.3 },
+									{ translateY: 2 },
+								],
 							},
 						]}>
 						<Text style={styles.headerText}>Flying</Text>
@@ -151,8 +121,13 @@ function Flying({ navigation, route }) {
 			<Footer
 				style={styles.footer}
 				progress={1}
-				onButtonClick={NextHandler}
-				onTextClick={SkipHandler}></Footer>
+				onButtonClick={() =>
+					navigation.navigate("CurrentCO2", {
+						country: country,
+						worldAvg: 427,
+					})
+				}
+				onTextClick={() => console.log("Kliknuto na skip dugme!")}></Footer>
 		</>
 	);
 }
