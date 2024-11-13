@@ -15,7 +15,7 @@ import { footprintData } from "../../dummy_data/MainScreen/FootPrintData";
 import { entryData } from "../../dummy_data/MainScreen/EntryData";
 import { useStatusBar } from "../../hooks/useStatusBar";
 
-function Calculator({ navigation }) {
+function Calculator() {
 	const { width, height } = useWindowDimensions();
 	const { updateStatusBarColor } = useStatusBar();
 
@@ -28,7 +28,7 @@ function Calculator({ navigation }) {
 	return (
 		<SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
 			<ScrollView
-				//bounces={false}
+				bounces={false}
 				contentContainerStyle={{ paddingBottom: 180 }}
 				style={{
 					flexGrow: 1,

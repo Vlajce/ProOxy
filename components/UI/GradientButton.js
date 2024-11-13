@@ -1,4 +1,4 @@
-import { View, Pressable, Text, StyleSheet, Platform } from "react-native";
+import { View, Pressable, Text, StyleSheet } from "react-native";
 
 import { Colors } from "../../constants/Colors";
 import { LinearGradient } from "expo-linear-gradient";

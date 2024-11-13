@@ -18,7 +18,7 @@ function BottomSheetPopup({
 			<BottomSheetView
 				style={{
 					paddingTop: 6,
-					paddingHorizontal: 30,
+					// paddingHorizontal: 30,
 				}}>
 				{bottomSheetBody && bottomSheetBody()}
 			</BottomSheetView>

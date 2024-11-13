@@ -2,17 +2,20 @@ import { TouchableOpacity, Text, StyleSheet } from "react-native";
 
 import { Colors } from "../../constants/Colors";
 
-function CustomButton({ style, children, onPress }) {
+function CustomButton({ onPress, style, textStyle, children }) {
 	return (
 		<TouchableOpacity
 			style={[styles.button, style]}
 			onPress={onPress}>
 			<Text
-				style={{
-					color: Colors.gray500,
-					fontWeight: "bold",
-					fontSize: 12,
-				}}>
+				style={[
+					{
+						color: Colors.gray500,
+						fontWeight: "bold",
+						fontSize: 12,
+					},
+					textStyle,
+				]}>
 				{children}
 			</Text>
 		</TouchableOpacity>
@@ -25,6 +28,7 @@ const styles = StyleSheet.create({
 	button: {
 		// width: 65,
 		// height: 34,
+		alignItems: "center",
 		justifyContent: "center",
 		backgroundColor: Colors.blue20,
 		borderRadius: 20,

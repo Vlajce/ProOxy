@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { StatusBar as StatusBarNative } from "react-native";
+import { Platform, StatusBar as StatusBarNative } from "react-native";
 import { useStatusBar } from "../hooks/useStatusBar";
 
 export default function StatusBar() {
@@ -7,6 +7,11 @@ export default function StatusBar() {
 
 	useEffect(() => {
 		StatusBarNative.setBarStyle(statusBarColor);
+		if (Platform.OS === "android") {
+			StatusBarNative.setBackgroundColor(
+				statusBarColor === "dark-content" ? "#fff" : "#000"
+			);
+		}
 	}, [statusBarColor]);
 
 	return (

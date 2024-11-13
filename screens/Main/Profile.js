@@ -38,62 +38,59 @@ function Profile({ navigation }) {
 	const isLandscape = width > height;
 
 	return (
-		<>
-			<View
-				style={{
-					flex: 1,
-					backgroundColor: Colors.primary200,
-					paddingTop: isLandscape ? height * 0.1 : height * 0.1,
-					paddingHorizontal: isLandscape ? width * 0.1 : width * 0.1,
-				}}>
-				{/* <StatusBar style="light" /> */}
-				<View style={{ flexDirection: "row" }}>
-					<Text style={styles.welcomeText}>Hello Philipp</Text>
-					<Image
-						tintColor={"white"}
-						style={styles.wavingHand}
-						source={require("../../assets/images/waving-hand.png")}
-					/>
-				</View>
-				<Text style={{ color: "white", fontSize: 16 }}>
-					Here is your progile information
-				</Text>
-				<BottomSheetPopup
-					bottomSheetRef={bottomSheetRef}
-					snapPoints={["75%"]}
-					bottomSheetBody={() => (
-						<>
-							<Text style={styles.bottomSheetText}>Settings</Text>
-							{/* <View style={styles.bottomSheetUpperCont}> */}
-							{settingData.map((item, index) => (
-								<SettingsCard
-									key={index}
-									text={item.text}
-									IconComponent={item.icon}
-									iconStyle={{ marginRight: 20 }}
-									onClick={() => console.log("Kliknuto edit dugme")}
-								/>
-							))}
-							<Text style={styles.bottomSheetText}>Other</Text>
-							{otherData.map((item, index) => (
-								<OtherCard
-									key={index}
-									text={item.text}
-									IconComponent={item.icon}
-									iconStyle={{ marginRight: 20 }}
-									onClick={
-										item.rightIcon
-											? () => console.log("Kliknuto na karticu")
-											: () => navigation.navigate("LogIn")
-									}
-									rightIcon={item.rightIcon}
-								/>
-							))}
-						</>
-					)}
+		<View
+			style={{
+				flex: 1,
+				backgroundColor: Colors.primary200,
+				paddingTop: isLandscape ? height * 0.1 : height * 0.1,
+				paddingHorizontal: isLandscape ? width * 0.1 : width * 0.08,
+			}}>
+			<View style={{ flexDirection: "row" }}>
+				<Text style={styles.welcomeText}>Hello Philipp</Text>
+				<Image
+					tintColor={"white"}
+					style={styles.wavingHand}
+					source={require("../../assets/images/waving-hand.png")}
 				/>
 			</View>
-		</>
+			<Text style={{ color: "white", fontSize: 16 }}>
+				Here is your progile information
+			</Text>
+			<BottomSheetPopup
+				bottomSheetRef={bottomSheetRef}
+				snapPoints={["75%"]}
+				style={{ paddingHorizontal: 30, paddingTop: 6 }}
+				bottomSheetBody={() => (
+					<>
+						<Text style={styles.bottomSheetText}>Settings</Text>
+						{settingData.map((item, index) => (
+							<SettingsCard
+								key={index}
+								text={item.text}
+								IconComponent={item.icon}
+								iconStyle={{ marginRight: 20 }}
+								onClick={() => console.log("Kliknuto edit dugme")}
+							/>
+						))}
+						<Text style={styles.bottomSheetText}>Other</Text>
+						{otherData.map((item, index) => (
+							<OtherCard
+								key={index}
+								text={item.text}
+								IconComponent={item.icon}
+								iconStyle={{ marginRight: 20 }}
+								onClick={
+									item.rightIcon
+										? () => console.log("Kliknuto na karticu")
+										: () => navigation.navigate("LogIn")
+								}
+								rightIcon={item.rightIcon}
+							/>
+						))}
+					</>
+				)}
+			/>
+		</View>
 	);
 }
 

@@ -2,11 +2,28 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Colors } from "../../constants/Colors";
 
-function CO2Card({ IconComponent, iconProps, iconStyle, value, style }) {
+function CO2Card({
+	IconComponent,
+	iconProps,
+	iconStyle,
+	value,
+	style,
+	size = "small",
+}) {
 	return (
-		<View style={[styles.container, style]}>
+		<View
+			style={[
+				styles.container,
+				style,
+				size === "large" && styles.containerLarge,
+			]}>
 			{IconComponent && (
-				<View style={[styles.icon, iconStyle]}>
+				<View
+					style={[
+						styles.icon,
+						iconStyle,
+						size === "large" && styles.iconLarge,
+					]}>
 					<IconComponent {...iconProps} />
 				</View>
 			)}
@@ -15,9 +32,13 @@ function CO2Card({ IconComponent, iconProps, iconStyle, value, style }) {
 					flexDirection: "row",
 					alignItems: "center",
 				}}>
-				<Text style={styles.value}>{value}</Text>
+				<Text style={[styles.value, size === "large" && { fontSize: 40 }]}>
+					{value}
+				</Text>
 				<Text style={{ fontSize: 14 }}> </Text>
-				<Text style={styles.measure}>kg</Text>
+				<Text style={[styles.measure, size === "large" && { fontSize: 24 }]}>
+					kg
+				</Text>
 			</Text>
 		</View>
 	);
@@ -33,10 +54,20 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		alignItems: "center",
 	},
+	containerLarge: {
+		padding: 10,
+		borderRadius: 60,
+	},
 	icon: {
 		backgroundColor: Colors.red50,
 		borderRadius: 20,
-		alignSelf: "center",
+		alignItems: "center",
+		justifyContent: "center",
+	},
+	iconLarge: {
+		width: 60,
+		height: 60,
+		borderRadius: 30,
 	},
 	value: {
 		textAlign: "center",
@@ -45,7 +76,8 @@ const styles = StyleSheet.create({
 		color: Colors.red200,
 	},
 	measure: {
+		color: Colors.gray500,
 		fontSize: 18,
-		fontWeight: "450",
+		fontWeight: "500",
 	},
 });

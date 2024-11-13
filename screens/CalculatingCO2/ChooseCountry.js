@@ -47,20 +47,14 @@ function ChooseCountry({ navigation, countries }) {
 
 	return (
 		<ScrollView
-			contentContainerStyle={{ flex: 1 }}
+			contentContainerStyle={{ flex: 1, marginBottom: isLandscape && 200 }}
 			bounces="false">
-			<View
-				style={[
-					styles.mainContainer,
-					isLandscape ? styles.landscapeMainContainer : null,
-				]}>
+			{!isLandscape && (
 				<View
-					style={[
-						styles.upperContainer,
-						isLandscape
-							? styles.landscapeUpperContainer
-							: styles.portraitUpperContainer,
-					]}>
+					style={{
+						backgroundColor: "#2a8dca",
+						flex: 0.6,
+					}}>
 					<View style={styles.upperContent}>
 						<View style={{ paddingTop: 10 }}>
 							<IconButton
@@ -79,40 +73,40 @@ function ChooseCountry({ navigation, countries }) {
 						</View>
 					</View>
 				</View>
-				<View
-					style={[
-						styles.lowerContainer,
-						isLandscape ? styles.landscapeLowerContainer : null,
-					]}>
-					<View style={styles.textContainer}>
-						<Text style={styles.title}>Choose Country</Text>
-						<Text style={styles.description}>
-							This is your country average footprint per month.
-						</Text>
-						<Text style={styles.description}>
-							Personalize it from your home page.
-						</Text>
-					</View>
-					<View style={{ marginVertical: 20 }}>
-						<Card
-							label="Select Country"
-							flag={
-								country ? country.imageUrl : "https://flagcdn.com/w320/ch.png"
-							}
-							name={country ? country.name : "Switzerland"}
-							icon="caretdown"
-							onPress={SelectCountryHandler}
-						/>
-					</View>
-					<GradientButton
-						onPress={() =>
-							navigation.navigate("Flying", {
-								country: country,
-							})
-						}>
-						Continue
-					</GradientButton>
+			)}
+			<View
+				style={[
+					styles.lowerContainer,
+					isLandscape ? styles.landscapeLowerContainer : null,
+				]}>
+				<View style={styles.textContainer}>
+					<Text style={styles.title}>Choose Country</Text>
+					<Text style={styles.description}>
+						This is your country average footprint per month.
+					</Text>
+					<Text style={styles.description}>
+						Personalize it from your home page.
+					</Text>
 				</View>
+				<View style={{ marginVertical: 20 }}>
+					<Card
+						label="Select Country"
+						flag={
+							country ? country.imageUrl : "https://flagcdn.com/w320/ch.png"
+						}
+						name={country ? country.name : "Switzerland"}
+						icon="caretdown"
+						onPress={SelectCountryHandler}
+					/>
+				</View>
+				<GradientButton
+					onPress={() =>
+						navigation.navigate("Flying", {
+							country: country,
+						})
+					}>
+					Continue
+				</GradientButton>
 			</View>
 			{modalIsVisible && (
 				<CountrySelectionModal
@@ -136,20 +130,8 @@ function ChooseCountry({ navigation, countries }) {
 export default ChooseCountry;
 
 const styles = StyleSheet.create({
-	mainContainer: {
-		flex: 1,
-	},
-	landscapeMainContainer: {
-		flex: 1,
-	},
 	upperContainer: {
 		backgroundColor: "#2a8dca",
-	},
-	portraitUpperContainer: {
-		flex: 0.6,
-	},
-	landscapeUpperContainer: {
-		flex: 0.4,
 	},
 	upperContent: {
 		flexDirection: "row",

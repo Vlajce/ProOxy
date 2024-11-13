@@ -5,6 +5,7 @@ import { useStatusBar } from "../hooks/useStatusBar";
 import { Colors } from "../constants/Colors";
 import GradientButton from "../components/UI/GradientButton";
 import ClickableText from "../components/UI/ClickableText";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 function Welcome({ navigation }) {
 	const { width, height } = useWindowDimensions();
@@ -17,25 +18,31 @@ function Welcome({ navigation }) {
 	const isLandscape = width > height;
 
 	return (
-		<View
+		<SafeAreaView
 			style={[
 				styles.container,
-				{ paddingTop: isLandscape ? height * 0.2 : height * 0.25 },
+				{
+					paddingBottom: isLandscape ? height * 0.2 : height * 0.25,
+				},
 			]}>
-			<View
+			<Text
 				style={[
-					styles.logo,
-					{ paddingBottom: isLandscape ? height * 0.2 : height * 0.3 },
+					styles.title,
+					{
+						fontSize: isLandscape ? 50 : 40,
+						marginTop: isLandscape ? height * 0.2 : height * 0.2,
+					},
 				]}>
-				<Text style={[styles.title, { fontSize: isLandscape ? 40 : 32 }]}>
-					Proxy
-				</Text>
-			</View>
-			<View style={styles.buttonContainer}>
-				<GradientButton onPress={() => navigation.navigate("ChooseCountry")}>
-					Calculate Your CO2
-				</GradientButton>
-			</View>
+				Proxy
+			</Text>
+			<GradientButton
+				onPress={() => navigation.navigate("ChooseCountry")}
+				style={{
+					width: "80%",
+					marginTop: isLandscape ? height * 0.1 : height * 0.3,
+				}}>
+				Calculate Your CO2
+			</GradientButton>
 			<View style={styles.textCointaner}>
 				<View>
 					<Text style={{ fontWeight: "500" }}>Already a member?</Text>
@@ -43,9 +50,12 @@ function Welcome({ navigation }) {
 				<ClickableText
 					onPress={() => navigation.navigate("LogIn")}
 					text="Log in"
-					style={{ fontSize: 14, marginLeft: 8 }}></ClickableText>
+					style={{
+						fontSize: 14,
+						marginLeft: 8,
+					}}></ClickableText>
 			</View>
-		</View>
+		</SafeAreaView>
 	);
 }
 
@@ -55,19 +65,13 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		alignItems: "center",
+		color: "white",
 	},
 	title: {
 		fontSize: 30,
 		fontWeight: "bold",
 		color: Colors.primary200,
-	},
-	logo: {
-		justifyContent: "center",
-		alignItems: "center",
-	},
-	buttonContainer: {
-		width: "80%",
-		marginVertical: 5,
+		alignSelf: "center",
 	},
 	textCointaner: {
 		flexDirection: "row",
