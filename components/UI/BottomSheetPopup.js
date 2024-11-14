@@ -7,6 +7,7 @@ function BottomSheetPopup({
 	snapPoints,
 	bottomSheetBody,
 	style,
+	...props
 }) {
 	return (
 		<BottomSheet
@@ -14,11 +15,11 @@ function BottomSheetPopup({
 			snapPoints={snapPoints}
 			index={0}
 			handleIndicatorStyle={{ backgroundColor: "#fff" }}
-			style={[styles.bottomSheetContainer, style]}>
+			style={[styles.bottomSheetContainer, style]}
+			{...props}>
 			<BottomSheetView
 				style={{
 					paddingTop: 6,
-					// paddingHorizontal: 30,
 				}}>
 				{bottomSheetBody && bottomSheetBody()}
 			</BottomSheetView>

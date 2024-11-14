@@ -31,6 +31,7 @@ import StatusBar from "./components/StatusBar";
 import { Colors } from "./constants/Colors";
 import { StatusBarProvider } from "./hooks/useStatusBar";
 import ProjectDetails from "./components/MainScreen/Projects/ProjectDetails";
+import FrequentlyAskedQuestions from "./screens/Main/FrequentlyAskedQuestions";
 
 const Tab = createBottomTabNavigator();
 
@@ -215,6 +216,10 @@ export default function App() {
 						<Stack.Screen
 							name="ProjectDetails"
 							component={ProjectDetails}
+						/>
+						<Stack.Screen
+							name="FrequentlyAskedQuestions"
+							component={FrequentlyAskedQuestions}
 						/>
 					</Stack.Navigator>
 				</NavigationContainer>

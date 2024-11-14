@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { View, FlatList, StyleSheet, Animated, Dimensions } from "react-native";
+import { View, StyleSheet, Animated, Dimensions } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
 
 import ProjectCard from "./Projects/ProjectCard";
 import { Colors } from "../../constants/Colors";
@@ -35,7 +36,6 @@ function Carousel({ data, horizontal }) {
 			<FlatList
 				data={data}
 				horizontal={horizontal}
-				//pagingEnabled
 				showsHorizontalScrollIndicator={false}
 				onScroll={Animated.event(
 					[{ nativeEvent: { contentOffset: { x: scrollX } } }],

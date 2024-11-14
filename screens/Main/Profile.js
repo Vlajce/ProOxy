@@ -81,7 +81,7 @@ function Profile({ navigation }) {
 								iconStyle={{ marginRight: 20 }}
 								onClick={
 									item.rightIcon
-										? () => console.log("Kliknuto na karticu")
+										? () => navigation.navigate("FrequentlyAskedQuestions") //console.log("Kliknuto na karticu")
 										: () => navigation.navigate("LogIn")
 								}
 								rightIcon={item.rightIcon}

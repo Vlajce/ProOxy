@@ -1,5 +1,12 @@
 import React, { useEffect, useRef } from "react";
-import { View, Text, StyleSheet, useWindowDimensions } from "react-native";
+import {
+	View,
+	Text,
+	StyleSheet,
+	useWindowDimensions,
+	Image,
+	SafeAreaView,
+} from "react-native";
 import Entypo from "@expo/vector-icons/Entypo";
 
 import { Colors } from "../../constants/Colors";
@@ -74,16 +81,19 @@ function MyImpact({ navigation }) {
 				/>
 				<BottomSheetPopup
 					bottomSheetRef={bottomSheetRef}
-					snapPoints={["50%", "75%", "80%"]}
+					snapPoints={["50%", "75%"]}
+					enableOverDrag={false}
+					enablePanDownToClose={false}
+					expandOnContentDrag={false}
+					topInset={70}
 					bottomSheetBody={() => (
-						// <ScrollView
-						// 	bounces={false}
-						// 	showsVerticalScrollIndicator={false}
-						// 	contentContainerStyle={{ paddingBottom: 180 }}>
-						<View>
+						<ScrollView
+							bounces={false}
+							showsVerticalScrollIndicator={false}
+							contentContainerStyle={{ paddingBottom: 50 }}>
 							<GradientButton
 								onPress={() => console.log("kliknuto dugme")}
-								style={{ marginBottom: 52, paddingHorizontal: 30 }}>
+								style={{ marginBottom: 52, marginHorizontal: 30 }}>
 								Offset my CO2
 							</GradientButton>
 							<View style={styles.titleCont}>
@@ -120,8 +130,27 @@ function MyImpact({ navigation }) {
 									Share
 								</CustomButton>
 							</View>
-							{/* OVDE TREBA DA SE DODAJU SLIKE KARTICA */}
-						</View>
+							<View style={styles.imageContainer}>
+								<Image
+									source={require("../../assets/images/proxy-card.png")}
+									style={styles.image}
+								/>
+							</View>
+							<Text
+								style={{
+									fontSize: 14,
+									alignSelf: "center",
+									marginBottom: 20,
+								}}>
+								That's equivalent to:
+							</Text>
+							<View style={styles.imageContainer}>
+								<Image
+									source={require("../../assets/images/trees-planted.png")}
+									style={[styles.image, { height: 260, borderRadius: 45 }]}
+								/>
+							</View>
+						</ScrollView>
 					)}
 				/>
 			</View>
@@ -153,5 +182,16 @@ const styles = StyleSheet.create({
 	button: {
 		paddingHorizontal: 15,
 		backgroundColor: Colors.gray10,
+	},
+	imageContainer: {
+		paddingHorizontal: 20,
+		marginBottom: 36,
+		alignItems: "center",
+		justifyContent: "center",
+	},
+	image: {
+		width: "100%",
+		resizeMode: "cover",
+		borderRadius: 30,
 	},
 });
