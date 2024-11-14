@@ -30,6 +30,7 @@ import Profile from "./screens/Main/Profile";
 import StatusBar from "./components/StatusBar";
 import { Colors } from "./constants/Colors";
 import { StatusBarProvider } from "./hooks/useStatusBar";
+import ProjectDetails from "./components/MainScreen/Projects/ProjectDetails";
 
 const Tab = createBottomTabNavigator();
 
@@ -210,6 +211,10 @@ export default function App() {
 						<Stack.Screen
 							name="Home"
 							component={Home}
+						/>
+						<Stack.Screen
+							name="ProjectDetails"
+							component={ProjectDetails}
 						/>
 					</Stack.Navigator>
 				</NavigationContainer>

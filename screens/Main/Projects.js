@@ -5,16 +5,18 @@ import { projectsData } from "../../dummy_data/MyImpact/ProjectsData";
 import ProjectCard from "../../components/MainScreen/Projects/ProjectCard";
 
 function Projects({ navigation }) {
-	const renderItem = ({ item }) => {
-		return (
-			<ProjectCard
-				title={item.title}
-				imageUrl={item.imageUrl}
-				style={{ marginRight: 0, height: 180 }}
-				onPress={() => console.log("kliknuto na item")}
-			/>
-		);
-	};
+	const renderItem = ({ item }) => (
+		<ProjectCard
+			title={item.title}
+			imageUrl={item.imageUrl}
+			style={{ marginRight: 0, height: 180 }}
+			onPress={() =>
+				navigation.navigate("ProjectDetails", {
+					project: item,
+				})
+			}
+		/>
+	);
 
 	return (
 		<>
@@ -60,7 +62,6 @@ const styles = StyleSheet.create({
 		lineHeight: 22,
 	},
 	listContainer: {
-		//flex: 1,
 		backgroundColor: "white",
 		padding: 24,
 	},

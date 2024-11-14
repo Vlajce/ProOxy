@@ -31,7 +31,6 @@ function CurrentCO2({ navigation, route }) {
 
 	return (
 		<View style={{ flex: 1, backgroundColor: "#ebebeb" }}>
-			<StatusBar />
 			<View
 				style={{
 					marginBottom: 36,

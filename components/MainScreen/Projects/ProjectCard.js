@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, ImageBackground } from "react-native";
+import { Text, StyleSheet, ImageBackground } from "react-native";
 
 import CustomButton from "../../UI/CustomButton";
 import { Colors } from "../../../constants/Colors";
@@ -32,8 +32,6 @@ export default ProjectCard;
 const styles = StyleSheet.create({
 	image: {
 		flex: 1,
-		// width: 220,
-		// height: 300,
 		padding: 24,
 		justifyContent: "flex-end",
 		borderRadius: 20,

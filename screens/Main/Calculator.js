@@ -29,6 +29,7 @@ function Calculator() {
 		<SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
 			<ScrollView
 				bounces={false}
+				showsVerticalScrollIndicator={false}
 				contentContainerStyle={{ paddingBottom: 180 }}
 				style={{
 					flexGrow: 1,

@@ -1,13 +1,5 @@
-import {
-	View,
-	Text,
-	StyleSheet,
-	Image,
-	Pressable,
-	TouchableOpacity,
-} from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import Ionicons from "@expo/vector-icons/AntDesign";
-import { useField } from "formik";
 
 import { Colors } from "../../constants/Colors";
 

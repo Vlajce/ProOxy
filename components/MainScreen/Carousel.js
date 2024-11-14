@@ -1,18 +1,14 @@
 import React, { useRef, useState } from "react";
-import {
-	View,
-	Text,
-	FlatList,
-	StyleSheet,
-	Animated,
-	Dimensions,
-} from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { View, FlatList, StyleSheet, Animated, Dimensions } from "react-native";
+
 import ProjectCard from "./Projects/ProjectCard";
 import { Colors } from "../../constants/Colors";
 
 const { width } = Dimensions.get("window");
 
 function Carousel({ data, horizontal }) {
+	const navigation = useNavigation();
 	const scrollX = useRef(new Animated.Value(0)).current;
 	const [activeIndex, setActiveIndex] = useState(0);
 
@@ -26,6 +22,11 @@ function Carousel({ data, horizontal }) {
 			imageUrl={item.imageUrl}
 			title={item.title}
 			style={{ width: 220, height: 300, flex: 0 }}
+			onPress={() =>
+				navigation.navigate("ProjectDetails", {
+					project: item,
+				})
+			}
 		/>
 	);
 

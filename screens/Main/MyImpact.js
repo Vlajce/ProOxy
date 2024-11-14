@@ -10,7 +10,6 @@ import GradientButton from "../../components/UI/GradientButton";
 import CustomButton from "../../components/UI/CustomButton";
 import { ScrollView } from "react-native-gesture-handler";
 import Carousel from "../../components/MainScreen/Carousel";
-import ProjectCard from "../../components/MainScreen/Projects/ProjectCard";
 import { projectsData } from "../../dummy_data/MyImpact/ProjectsData";
 
 function MyImpact({ navigation }) {
@@ -141,7 +140,7 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		justifyContent: "space-between",
 		alignItems: "center",
-		marginBottom: 14,
+		marginBottom: 20,
 		paddingHorizontal: 30,
 	},
 	projectsContainer: {
