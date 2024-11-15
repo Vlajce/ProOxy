@@ -2,12 +2,20 @@ import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Colors } from "../../../constants/Colors";
 
-function OtherCard({ text, IconComponent, iconStyle, rightIcon, onClick }) {
+function OtherCard({
+	text,
+	style,
+	IconComponent,
+	iconStyle,
+	rightIcon,
+	onClick,
+}) {
 	return (
 		<TouchableOpacity
 			style={[
 				styles.container,
 				!rightIcon && { backgroundColor: Colors.red50 },
+				style,
 			]}
 			onPress={onClick}>
 			<View style={{ flexDirection: "row", justifyContent: "space-between" }}>
@@ -15,12 +23,12 @@ function OtherCard({ text, IconComponent, iconStyle, rightIcon, onClick }) {
 					style={{
 						flexDirection: "row",
 						alignItems: "center",
-						justifyContent: "center",
+						maxWidth: "90%",
 					}}>
 					{IconComponent && <View style={iconStyle}>{IconComponent}</View>}
 					<Text style={{ fontWeight: "600", fontSize: 15 }}>{text}</Text>
 				</View>
-				{rightIcon && rightIcon}
+				{rightIcon && <View style={{ alignSelf: "center" }}>{rightIcon}</View>}
 			</View>
 		</TouchableOpacity>
 	);

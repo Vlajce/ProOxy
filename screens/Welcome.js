@@ -9,11 +9,13 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 function Welcome({ navigation }) {
 	const { width, height } = useWindowDimensions();
-	const { updateStatusBarColor } = useStatusBar();
+	const { updateStatusBarColor, statusBarColor } = useStatusBar();
+
+	console.log("Welcome:", statusBarColor);
 
 	useEffect(() => {
 		updateStatusBarColor("dark-content");
-	}, []);
+	}, [updateStatusBarColor]);
 
 	const isLandscape = width > height;
 

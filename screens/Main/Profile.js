@@ -18,7 +18,9 @@ import { otherData } from "../../dummy_data/Profile/OtherData";
 function Profile({ navigation }) {
 	const { width, height } = useWindowDimensions();
 	const bottomSheetRef = useRef(null);
-	const { updateStatusBarColor } = useStatusBar();
+	const { updateStatusBarColor, statusBarColor } = useStatusBar();
+
+	console.log("Profile", statusBarColor);
 
 	useEffect(() => {
 		const subscribeFocus = navigation.addListener("focus", () => {
@@ -33,7 +35,7 @@ function Profile({ navigation }) {
 			subscribeFocus();
 			subscribeBlur();
 		};
-	}, [navigation]);
+	}, [navigation, updateStatusBarColor]);
 
 	const isLandscape = width > height;
 
@@ -69,7 +71,7 @@ function Profile({ navigation }) {
 								text={item.text}
 								IconComponent={item.icon}
 								iconStyle={{ marginRight: 20 }}
-								onClick={() => console.log("Kliknuto edit dugme")}
+								onClick={() => navigation.navigate(item.screen)}
 							/>
 						))}
 						<Text style={styles.bottomSheetText}>Other</Text>
@@ -81,7 +83,7 @@ function Profile({ navigation }) {
 								iconStyle={{ marginRight: 20 }}
 								onClick={
 									item.rightIcon
-										? () => navigation.navigate("FrequentlyAskedQuestions") //console.log("Kliknuto na karticu")
+										? () => navigation.navigate(item.screen)
 										: () => navigation.navigate("LogIn")
 								}
 								rightIcon={item.rightIcon}

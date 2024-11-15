@@ -1,11 +1,10 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
 	View,
 	Text,
 	StyleSheet,
 	useWindowDimensions,
 	Image,
-	SafeAreaView,
 } from "react-native";
 import Entypo from "@expo/vector-icons/Entypo";
 
@@ -18,11 +17,34 @@ import CustomButton from "../../components/UI/CustomButton";
 import { ScrollView } from "react-native-gesture-handler";
 import Carousel from "../../components/MainScreen/Carousel";
 import { projectsData } from "../../dummy_data/MyImpact/ProjectsData";
+import CustomBottomSheetModal from "../../components/UI/CustomBottomSheetModal";
 
+{
+	/*  ZAPOCETO DODAVANJE MODALA MEDJUTIM NIJE DOVRSENO!!!!*/
+}
 function MyImpact({ navigation }) {
 	const { height, width } = useWindowDimensions();
-	const { updateStatusBarColor } = useStatusBar();
+	const { updateStatusBarColor, statusBarColor } = useStatusBar();
+
 	const bottomSheetRef = useRef(null);
+	const bottomSheetModalRef = useRef(null);
+
+	const modalBody = (
+		<ScrollView
+			bounces={false}
+			showsVerticalScrollIndicator={false}
+			contentContainerStyle={{ paddingBottom: 50 }}>
+			<Text style={{ fontWeight: "bold", fontSize: 24 }}>My Custom Modal</Text>
+			<Text>This is the content inside the modal!</Text>
+		</ScrollView>
+	);
+
+	console.log("MyImpact: ", statusBarColor);
+
+	const handlePresentModal = () => {
+		console.log("Present modal triggered");
+		bottomSheetModalRef.current?.present();
+	};
 
 	useEffect(() => {
 		const subscribeFocus = navigation.addListener("focus", () => {
@@ -37,7 +59,7 @@ function MyImpact({ navigation }) {
 			subscribeFocus();
 			subscribeBlur();
 		};
-	}, [navigation]);
+	}, [navigation, updateStatusBarColor]);
 
 	const isLandscape = width > height;
 
@@ -92,10 +114,11 @@ function MyImpact({ navigation }) {
 							showsVerticalScrollIndicator={false}
 							contentContainerStyle={{ paddingBottom: 50 }}>
 							<GradientButton
-								onPress={() => console.log("kliknuto dugme")}
+								onPress={handlePresentModal}
 								style={{ marginBottom: 52, marginHorizontal: 30 }}>
 								Offset my CO2
 							</GradientButton>
+							<CustomBottomSheetModal modalRef={bottomSheetModalRef} />
 							<View style={styles.titleCont}>
 								<Text style={{ fontWeight: "bold", fontSize: 24 }}>
 									Our projects

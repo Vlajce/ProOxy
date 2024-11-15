@@ -31,7 +31,7 @@ function ChooseCountry({ navigation, countries }) {
 			: updateStatusBarColor("light-content");
 
 		return () => updateStatusBarColor("dark-content");
-	}, [modalIsVisible]);
+	}, [modalIsVisible, updateStatusBarColor]);
 
 	function SelectCountryHandler() {
 		setModalIsVisible(true);

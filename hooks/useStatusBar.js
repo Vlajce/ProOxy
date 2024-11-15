@@ -1,11 +1,17 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useContext, useCallback } from "react";
 
-const StatusBarContext = createContext();
+const StatusBarContext = createContext({
+	statusBarColor: "dark-content",
+	updateStatusBarColor: () => {},
+});
 
 export const StatusBarProvider = ({ children }) => {
 	const [statusBarColor, setStatusBarColor] = useState("dark-content");
 
-	const updateStatusBarColor = (color) => setStatusBarColor(color);
+	const updateStatusBarColor = useCallback(
+		(color) => setStatusBarColor(color),
+		[]
+	);
 
 	return (
 		<StatusBarContext.Provider value={{ statusBarColor, updateStatusBarColor }}>

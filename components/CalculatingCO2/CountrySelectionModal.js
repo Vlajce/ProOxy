@@ -34,7 +34,7 @@ function CountrySelectionModal({
 			<View style={styles.mainContainer}>
 				<StatusBar style="dark" />
 				<IconButton
-					icon="close-circle"
+					icon="chevron-back-circle"
 					size={40}
 					color={Colors.gray100}
 					onPress={onClose}

@@ -85,7 +85,7 @@ function CurrentCO2({ navigation, route }) {
 				bottomSheetRef={bottomSheetRef}
 				snapPoints={["20%", "85%"]}
 				bottomSheetBody={() => (
-					<>
+					<View style={{ paddingHorizontal: 24 }}>
 						<Text style={styles.bottomSheetText}>
 							Understand your footprint
 						</Text>
@@ -109,7 +109,7 @@ function CurrentCO2({ navigation, route }) {
 								/>
 							))}
 						</View>
-					</>
+					</View>
 				)}
 			/>
 		</View>

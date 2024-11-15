@@ -15,13 +15,26 @@ import { footprintData } from "../../dummy_data/MainScreen/FootPrintData";
 import { entryData } from "../../dummy_data/MainScreen/EntryData";
 import { useStatusBar } from "../../hooks/useStatusBar";
 
-function Calculator() {
+function Calculator({ navigation }) {
 	const { width, height } = useWindowDimensions();
-	const { updateStatusBarColor } = useStatusBar();
+	const { updateStatusBarColor, statusBarColor } = useStatusBar();
+
+	console.log("Calculator: ", statusBarColor);
 
 	useEffect(() => {
-		updateStatusBarColor("dark-content");
-	}, []);
+		const subscribeFocus = navigation.addListener("focus", () => {
+			updateStatusBarColor("dark-content");
+		});
+
+		const subscribeBlur = navigation.addListener("blur", () => {
+			updateStatusBarColor("light-content");
+		});
+
+		return () => {
+			subscribeFocus();
+			subscribeBlur();
+		};
+	}, [navigation, updateStatusBarColor]);
 
 	const isLandscape = width > height;
 

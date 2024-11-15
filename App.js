@@ -30,8 +30,8 @@ import Profile from "./screens/Main/Profile";
 import StatusBar from "./components/StatusBar";
 import { Colors } from "./constants/Colors";
 import { StatusBarProvider } from "./hooks/useStatusBar";
-import ProjectDetails from "./components/MainScreen/Projects/ProjectDetails";
-import FrequentlyAskedQuestions from "./screens/Main/FrequentlyAskedQuestions";
+import ProjectDetails from "./screens/Main/ProjectDetails";
+import FrequentlyAskedQuestions from "./screens/Main/Profile/FrequentlyAskedQuestions";
 
 const Tab = createBottomTabNavigator();
 

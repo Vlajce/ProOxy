@@ -13,6 +13,7 @@ export const settingData = [
 				color={Colors.gray100}
 			/>
 		),
+		screen: "LogIn",
 	},
 	{
 		text: "Change password",
@@ -23,6 +24,7 @@ export const settingData = [
 				color={Colors.gray100}
 			/>
 		),
+		screen: "ForgotPassword",
 	},
 	{
 		text: "Payment methods",
@@ -33,5 +35,6 @@ export const settingData = [
 				color={Colors.gray100}
 			/>
 		),
+		screen: "PaymentMethod",
 	},
 ];

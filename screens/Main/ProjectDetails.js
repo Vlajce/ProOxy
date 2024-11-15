@@ -9,21 +9,34 @@ import {
 } from "react-native";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
-import { Colors } from "../../../constants/Colors";
-import { useStatusBar } from "../../../hooks/useStatusBar";
-import IconButton from "../../../components/UI/IconButton";
-import CustomButton from "../../UI/CustomButton";
-import CategoryTag from "./CategoryTag";
-import ProjectBottomSection from "./ProjectBottomSection";
+import { Colors } from "../../constants/Colors";
+import { useStatusBar } from "../../hooks/useStatusBar";
+import IconButton from "../../components/UI/IconButton";
+import CustomButton from "../../components/UI/CustomButton";
+import CategoryTag from "../../components/MainScreen/Projects/CategoryTag";
+import ProjectBottomSection from "../../components/MainScreen/Projects/ProjectBottomSection";
 
 function ProjectDetails({ route, navigation, imageStyle }) {
 	const { width, height } = useWindowDimensions();
 	const { project } = route.params || {};
-	const { updateStatusBarColor } = useStatusBar();
+	const { updateStatusBarColor, statusBarColor } = useStatusBar();
+
+	console.log("ProjectDetails:", statusBarColor);
 
 	useEffect(() => {
-		updateStatusBarColor("light-content");
-	}, []);
+		const subscribeFocus = navigation.addListener("focus", () => {
+			updateStatusBarColor("light-content");
+		});
+
+		const subscribeBlur = navigation.addListener("blur", () => {
+			updateStatusBarColor("dark-content");
+		});
+
+		return () => {
+			subscribeFocus();
+			subscribeBlur();
+		};
+	}, [navigation, updateStatusBarColor]);
 
 	if (!project) {
 		return (
@@ -60,7 +73,7 @@ function ProjectDetails({ route, navigation, imageStyle }) {
 					icon="chevron-back-circle"
 					size={36}
 					color={Colors.gray10}
-					onPress={() => navigation.goBack()}
+					onPress={() => navigation.navigate("Projects")}
 				/>
 				<View>
 					<CustomButton

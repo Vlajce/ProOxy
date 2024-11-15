@@ -1,10 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, StyleSheet, Dimensions, FlatList } from "react-native";
 
 import { projectsData } from "../../dummy_data/MyImpact/ProjectsData";
 import ProjectCard from "../../components/MainScreen/Projects/ProjectCard";
+import { useStatusBar } from "../../hooks/useStatusBar";
 
 function Projects({ navigation }) {
+	const { updateStatusBarColor, statusBarColor } = useStatusBar();
+
+	console.log("Projects: ", statusBarColor);
+
+	useEffect(() => {
+		const subscribeFocus = navigation.addListener("focus", () => {
+			updateStatusBarColor("dark-content");
+		});
+
+		const subscribeBlur = navigation.addListener("blur", () => {
+			updateStatusBarColor("light-content");
+		});
+
+		return () => {
+			subscribeFocus();
+			subscribeBlur();
+		};
+	}, [navigation, updateStatusBarColor]);
+
 	const renderItem = ({ item }) => (
 		<ProjectCard
 			title={item.title}

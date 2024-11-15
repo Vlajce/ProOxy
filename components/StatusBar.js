@@ -7,6 +7,7 @@ export default function StatusBar() {
 
 	useEffect(() => {
 		StatusBarNative.setBarStyle(statusBarColor);
+
 		if (Platform.OS === "android") {
 			StatusBarNative.setBackgroundColor(
 				statusBarColor === "dark-content" ? "#fff" : "#000"
@@ -16,9 +17,7 @@ export default function StatusBar() {
 
 	return (
 		<>
-			<StatusBarNative
-				barStyle={statusBarColor === "dark" ? "light-content" : "dark-content"}
-			/>
+			<StatusBarNative barStyle={statusBarColor} />
 		</>
 	);
 }

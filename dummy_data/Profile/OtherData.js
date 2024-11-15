@@ -21,6 +21,7 @@ export const otherData = [
 				color={Colors.gray200}
 			/>
 		),
+		screen: "FrequentlyAskedQuestions",
 	},
 	{
 		text: "Support",
@@ -38,6 +39,7 @@ export const otherData = [
 				color={Colors.gray200}
 			/>
 		),
+		screen: "Support",
 	},
 	{
 		text: "Log out",
