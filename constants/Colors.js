@@ -15,4 +15,5 @@ export const Colors = {
 	blue20: "#DDE2EB",
 	blue200: "#0091D4",
 	blue500: "#27637F",
+	blueBackground: "#27637FFF",
 };

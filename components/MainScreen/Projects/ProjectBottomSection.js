@@ -8,14 +8,16 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import GradientButton from "../../UI/GradientButton";
 import ProjectInfoSection from "./ProjectInfoSection";
 
-function ProjectBottomSection() {
+function ProjectBottomSection({ onPress }) {
 	return (
 		<View
 			style={{
 				paddingHorizontal: 32,
 				paddingVertical: 20,
 			}}>
-			<GradientButton style={{ marginBottom: 30 }}>
+			<GradientButton
+				onPress={onPress}
+				style={{ marginBottom: 30 }}>
 				Contribute for $2
 			</GradientButton>
 			<ProjectInfoSection
