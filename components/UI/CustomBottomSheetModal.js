@@ -1,10 +1,5 @@
 import React, { useCallback, useState, useEffect } from "react";
-import {
-	StyleSheet,
-	KeyboardAvoidingView,
-	Platform,
-	Keyboard,
-} from "react-native";
+import { StyleSheet, Keyboard } from "react-native";
 import {
 	BottomSheetModal,
 	BottomSheetView,
@@ -13,30 +8,32 @@ import {
 } from "@gorhom/bottom-sheet";
 import { Colors } from "../../constants/Colors";
 
-function CustomBottomSheetModal({ modalRef, modalBody }) {
+function CustomBottomSheetModal({ modalRef, modalBody, points, ...props }) {
 	const [snapPoints, setSnapPoints] = useState(["70%", "95%"]);
 
-	useEffect(() => {
-		const keyboardWillShowListener = Keyboard.addListener(
-			"keyboardWillShow",
-			() => {
-				setSnapPoints(["95%"]);
-				modalRef.current?.snapToIndex(1);
-			}
-		);
-		const keyboardWillHideListener = Keyboard.addListener(
-			"keyboardWillHide",
-			() => {
-				setSnapPoints(["70%"]);
-				modalRef.current?.snapToIndex(0);
-			}
-		);
+	if (!points) {
+		useEffect(() => {
+			const keyboardWillShowListener = Keyboard.addListener(
+				"keyboardWillShow",
+				() => {
+					setSnapPoints(["95%"]);
+					modalRef.current?.snapToIndex(1);
+				}
+			);
+			const keyboardWillHideListener = Keyboard.addListener(
+				"keyboardWillHide",
+				() => {
+					setSnapPoints(["70%"]);
+					modalRef.current?.snapToIndex(0);
+				}
+			);
 
-		return () => {
-			keyboardWillShowListener.remove();
-			keyboardWillHideListener.remove();
-		};
-	}, [modalRef]);
+			return () => {
+				keyboardWillShowListener.remove();
+				keyboardWillHideListener.remove();
+			};
+		}, [modalRef]);
+	}
 
 	const handleSheetChanges = useCallback((index) => {}, []);
 
@@ -59,11 +56,9 @@ function CustomBottomSheetModal({ modalRef, modalBody }) {
 				backdropComponent={renderBackdrop}
 				ref={modalRef}
 				onChange={handleSheetChanges}
-				snapPoints={snapPoints}
-				index={1}
-				enablePanDownToClose={false}
+				snapPoints={points === undefined ? snapPoints : points}
 				handleIndicatorStyle={{ backgroundColor: "#fff" }}
-				keyboardBehavior="interactive"
+				{...props}
 				style={styles.container}>
 				<BottomSheetView style={{ flex: 1 }}>{modalBody}</BottomSheetView>
 			</BottomSheetModal>

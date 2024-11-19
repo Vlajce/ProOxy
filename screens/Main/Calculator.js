@@ -19,8 +19,6 @@ function Calculator({ navigation }) {
 	const { width, height } = useWindowDimensions();
 	const { updateStatusBarColor, statusBarColor } = useStatusBar();
 
-	console.log("Calculator: ", statusBarColor);
-
 	useEffect(() => {
 		const subscribeFocus = navigation.addListener("focus", () => {
 			updateStatusBarColor("dark-content");

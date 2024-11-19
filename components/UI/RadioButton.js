@@ -1,12 +1,11 @@
 import { View, StyleSheet } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import Entypo from "@expo/vector-icons/Entypo";
 
 import { Colors } from "../../constants/Colors";
 
-function RadioButton({ selected, style }) {
+function RadioButton({ selected, contStyle, style }) {
 	return (
-		<View style={[styles.container, style]}>
+		<View style={[styles.container, contStyle]}>
 			{selected ? (
 				<Ionicons
 					name="checkmark-circle"
@@ -14,7 +13,7 @@ function RadioButton({ selected, style }) {
 					color={Colors.primary100}
 				/>
 			) : (
-				<View style={styles.emptyCircle}></View>
+				<View style={[styles.emptyCircle, style]}></View>
 			)}
 		</View>
 	);

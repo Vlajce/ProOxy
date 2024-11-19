@@ -8,8 +8,6 @@ import { useStatusBar } from "../../hooks/useStatusBar";
 function Projects({ navigation }) {
 	const { updateStatusBarColor, statusBarColor } = useStatusBar();
 
-	console.log("Projects: ", statusBarColor);
-
 	useEffect(() => {
 		const subscribeFocus = navigation.addListener("focus", () => {
 			updateStatusBarColor("dark-content");

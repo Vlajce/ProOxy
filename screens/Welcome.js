@@ -11,8 +11,6 @@ function Welcome({ navigation }) {
 	const { width, height } = useWindowDimensions();
 	const { updateStatusBarColor, statusBarColor } = useStatusBar();
 
-	console.log("Welcome:", statusBarColor);
-
 	useEffect(() => {
 		updateStatusBarColor("dark-content");
 	}, [updateStatusBarColor]);

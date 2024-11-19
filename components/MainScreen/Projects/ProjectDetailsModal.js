@@ -3,7 +3,6 @@ import {
 	View,
 	Text,
 	StyleSheet,
-	Dimensions,
 	TouchableWithoutFeedback,
 	Keyboard,
 } from "react-native";
@@ -20,7 +19,7 @@ function ProjectDetailsModal({ onCancel }) {
 	const [selectedValue, setSelectedValue] = useState("2");
 
 	const handleSelect = (value) => {
-		setSelectedValue((prevOption) => (prevOption === value ? "" : value));
+		setSelectedValue((prevValue) => (prevValue === value ? "" : value));
 	};
 
 	return (
@@ -94,8 +93,6 @@ function ProjectDetailsModal({ onCancel }) {
 }
 
 export default ProjectDetailsModal;
-
-const width = Dimensions.get("window").width;
 
 const styles = StyleSheet.create({
 	container: {

@@ -20,8 +20,6 @@ function Profile({ navigation }) {
 	const bottomSheetRef = useRef(null);
 	const { updateStatusBarColor, statusBarColor } = useStatusBar();
 
-	console.log("Profile", statusBarColor);
-
 	useEffect(() => {
 		const subscribeFocus = navigation.addListener("focus", () => {
 			updateStatusBarColor("light-content");
@@ -60,6 +58,10 @@ function Profile({ navigation }) {
 			</Text>
 			<BottomSheetPopup
 				bottomSheetRef={bottomSheetRef}
+				enablePanDownToClose={false}
+				enableOverDrag={false}
+				enableContentPanningGesture={false}
+				enableHandlePanningGesture={false}
 				snapPoints={["75%"]}
 				style={{ paddingHorizontal: 30, paddingTop: 6 }}
 				bottomSheetBody={() => (

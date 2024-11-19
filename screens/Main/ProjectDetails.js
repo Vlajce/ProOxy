@@ -136,6 +136,9 @@ function ProjectDetails({ route, navigation, imageStyle }) {
 			<CustomBottomSheetModal
 				modalRef={bottomSheetModalRef}
 				modalBody={<ProjectDetailsModal onCancel={handleCancel} />}
+				index={1}
+				enablePanDownToClose={false}
+				keyboardBehavior="interactive"
 			/>
 		</>
 	);
