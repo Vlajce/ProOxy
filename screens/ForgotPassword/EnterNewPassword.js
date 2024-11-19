@@ -58,7 +58,7 @@ function EnterNewPassword({ navigation }) {
 			contentContainerStyle={{
 				paddingBottom: 100,
 			}}
-			bounces="false"
+			bounces={false}
 			keyboardShouldPersistTaps="handled"
 			extraScrollHeight={30}
 			scrollEnabled={true}>

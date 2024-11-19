@@ -3,9 +3,9 @@ import { View, Text, StyleSheet, TextInput } from "react-native";
 
 import { Colors } from "../../constants/Colors";
 
-function CustomInput({ value, onChangeText, contStyle }) {
+function CustomInput({ value, onChangeText, style }) {
 	return (
-		<View style={[styles.container, contStyle]}>
+		<View style={[styles.container, style]}>
 			<Text style={styles.amount}>$</Text>
 			<TextInput
 				style={styles.input}
@@ -22,12 +22,8 @@ export default CustomInput;
 
 const styles = StyleSheet.create({
 	container: {
-		width: 170,
-		height: 65,
 		backgroundColor: Colors.gray50,
-		borderRadius: 10,
-		marginBottom: 24,
-		padding: 20,
+
 		flexDirection: "row",
 		alignItems: "center",
 		//position: "relative",

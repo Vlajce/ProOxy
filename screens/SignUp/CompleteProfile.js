@@ -61,7 +61,7 @@ function CompleteProfile({ navigation, countries }) {
 			/>
 			<KeyboardAwareScrollView
 				style={styles.scrollableCont}
-				bounces="false"
+				bounces={false}
 				keyboardShouldPersistTaps="handled"
 				extraScrollHeight={50}
 				scrollEnabled={true}>

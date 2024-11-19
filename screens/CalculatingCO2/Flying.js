@@ -14,7 +14,7 @@ import Footer from "../../components/CalculatingCO2/Footer";
 
 function Flying({ navigation, route }) {
 	const { width, height } = useWindowDimensions();
-	const { updateStatusBarColor, statusBarColor } = useStatusBar();
+	const { updateStatusBarColor } = useStatusBar();
 	const { country } = route.params;
 	const [selectedOption, setSelectedOption] = useState("");
 
@@ -66,7 +66,6 @@ function Flying({ navigation, route }) {
 				<Text style={styles.title}>
 					How many times a year do you use air transport (flying)?
 				</Text>
-
 				<View style={styles.formCont}>
 					<FormItem
 						IconComponent={MaterialIcons}

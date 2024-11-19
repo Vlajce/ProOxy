@@ -25,7 +25,7 @@ function CheckYourEmail({ navigation }) {
 			contentContainerStyle={{
 				paddingBottom: 100,
 			}}
-			bounces="false"
+			bounces={false}
 			keyboardShouldPersistTaps="handled"
 			extraScrollHeight={50}
 			scrollEnabled={true}>

@@ -17,24 +17,26 @@ function CustomBottomSheetModal({ modalRef, modalBody }) {
 	const [snapPoints, setSnapPoints] = useState(["70%", "95%"]);
 
 	useEffect(() => {
-		const keyboardDidShowListener = Keyboard.addListener(
-			"keyboardDidShow",
+		const keyboardWillShowListener = Keyboard.addListener(
+			"keyboardWillShow",
 			() => {
 				setSnapPoints(["95%"]);
+				modalRef.current?.snapToIndex(1);
 			}
 		);
-		const keyboardDidHideListener = Keyboard.addListener(
-			"keyboardDidHide",
+		const keyboardWillHideListener = Keyboard.addListener(
+			"keyboardWillHide",
 			() => {
 				setSnapPoints(["70%"]);
+				modalRef.current?.snapToIndex(0);
 			}
 		);
 
 		return () => {
-			keyboardDidHideListener.remove();
-			keyboardDidShowListener.remove();
+			keyboardWillShowListener.remove();
+			keyboardWillHideListener.remove();
 		};
-	}, []);
+	}, [modalRef]);
 
 	const handleSheetChanges = useCallback((index) => {}, []);
 
@@ -57,8 +59,8 @@ function CustomBottomSheetModal({ modalRef, modalBody }) {
 				backdropComponent={renderBackdrop}
 				ref={modalRef}
 				onChange={handleSheetChanges}
-				index={0}
 				snapPoints={snapPoints}
+				index={1}
 				enablePanDownToClose={false}
 				handleIndicatorStyle={{ backgroundColor: "#fff" }}
 				keyboardBehavior="interactive"

@@ -42,7 +42,7 @@ function ConfirmYourMail({ navigation }) {
 				// }}
 				extraHeight={100}
 				enableOnAndroid={true}
-				bounces="false"
+				bounces={false}
 				keyboardShouldPersistTaps="handled"
 				extraScrollHeight={100}
 				scrollEnabled={true}>

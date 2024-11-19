@@ -32,8 +32,8 @@ export default BottomSheetPopup;
 const styles = StyleSheet.create({
 	bottomSheetContainer: {
 		flex: 1,
-		borderTopLeftRadius: 40,
-		borderTopRightRadius: 40,
+		borderTopLeftRadius: 50,
+		borderTopRightRadius: 50,
 		overflow: "hidden",
 	},
 });

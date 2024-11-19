@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
 	View,
 	Text,
@@ -17,9 +17,15 @@ import ClickableText from "../../UI/ClickableText";
 import CustomInput from "../../UI/CustomInput";
 
 function ProjectDetailsModal({ onCancel }) {
+	const [selectedValue, setSelectedValue] = useState("2");
+
+	const handleSelect = (value) => {
+		setSelectedValue((prevOption) => (prevOption === value ? "" : value));
+	};
+
 	return (
 		<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-			<View style={styles.innerContainer}>
+			<View style={styles.container}>
 				<CO2SavedCard
 					IconComponent={Fontisto}
 					iconProps={{
@@ -42,10 +48,26 @@ function ProjectDetailsModal({ onCancel }) {
 					How much do you want to support?
 				</Text>
 				<View style={styles.amountOptions}>
-					<AmountOption>2</AmountOption>
-					<AmountOption>7</AmountOption>
-					<AmountOption>14</AmountOption>
-					<AmountOption>25</AmountOption>
+					<AmountOption
+						value="2"
+						selectedValue={selectedValue}
+						onSelect={handleSelect}
+					/>
+					<AmountOption
+						value="7"
+						selectedValue={selectedValue}
+						onSelect={handleSelect}
+					/>
+					<AmountOption
+						selectedValue={selectedValue}
+						onSelect={handleSelect}
+						value="14"
+					/>
+					<AmountOption
+						value="25"
+						selectedValue={selectedValue}
+						onSelect={handleSelect}
+					/>
 				</View>
 				<Text
 					style={{
@@ -55,7 +77,7 @@ function ProjectDetailsModal({ onCancel }) {
 					}}>
 					or enter custom amount
 				</Text>
-				<CustomInput />
+				<CustomInput style={styles.inputStyle} />
 				<GradientButton
 					onPress={() => console.log("kliknuto dugme")}
 					style={styles.button}>
@@ -78,10 +100,8 @@ const width = Dimensions.get("window").width;
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-	},
-	innerContainer: {
-		flex: 1,
 		alignItems: "center",
+		paddingBottom: 50,
 	},
 	amountOptions: {
 		paddingHorizontal: 26,
@@ -100,6 +120,13 @@ const styles = StyleSheet.create({
 	amount: {
 		fontSize: 18,
 		fontWeight: "600",
+	},
+	inputStyle: {
+		width: 170,
+		height: 65,
+		borderRadius: 10,
+		marginBottom: 24,
+		padding: 20,
 	},
 	button: {
 		width: "85%",

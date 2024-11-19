@@ -48,7 +48,7 @@ function ChooseCountry({ navigation, countries }) {
 	return (
 		<ScrollView
 			contentContainerStyle={{ flex: 1, marginBottom: isLandscape && 200 }}
-			bounces="false">
+			bounces={false}>
 			{!isLandscape && (
 				<View
 					style={{
