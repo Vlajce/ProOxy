@@ -6,14 +6,14 @@ import ProjectCard from "../../components/MainScreen/Projects/ProjectCard";
 import { useStatusBar } from "../../hooks/useStatusBar";
 
 function Projects({ navigation }) {
-	const { updateStatusBarColor, statusBarColor } = useStatusBar();
+	const { updateStatusBarColor } = useStatusBar();
 
 	useEffect(() => {
-		const subscribeFocus = navigation.addListener("focus", () => {
+		const subscribeFocus = navigation.addListener("focus", (e) => {
 			updateStatusBarColor("dark-content");
 		});
 
-		const subscribeBlur = navigation.addListener("blur", () => {
+		const subscribeBlur = navigation.addListener("blur", (e) => {
 			updateStatusBarColor("light-content");
 		});
 

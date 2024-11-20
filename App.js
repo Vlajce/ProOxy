@@ -32,6 +32,8 @@ import { Colors } from "./constants/Colors";
 import { StatusBarProvider } from "./hooks/useStatusBar";
 import ProjectDetails from "./screens/Main/ProjectDetails";
 import FrequentlyAskedQuestions from "./screens/Main/Profile/FrequentlyAskedQuestions";
+import PaymentMethod from "./screens/Main/Offset/PaymentMethod";
+import ThanksGiving from "./screens/Main/Offset/ThanksGiving";
 
 const Tab = createBottomTabNavigator();
 
@@ -220,6 +222,14 @@ export default function App() {
 						<Stack.Screen
 							name="FrequentlyAskedQuestions"
 							component={FrequentlyAskedQuestions}
+						/>
+						<Stack.Screen
+							name="PaymentMethod"
+							component={PaymentMethod}
+						/>
+						<Stack.Screen
+							name="ThanksGiving"
+							component={ThanksGiving}
 						/>
 					</Stack.Navigator>
 				</NavigationContainer>

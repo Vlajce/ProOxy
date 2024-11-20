@@ -25,14 +25,10 @@ import OffsetModal from "../../components/MainScreen/MyImpact/OffsetModal";
 }
 function MyImpact({ navigation }) {
 	const { height, width } = useWindowDimensions();
-	const { updateStatusBarColor, statusBarColor } = useStatusBar();
+	const { updateStatusBarColor } = useStatusBar();
 
 	const bottomSheetRef = useRef(null);
 	const bottomSheetModalRef = useRef(null);
-
-	const handlePresentModal = () => {
-		bottomSheetModalRef.current?.present();
-	};
 
 	useEffect(() => {
 		const subscribeFocus = navigation.addListener("focus", () => {
@@ -48,6 +44,18 @@ function MyImpact({ navigation }) {
 			subscribeBlur();
 		};
 	}, [navigation, updateStatusBarColor]);
+
+	useEffect(() => {
+		const handleFocus = () => {
+			bottomSheetModalRef.current?.dismiss();
+		};
+
+		const subscribeFocus = navigation.addListener("focus", handleFocus);
+
+		return () => {
+			subscribeFocus();
+		};
+	}, [navigation]);
 
 	const isLandscape = width > height;
 
@@ -102,7 +110,7 @@ function MyImpact({ navigation }) {
 							showsVerticalScrollIndicator={false}
 							contentContainerStyle={{ paddingBottom: 50 }}>
 							<GradientButton
-								onPress={handlePresentModal}
+								onPress={() => bottomSheetModalRef.current?.present()}
 								style={{
 									marginBottom: 52,
 									marginHorizontal: 30,
@@ -169,7 +177,11 @@ function MyImpact({ navigation }) {
 			</View>
 			<CustomBottomSheetModal
 				modalRef={bottomSheetModalRef}
-				modalBody={<OffsetModal />}
+				modalBody={
+					<OffsetModal
+						onCancel={() => bottomSheetModalRef.current?.dismiss()}
+					/>
+				}
 				points={["80%"]}
 				index={1}
 				enablePanDownToClose={false}

@@ -44,9 +44,9 @@ export default Input;
 
 const styles = StyleSheet.create({
 	inputWrapper: {
-		height: 60,
+		minHeight: 60,
 		position: "relative",
-		backgroundColor: Colors.gray50,
+		backgroundColor: Colors.gray10,
 		borderRadius: 12,
 		flexDirection: "row",
 		alignItems: "center",
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
 	},
 	input: {
 		flex: 1,
-		color: Colors.gray200,
+		color: Colors.gray500,
 		fontSize: 16,
 	},
 	countryCode: {

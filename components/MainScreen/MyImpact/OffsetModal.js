@@ -1,13 +1,15 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Switch } from "react-native";
+import { View, Text, StyleSheet, Switch, Platform } from "react-native";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { useNavigation } from "@react-navigation/native";
 
 import ImpactCard from "./ImpactCard";
 import { Colors } from "../../../constants/Colors";
 import GradientButton from "../../UI/GradientButton";
 import ClickableText from "../../UI/ClickableText";
 
-function OffsetModal() {
+function OffsetModal({ onCancel }) {
+	const navigation = useNavigation();
 	const [selectedOption, setSelectedOption] = useState(false);
 	const [isEnabled, setIsEnabled] = useState(false);
 
@@ -23,7 +25,7 @@ function OffsetModal() {
 					Thanks for taking climate action{"  "}
 					<MaterialCommunityIcons
 						name="hands-pray"
-						size={26}
+						size={32}
 						color="black"
 					/>
 				</Text>
@@ -52,20 +54,21 @@ function OffsetModal() {
 			<View style={styles.rowCont}>
 				<Text style={styles.switchText}>Automatic renewal</Text>
 				<Switch
-					trackColor={{ false: "#767577", true: "#81b0ff" }}
-					thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+					trackColor={{ false: Colors.gray70, true: Colors.primary100 }}
+					thumbColor={isEnabled ? "#f4f3f4" : "#f4f3f4"}
 					ios_backgroundColor={Colors.gray70}
 					onValueChange={toggleSwitch}
 					value={isEnabled}
+					style={styles.switch}
 				/>
 			</View>
 			<GradientButton
-				onPress={() => console.log("kliknuo na dugme")}
+				onPress={() => navigation.navigate("PaymentMethod")}
 				style={styles.button}>
 				Go to Checkout
 			</GradientButton>
 			<ClickableText
-				onPress={() => console.log("cancel dugme kliknuto")}
+				onPress={onCancel}
 				text="Cancel"
 				style={styles.clickable}
 			/>
@@ -101,10 +104,17 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 30,
 		flexDirection: "row",
 		justifyContent: "space-between",
+		alignItems: "center",
 	},
 	switchText: {
 		fontWeight: "600",
 		fontSize: 17,
+	},
+	switch: {
+		transform:
+			Platform.OS === "ios"
+				? [{ scaleX: 0.9 }, { scaleY: 0.9 }]
+				: [{ scaleX: 1.4 }, { scaleY: 1.3 }],
 	},
 	button: {
 		marginTop: 24,

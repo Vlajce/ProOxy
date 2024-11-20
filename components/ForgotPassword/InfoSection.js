@@ -10,7 +10,7 @@ function InfoSection({
 }) {
 	return (
 		<View style={styles.upperTextCont}>
-			<Text style={styles.title}>{title}</Text>
+			{title && <Text style={styles.title}>{title}</Text>}
 			{IconComponent && (
 				<View style={[styles.icon, iconStyle]}>
 					<IconComponent {...iconProps} />

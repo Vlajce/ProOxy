@@ -1,4 +1,5 @@
 export const Colors = {
+	primaryBackground: "#f2f8ce",
 	primary50: "#89BB31",
 	primary100: "#83B32F",
 	primary200: "#76A12A",
@@ -7,6 +8,7 @@ export const Colors = {
 	gray70: "#929DB7",
 	gray100: "#87888d",
 	gray200: "#747577",
+	gray300: "#545C6E",
 	gray500: "#464F63",
 	error50: "#d52323",
 	error500: "#a31616",
